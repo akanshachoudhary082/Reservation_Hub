@@ -1,10 +1,10 @@
-// src/App.js
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';  // For routing
 import { Container } from '@mui/material';  // Material-UI container for layout
 import Navbar from './components/Navbar';  // Importing the Navbar component
 import Footer from './components/Footer';  // Importing the Footer component
 import Home from './pages/Home';  // Home page
+import AboutUs from './pages/AboutUs';
 import Transport from './pages/Transport';  // Transport page
 import Movies from './pages/Movies';  // Theatre page
 import Events from './pages/Events';  // Event page
