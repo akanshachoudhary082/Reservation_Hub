@@ -19,6 +19,7 @@ const App = () => {
       <Container sx={{ minHeight: '80vh' }}> {/* Add minHeight to make sure footer stays at the bottom */}
         <Routes>
           <Route path="/" element={<Home />} />  {/* Home Page */}
+          <Route path="/aboutUs" element={<AboutUs />} /> 
           <Route path="/transport" element={<Transport />} />  {/* Transport Service */}
           <Route path="/movies" element={<Movies />} />  {/* Theatre Service */}
           <Route path="/events" element={<Events />} />  {/* Events Service */}
