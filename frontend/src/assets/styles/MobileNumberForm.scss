@@ -1,0 +1,61 @@
+.mobile-number-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px; // Increased padding for more space
+    background-color: #f9f9f9; // Light background for contrast
+    border-radius: 12px; 
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1); // Deeper shadow for depth
+    width: 100%;
+    max-width: 500px; // Increased max-width for a larger container
+    height: auto; // Adjust height as needed
+    margin: auto; 
+    margin-top: 100px; 
+
+    h4 {
+        margin-bottom: 24px; 
+        color: #0f0f0f; // Primary color for the heading
+        font-weight: 600; 
+        text-align: center;
+        font-size: 1.5rem; // Larger font size for emphasis
+    }
+
+    select {
+        width: 100%; // Full width for the dropdown
+        padding: 12px; // Increased padding for better touch targets
+        border: 1px solid #ccc; 
+        border-radius: 4px; 
+        margin-bottom: 16px; // Space below the dropdown
+        font-size: 1rem; // Font size for better readability
+
+        &:focus {
+            border-color: #3f51b5; // Change border color on focus
+            outline: none; // Remove default outline
+        }
+    }
+
+    .error-message {
+        color: red; 
+        margin-top: 8px; 
+        font-size: 0.875rem; 
+        text-align: center; // Center the error message
+    }
+
+    .submit-button {
+        width: 100%;
+        padding: 12px; // Increased padding for the button
+        margin-top: 16px; // Space above the button
+        background-color: #3f51b5; 
+        color: white; // White text for contrast
+        font-size: 1rem; // Font size for better readability
+        border: none; // Remove default border
+        border-radius: 4px; // Rounded corners
+        cursor: pointer; // Pointer cursor on hover
+
+        &:disabled {
+            background-color: #b0bec5; // Greyed out color for disabled state
+            cursor: not-allowed; // Not-allowed cursor for disabled state
+        }
+    }
+}
