@@ -7,22 +7,20 @@ import logo from '../assets/images/logo.png';
 import SearchIcon from '@mui/icons-material/Search'; 
 import MenuIcon from '@mui/icons-material/Menu'; 
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import { toggleDrawer, openProfileMenu, closeProfileMenu } from '../redux/actions/navbarActions';  // Redux actions
-
+import { toggleDrawer, openProfileMenu, closeProfileMenu } from '../redux/actions/navbarActions';  
 const Navbar = () => {
     const dispatch = useDispatch();
-    const { openDrawer, profileMenuAnchorEl } = useSelector(state => state.navbar); // Access Redux state
-
+    const { openDrawer, profileMenuAnchorEl } = useSelector(state => state.navbar); 
     const handleProfileMenuOpen = (event) => {
-        dispatch(openProfileMenu(event.currentTarget)); // Dispatch action to open profile menu
+        dispatch(openProfileMenu(event.currentTarget)); 
     };
     
     const handleProfileMenuClose = () => {
-        dispatch(closeProfileMenu()); // Dispatch action to close profile menu
+        dispatch(closeProfileMenu());
     };
 
     const handleDrawerToggle = () => {
-        dispatch(toggleDrawer()); // Dispatch action to toggle drawer state
+        dispatch(toggleDrawer()); 
     };
 
     return (
@@ -84,7 +82,7 @@ const Navbar = () => {
 
                     {/* Navigation Buttons for Desktop */}
                     <Box sx={{ display: { xs: 'none', sm: 'flex' } }}>
-                        <Button color="inherit" component={Link} to="/aboutUs">About Us</Button>
+                        <Button color="inherit" component={Link} to="/aboutUs">About</Button>
                         <Button color="inherit" component={Link} to="/transport">Transport</Button>
                         <Button color="inherit" component={Link} to="/movies">Movies</Button>
                         <Button color="inherit" component={Link} to="/events">Events</Button>

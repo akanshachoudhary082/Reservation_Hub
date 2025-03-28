@@ -16,10 +16,16 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import lombok.*;
 
 @Entity
 @Table(name = "services")
-public class Services {
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
+@Builder
+public class ServiceRecord {
 
 	    @Id
 	    @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -43,57 +49,6 @@ public class Services {
 	    @OneToMany(mappedBy = "services", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	    private List<Seat> seats;
 
-		public Services() {
-			super();
-		}
-
-		public Long getServiceId() {
-			return serviceId;
-		}
-
-		public void setServiceId(Long serviceId) {
-			this.serviceId = serviceId;
-		}
-
-		public ServiceType getServiceType() {
-			return serviceType;
-		}
-
-		public void setServiceType(ServiceType serviceType) {
-			this.serviceType = serviceType;
-		}
-
-		public User getUser() {
-			return user;
-		}
-
-		public void setUser(User user) {
-			this.user = user;
-		}
-
-		public Details getDetails() {
-			return details;
-		}
-
-		public void setDetails(Details details) {
-			this.details = details;
-		}
-
-		public List<Reservation> getReservations() {
-			return reservations;
-		}
-
-		public void setReservations(List<Reservation> reservations) {
-			this.reservations = reservations;
-		}
-
-		public List<Seat> getSeats() {
-			return seats;
-		}
-
-		public void setSeats(List<Seat> seats) {
-			this.seats = seats;
-		}
 
 		@Override
 		public String toString() {

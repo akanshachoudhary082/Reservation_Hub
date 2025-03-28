@@ -17,9 +17,17 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table(name = "seats")
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
 public class Seat {
 
 	    @Id
@@ -44,59 +52,8 @@ public class Seat {
 
 	    @ManyToOne
 	    @JoinColumn(name = "service_id", nullable = false)
-	    private Services services;
+	    private ServiceRecord services;
 
-		public Seat() {
-			super();
-		}
-
-		public Long getSeatId() {
-			return seatId;
-		}
-
-		public void setSeatId(Long seatId) {
-			this.seatId = seatId;
-		}
-
-		public SeatType getSeatType() {
-			return seatType;
-		}
-
-		public void setSeatType(SeatType seatType) {
-			this.seatType = seatType;
-		}
-
-		public ClassType getClassType() {
-			return classType;
-		}
-
-		public void setClassType(ClassType classType) {
-			this.classType = classType;
-		}
-
-		public SeatStatus getStatus() {
-			return status;
-		}
-
-		public void setStatus(SeatStatus status) {
-			this.status = status;
-		}
-
-		public List<Reservation> getReservations() {
-			return reservations;
-		}	
-
-		public void setReservations(List<Reservation> reservations) {
-			this.reservations = reservations;
-		}
-
-		public Services getServices() {
-			return services;
-		}
-
-		public void setServices(Services services) {
-			this.services = services;
-		} 
 
 		@Override
 		public String toString() {

@@ -15,9 +15,17 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table(name = "reservations")
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
 public class Reservation {
 
     @Id
@@ -48,75 +56,7 @@ public class Reservation {
 
     @ManyToOne
     @JoinColumn(name = "service_id", nullable = false)
-    private Services services;
-
-	public Reservation() {
-		super();
-	}
-
-	public Long getReservationId() {
-		return reservationId;
-	}
-
-	public void setReservationId(Long reservationId) {
-		this.reservationId = reservationId;
-	}
-
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}
-
-	public Seat getSeat() {
-		return seat;
-	}
-
-	public void setSeat(Seat seat) {
-		this.seat = seat;
-	}
-
-	public ReservationStatus getStatus() {
-		return status;
-	}
-
-	public void setStatus(ReservationStatus status) {
-		this.status = status;
-	}
-
-	public LocalDateTime getBookingDate() {
-		return bookingDate;
-	}
-
-	public void setBookingDate(LocalDateTime bookingDate) {
-		this.bookingDate = bookingDate;
-	}
-
-	public String getTimeSlot() {
-		return timeSlot;
-	}
-
-	public void setTimeSlot(String timeSlot) {
-		this.timeSlot = timeSlot;
-	}
-
-	public Payment getPayment() {
-		return payment;
-	}
-
-	public void setPayment(Payment payment) {
-		this.payment = payment;
-	}
-
-	public Services getServices() {
-		return services;
-	}
-
-	public void setServices(Services services) {
-		this.services = services;
-	}
+    private ServiceRecord services;
 
 	@Override
 	public String toString() {

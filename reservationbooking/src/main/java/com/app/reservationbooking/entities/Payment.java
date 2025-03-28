@@ -15,9 +15,13 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Table(name = "payment")
+@Getter
+@Setter
 public class Payment {
 
 	    @Id
@@ -27,7 +31,7 @@ public class Payment {
 
 	    @ManyToOne
 	    @JoinColumn(name = "service_id", nullable = false)
-	    private Services services; 
+	    private ServiceRecord services;
 
 	    @ManyToOne
 	    @JoinColumn(name = "user_id", nullable = false)
@@ -64,77 +68,6 @@ public class Payment {
 	        return UUID.randomUUID().toString(); // Generates a unique transaction ID
 	    }
 
-		public Long getPaymentId() {
-			return paymentId;
-		}
-
-		public void setPaymentId(Long paymentId) {
-			this.paymentId = paymentId;
-		}
-
-		public Services getServices() {
-			return services;
-		}
-
-		public void setServices(Services services) {
-			this.services = services;
-		}
-
-		public User getUser() {
-			return user;
-		}
-
-		public void setUser(User user) {
-			this.user = user;
-		}
-
-		public Reservation getReservation() {
-			return reservation;
-		}
-
-		public void setReservation(Reservation reservation) {
-			this.reservation = reservation;
-		}
-
-		public Double getAmount() {
-			return amount;
-		}
-
-		public void setAmount(Double amount) {
-			this.amount = amount;
-		}
-
-		public PaymentMethod getPaymentMethod() {
-			return paymentMethod;
-		}
-
-		public void setPaymentMethod(PaymentMethod paymentMethod) {
-			this.paymentMethod = paymentMethod;
-		}
-
-		public PaymentStatus getPaymentStatus() {
-			return paymentStatus;
-		}
-
-		public void setPaymentStatus(PaymentStatus paymentStatus) {
-			this.paymentStatus = paymentStatus;
-		}
-
-		public String getTransactionId() {
-			return transactionId;
-		}
-
-		public void setTransactionId(String transactionId) {
-			this.transactionId = transactionId;
-		}
-
-		public LocalDateTime getPaymentDate() {
-			return paymentDate;
-		}
-
-		public void setPaymentDate(LocalDateTime paymentDate) {
-			this.paymentDate = paymentDate;
-		}
 
 		@Override
 		public String toString() {

@@ -1,8 +1,15 @@
-import React from 'react';
+// src/pages/Home.js
 
-const Home = () =>{
-    return <h1>Welcome to Reservation</h1>
-}
+import React from 'react';
+import Transport from './Transport'; // Import the Transport component
+import '../assets/styles/style.scss';
+
+const Home = () => {
+  return (
+    <div>
+      <Transport />
+    </div>
+  );
+};
 
 export default Home;
-
