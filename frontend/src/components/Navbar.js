@@ -7,14 +7,12 @@ import logo from '../assets/images/Reservation_Hub_Logo.jpg';
 import SearchIcon from '@mui/icons-material/Search'; 
 import MenuIcon from '@mui/icons-material/Menu'; 
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import { toggleDrawer, openProfileMenu, closeProfileMenu } from '../redux/actions/navbarActions';
-
+import { toggleDrawer, openProfileMenu, closeProfileMenu } from '../redux/actions/navbarActions';  
 const Navbar = () => {
     const dispatch = useDispatch();
-    const { openDrawer, profileMenuAnchorEl } = useSelector(state => state.navbar);
-
+    const { openDrawer, profileMenuAnchorEl } = useSelector(state => state.navbar); 
     const handleProfileMenuOpen = (event) => {
-        dispatch(openProfileMenu(event.currentTarget));
+        dispatch(openProfileMenu(event.currentTarget)); 
     };
     
     const handleProfileMenuClose = () => {
@@ -22,7 +20,7 @@ const Navbar = () => {
     };
 
     const handleDrawerToggle = () => {
-        dispatch(toggleDrawer());
+        dispatch(toggleDrawer()); 
     };
 
     return (
@@ -79,14 +77,14 @@ const Navbar = () => {
                     <MenuIcon />
                 </IconButton>
 
-                {/* Navigation Buttons for Desktop */}
-                <Box sx={{ display: { xs: 'none', sm: 'flex' } }}>
-                    <Button color="inherit" component={Link} to="/aboutUs">About Us</Button>
-                    <Button color="inherit" component={Link} to="/transport">Transport</Button>
-                    <Button color="inherit" component={Link} to="/movies">Movies</Button>
-                    <Button color="inherit" component={Link} to="/events">Events</Button>
-                    <Button color="inherit" component={Link} to="/contactUs">Contact</Button>
-                </Box>
+                    {/* Navigation Buttons for Desktop */}
+                    <Box sx={{ display: { xs: 'none', sm: 'flex' } }}>
+                        <Button color="inherit" component={Link} to="/aboutUs">About</Button>
+                        <Button color="inherit" component={Link} to="/transport">Transport</Button>
+                        <Button color="inherit" component={Link} to="/movies">Movies</Button>
+                        <Button color="inherit" component={Link} to="/events">Events</Button>
+                        <Button color="inherit" component={Link} to="/contactUs">Contact</Button>
+                    </Box>
 
                 {/* Profile Icon */}
                 <IconButton color="inherit" onClick={handleProfileMenuOpen} sx={{ ml: 2 }}>

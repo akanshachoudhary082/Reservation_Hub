@@ -7,7 +7,10 @@
 		<list key="ImportExportPage.STORE_EXPANDED_IMPORT_CATEGORIES">
 			<item value="org.eclipse.m2e"/>
 		</list>
+<<<<<<< HEAD
 		<section name="ImportExportWizard.dialogBounds">
 		</section>
+=======
+>>>>>>> 0662a31b7dc63c43ba23f9e0fcaaf0c2a2b915c1
 	</section>
 </section>
