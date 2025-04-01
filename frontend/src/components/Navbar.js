@@ -11,102 +11,96 @@ import { toggleDrawer, openProfileMenu, closeProfileMenu } from '../redux/action
 
 const Navbar = () => {
     const dispatch = useDispatch();
-    const { openDrawer, profileMenuAnchorEl } = useSelector(state => state.navbar); // Access Redux state
+    const { openDrawer, profileMenuAnchorEl } = useSelector(state => state.navbar);
 
     const handleProfileMenuOpen = (event) => {
-        dispatch(openProfileMenu(event.currentTarget)); // Dispatch action to open profile menu
+        dispatch(openProfileMenu(event.currentTarget));
     };
     
     const handleProfileMenuClose = () => {
-        dispatch(closeProfileMenu()); // Dispatch action to close profile menu
+        dispatch(closeProfileMenu());
     };
 
     const handleDrawerToggle = () => {
-        dispatch(toggleDrawer()); // Dispatch action to toggle drawer state
+        dispatch(toggleDrawer());
     };
 
     return (
-        <>
-            <AppBar position="static" className='header__footer__background'>
-                <Toolbar>
-                    {/* Logo */}
-                    <Link to="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
-                        <img
-                            src={logo}
-                            alt="Logo"
-                            style={{
-                                width: '150px',
-                                height: 'auto',
-                                marginRight: 10,
-                                [window.innerWidth <= 600 ? 'width' : '']: '120px', // Responsive width
-                            }}
-                        />
-                    </Link>
+        <AppBar position="static" sx={{ backgroundColor: '#4f4f4f' }}>
+            <Toolbar>
+                {/* Logo */}
+                <Link to="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
+                    <img
+                        src={logo}
+                        alt="Logo"
+                        style={{
+                            width: '150px',
+                            height: 'auto',
+                            marginRight: 10,
+                        }}
+                    />
+                </Link>
 
-                    {/* Search Bar */}
-                    <Box sx={{ mr: 2, flexGrow: 1, display: 'flex', justifyContent: 'center' }}>
-                        <TextField
-                            variant="outlined"
-                            size="small"
-                            placeholder="Search..."
-                            sx={(theme) => ({
-                                position: 'relative',
-                                borderRadius: theme.shape.borderRadius,
-                                backgroundColor: alpha(theme.palette.common.white, 0.15),
-                                '&:hover': {
-                                    backgroundColor: alpha(theme.palette.common.white, 0.25),
-                                },
-                                marginRight: theme.spacing(2),
-                                marginLeft: 0,
-                                width: '100%',
-                                [theme.breakpoints.up('sm')]: {
-                                    marginLeft: theme.spacing(3),
-                                    width: 'auto',
-                                },
-                                [theme.breakpoints.down('sm')]: {
-                                    width: '70%',
-                                },
-                            })}
-                            InputProps={{
-                                startAdornment: (
-                                    <InputAdornment position="start">
-                                        <SearchIcon />
-                                    </InputAdornment>
-                                ),
-                            }}
-                        />
-                    </Box>
+                {/* Search Bar */}
+                <Box sx={{ mr: 2, flexGrow: 1, display: 'flex', justifyContent: 'center' }}>
+                    <TextField
+                        variant="outlined"
+                        size="small"
+                        placeholder="Search..."
+                        sx={(theme) => ({
+                            position: 'relative',
+                            borderRadius: theme.shape.borderRadius,
+                            backgroundColor: alpha(theme.palette.common.white, 0.15),
+                            '&:hover': {
+                                backgroundColor: alpha(theme.palette.common.white, 0.25),
+                            },
+                            marginRight: theme.spacing(2),
+                            width: '100%',
+                            [theme.breakpoints.up(' sm')]: {
+                                marginLeft: theme.spacing(3),
+                                width: 'auto',
+                            },
+                            [theme.breakpoints.down('sm')]: {
+                                width: '70%',
+                            },
+                        })}
+                        InputProps={{
+                            startAdornment: (
+                                <InputAdornment position="start">
+                                    <SearchIcon />
+                                </InputAdornment>
+                            ),
+                        }}
+                    />
+                </Box>
 
-                    {/* Hamburger Menu (Drawer) for mobile */}
-                    <IconButton sx={{ display: { xs: 'flex', sm: 'none' } }} color="inherit" onClick={handleDrawerToggle}>
-                        <MenuIcon />
-                    </IconButton>
+                {/* Hamburger Menu (Drawer) for mobile */}
+                <IconButton sx={{ display: { xs: 'flex', sm: 'none' } }} color="inherit" onClick={handleDrawerToggle}>
+                    <MenuIcon />
+                </IconButton>
 
-                    {/* Navigation Buttons for Desktop */}
-                    <Box sx={{ display: { xs: 'none', sm: 'flex' } }}>
-                        <Button color="inherit" component={Link} to="/aboutUs">About Us</Button>
-                        <Button color="inherit" component={Link} to="/transport">Transport</Button>
-                        <Button color="inherit" component={Link} to="/movies">Movies</Button>
-                        <Button color="inherit" component={Link} to="/events">Events</Button>
-                        <Button color="inherit" component={Link} to="/contactUs">Contact</Button>
-                    </Box>
+                {/* Navigation Buttons for Desktop */}
+                <Box sx={{ display: { xs: 'none', sm: 'flex' } }}>
+                    <Button color="inherit" component={Link} to="/aboutUs">About Us</Button>
+                    <Button color="inherit" component={Link} to="/transport">Transport</Button>
+                    <Button color="inherit" component={Link} to="/movies">Movies</Button>
+                    <Button color="inherit" component={Link} to="/events">Events</Button>
+                    <Button color="inherit" component={Link} to="/contactUs">Contact</Button>
+                </Box>
 
-                    {/* Profile Icon */}
-                    <IconButton color="inherit" onClick={handleProfileMenuOpen} sx={{ ml: 2 }}>
-                        <AccountCircleIcon />
-                    </IconButton>
-                </Toolbar>
-            </AppBar>
+                {/* Profile Icon */}
+                <IconButton color="inherit" onClick={handleProfileMenuOpen} sx={{ ml: 2 }}>
+                    <AccountCircleIcon />
+                </IconButton>
+            </Toolbar>
 
             {/* Profile Menu (Dropdown) */}
             <Menu anchorEl={profileMenuAnchorEl} open={Boolean(profileMenuAnchorEl)} onClose={handleProfileMenuClose}>
                 <MenuItem onClick={handleProfileMenuClose}>My Account</MenuItem>
-                 {/* Adding Login and Register inside the Profile Menu */}
-                 <MenuItem component={Link} to="/login" onClick={handleProfileMenuClose}>Login</MenuItem>
+                <MenuItem component={Link} to="/login" onClick={handleProfileMenuClose}>Login</MenuItem>
                 <MenuItem component={Link} to="/signin" onClick={handleProfileMenuClose}>SignIn</MenuItem>
+                <MenuItem component={Link} to="/register" onClick={handleProfileMenuClose}>Register</MenuItem>
                 <MenuItem onClick={handleProfileMenuClose}>Logout</MenuItem>
-
-               
             </Menu>
 
             {/* Drawer (Hamburger Menu) */}
@@ -121,7 +115,7 @@ const Navbar = () => {
                     </List>
                 </Box>
             </Drawer>
-        </>
+        </AppBar>
     );
 };
 

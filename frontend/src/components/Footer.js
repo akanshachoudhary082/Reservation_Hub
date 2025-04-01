@@ -6,7 +6,9 @@ import FacebookIcon from '@mui/icons-material/Facebook';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
+
 //import './Footer.scss';
+
 
 
 const Footer = () => {
@@ -15,8 +17,14 @@ const Footer = () => {
     const currentYear = new Date().getFullYear();
     
   return (
+
     <Box className='header__footer__background'
-               >
+     sx={{ backgroundColor: '#333', 
+               color: 'white', 
+               padding: '20px 0', 
+               marginTop: 'auto' 
+               }}
+>
       <Divider sx={{ borderColor: 'white' }} />
 
       {/* Footer Section */}

@@ -3,13 +3,16 @@ import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_AUTH_DOMAIN",
-  projectId: "YOUR_PROJECT_ID",
-  storageBucket: "YOUR_STORAGE_BUCKET",
-  messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-  appId: "YOUR_APP_ID",
+  apiKey: "AIzaSyDFclmY3qDYskF_gEnduriFbAtoVf_5h48",
+  authDomain: "mobile-auth-d4b7e.firebaseapp.com",
+  projectId: "mobile-auth-d4b7e",
+  storageBucket: "mobile-auth-d4b7e.firebasestorage.app",
+  messagingSenderId: "381189096220",
+  appId: "1:381189096220:web:f5d00d3173dfb25886f0d9"
 };
 
+// Initialize Firebase
 const app = initializeApp(firebaseConfig);
-export const auth = getAuth(app);
+const auth = getAuth(app);
+
+export {app, auth};

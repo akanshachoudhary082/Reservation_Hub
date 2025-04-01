@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom'; // Use useNavigate for routing
-import { signinUser  } from '../redux/actions/signinAction'; // Import the signinUser  action
+import { loginUser  } from '../redux/actions/loginAction'; // Import the signinUser  action
 import '../assets/styles/MobileNumberForm.scss'; // Import the SCSS file
 import { Button, TextField, Typography } from '@mui/material'; // Import Material UI components
+
 
 const countryList = [
     { code: 'IN', name: 'India', dialCode: '+91' },
@@ -18,7 +19,7 @@ const MobileNumberForm = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const [inputNumber, setInputNumber] = useState('');
-    const [selectedCountry, setSelectedCountry] = useState(countryList[0]); // Default to the first country
+    const [selectedCountry, setSelectedCountry] = useState(countryList[0]); 
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
 
@@ -36,7 +37,7 @@ const MobileNumberForm = () => {
         return regex.test(number);
     };
 
-    const handleSubmit = async (e) => {
+    const getOtp = async (e) => {
         e.preventDefault();
         setLoading(true);
         setError('');
@@ -48,9 +49,9 @@ const MobileNumberForm = () => {
         }
 
         try {
-            const fullNumber = selectedCountry.dialCode + inputNumber; // Combine country code with mobile number
-            await dispatch(signinUser (fullNumber)); // Dispatch the signinUser  action
-            navigate('/otp'); // Redirect to OTP input page
+            const fullNumber = selectedCountry.dialCode + inputNumber; 
+            await dispatch(loginUser (fullNumber)); 
+            navigate('http://localhost:3000/otp-sent'); 
         } catch (error) {
             console.error('Error sending OTP:', error);
             setError('Failed to send OTP. Please try again.');
@@ -62,7 +63,7 @@ const MobileNumberForm = () => {
     return (
         <div className="mobile-number-form">
             <Typography variant="h4">Enter your mobile number</Typography>
-            <form onSubmit={handleSubmit} style={{ width: '100%', display: 'flex', flexDirection: 'column' }}>
+            <form onSubmit={getOtp} style={{ width: '100%', display: 'flex', flexDirection: 'column' }}>
                 <select onChange={handleCountryChange} value={selectedCountry.code} style={{ marginBottom: '16px' }}>
                     {countryList.map(country => (
                         <option key={country.code} value={country.code}>
@@ -77,7 +78,7 @@ const MobileNumberForm = () => {
                     value={inputNumber}
                     onChange={handleInputChange}
                     required
-                    style={{ marginBottom: '16px' }} // Space below the input field
+                    style={{ marginBottom: '16px' }} 
                 />
                 {error && <Typography className="error-message">{error}</Typography>}
                 <Button
@@ -86,7 +87,7 @@ const MobileNumberForm = () => {
                     color="primary"
                     className="submit-button"
                     disabled={loading}
-                    style={{ marginTop: '16px' }} // Ensure spacing above the button
+                    style={{ marginTop: '16px' }} 
                 >
                     {loading ? 'Sending...' : 'Send OTP'}
                 </Button>

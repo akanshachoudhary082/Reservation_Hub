@@ -1,4 +1,4 @@
-import { SIGNIN_REQUEST, SIGNIN_SUCCESS, SIGNIN_FAILURE } from '../actions/signinAction';
+import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE } from '../actions/loginAction';
 
 const initialState = {
     loading: false,
@@ -7,17 +7,17 @@ const initialState = {
     otpSent: false, // New state to track if OTP has been sent
 };
 
-const signinReducer = (state = initialState, action) => {
+const loginReducer = (state = initialState, action) => {
     switch (action.type) {
-        case SIGNIN_REQUEST:
+        case LOGIN_REQUEST:
             return { ...state, loading: true, error: null, otpSent: false }; // Reset otpSent on request
-        case SIGNIN_SUCCESS:
+        case LOGIN_SUCCESS:
             return { ...state, loading: false, user: action.payload, otpSent: true }; // Set otpSent to true on success
-        case SIGNIN_FAILURE:
+        case LOGIN_FAILURE:
             return { ...state, loading: false, error: action.payload };
         default:
             return state;
     }
 };
 
-export default signinReducer;
+export default loginReducer;
