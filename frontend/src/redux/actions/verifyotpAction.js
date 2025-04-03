@@ -1,7 +1,7 @@
-import { VERIFY_OTP } from '../actions/actionTypes'; // Define your action types
+import { VERIFY_OTP } from '../actions/actionTypes'; 
 
 export const verifyotpAction = (otp) => async (dispatch) => {
-    // Replace with your API call to verify OTP
+    
     const response = await fetch('/api/verify-otp', {
         method: 'POST',
         headers: {

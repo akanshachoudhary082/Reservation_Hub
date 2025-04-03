@@ -95,8 +95,10 @@ const Transport = () => {
         variant="h4" 
         sx={{ 
           textAlign: 'center', 
+          marginTop: '30px',
           marginBottom: '30px', 
-          fontSize: { xs: '1.5rem', sm: '2rem' }, // Responsive typography
+          fontSize: { xs: '1.5rem', sm: '2rem' },
+          color: 'gray', // Responsive typography
         }}
       >
         Choose Your Transport

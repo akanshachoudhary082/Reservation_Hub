@@ -2,17 +2,16 @@ package com.app.reservationbooking.dto;
 
 import jakarta.validation.constraints.NotBlank;
 
-public class OtpRequest {
+public class OtpRequestDTO {
 	
 	@NotBlank(message = "Mobile number is required")
-	//@Pattern(regexp = "^\\+?[1-9]\\d{1,14}$", message = "Invalid mobile number format")
 	private String mobileNumber;
 
-	public OtpRequest() {
+	public OtpRequestDTO() {
 	
 	}
 
-	public OtpRequest(String mobileNumber) {
+	public OtpRequestDTO(String mobileNumber) {
 		super();
 		this.mobileNumber = mobileNumber;
 	}

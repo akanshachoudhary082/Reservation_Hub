@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, Typography, Link, Divider } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
-import logo from '../assets/images/logo.png';
+import logo from '../assets/images/Reservation_Hub_Logo.jpg';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import InstagramIcon from '@mui/icons-material/Instagram';
@@ -19,7 +19,7 @@ const Footer = () => {
   return (
 
     <Box className='header__footer__background'
-     sx={{ backgroundColor: '#333', 
+     sx={{ backgroundColor: '#000000', 
                color: 'white', 
                padding: '20px 0', 
                marginTop: 'auto' 

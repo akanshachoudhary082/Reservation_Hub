@@ -1,6 +1,6 @@
 import React from 'react';
 import { AppProvider } from '@toolpad/core/AppProvider';
-import MobileNumberForm from '../components/MobileNumberForm'; // Import the MobileNumberForm component
+import MobileNumberForm from '../components/MobileNumberForm'; 
 import { useTheme } from '@mui/material/styles';
 
 const Login = () =>{

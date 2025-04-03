@@ -1,28 +1,63 @@
-/* OtpInput.css */
 .otp-container {
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    flex-direction: column; // Stack elements vertically
     justify-content: center;
-    height: 100vh;
-    background-color: #f5f5f5;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    align-items: center;
+    height: 80vh; // Full viewport height
+    padding: 0px;
+    margin: 0;
 }
 
-.otp-form {
+h4 {
+    margin-bottom: 24px; 
+    color: #0f0f0f; // Primary color for the heading
+    font-weight: 600; 
+    text-align: center;
+    font-size: 1.5rem; // Larger font size for emphasis
+}
+
+.otp-input {
     display: flex;
-    gap: 10px; /* Space between input fields */
+    flex-direction: column; // Stack elements vertically
+    justify-content: center;
+    align-items: center;
+    background-color: #ffffff; // Background color for the OTP input box
+    padding: 30px; // Padding inside the OTP input box
+    border-radius: 10px; // Rounded corners
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); // Shadow for depth
 }
 
-.submit-button {
-    margin-top: 20px;
-    background-color: #6200ea; /* Primary color */
-    color: #fff;
-    transition: background-color 0.3s;
+.text-box {
+    margin-bottom: 20px; // Space below the text box
 }
 
-.submit-button:hover {
-    background-color: #5a00d1; /* Darker shade for hover effect */
+.input-container {
+    display: flex;
+    gap: 10px; // Space between input boxes
+    margin-top: 10px; // Space between the heading and input boxes
 }
+
+.input-box {
+    width: 50px; // Fixed width for each input box
+    height: 60px; // Fixed height for each input box
+    font-size: 24px; // Font size for digits
+    text-align: center; // Center text
+    border: 2px solid #ccc; // Border style
+    border-radius: 5px; // Rounded corners
+    outline: none; // Remove default outline
+    transition: border-color 0.3s;
+
+    &:focus {
+        border-color: #6200ea; // Border color on focus
+    }
+
+    &.error {
+        border-color: red; // Border color for error state
+    }
+}
+
+.error-message {
+    color: red; // Style for error messages
+    margin-top: 10px; // Space above error message
+}
+

@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom'; // Use useNavigate for routing
-import { loginUser  } from '../redux/actions/loginAction'; // Import the signinUser  action
-import '../assets/styles/MobileNumberForm.scss'; // Import the SCSS file
-import { Button, TextField, Typography } from '@mui/material'; // Import Material UI components
-
+import { useNavigate } from 'react-router-dom';
+import { loginUser  } from '../redux/actions/loginAction'; 
+import '../assets/styles/MobileNumberForm.scss'; 
+import { Button, TextField, Typography } from '@mui/material'; 
+import '../assets/styles/style.scss';
 
 const countryList = [
     { code: 'IN', name: 'India', dialCode: '+91' },
@@ -17,11 +17,11 @@ const countryList = [
 
 const MobileNumberForm = () => {
     const dispatch = useDispatch();
-    const navigate = useNavigate();
     const [inputNumber, setInputNumber] = useState('');
     const [selectedCountry, setSelectedCountry] = useState(countryList[0]); 
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
+    const navigate = useNavigate();
 
     const handleInputChange = (e) => {
         setInputNumber(e.target.value);
@@ -49,9 +49,10 @@ const MobileNumberForm = () => {
         }
 
         try {
+            navigate('/otp-sent');
             const fullNumber = selectedCountry.dialCode + inputNumber; 
-            await dispatch(loginUser (fullNumber)); 
-            navigate('http://localhost:3000/otp-sent'); 
+            await dispatch(loginUser(fullNumber)); 
+             
         } catch (error) {
             console.error('Error sending OTP:', error);
             setError('Failed to send OTP. Please try again.');
@@ -61,7 +62,8 @@ const MobileNumberForm = () => {
     };
 
     return (
-        <div className="mobile-number-form">
+        <div >
+            <div className="mobile-number-form">
             <Typography variant="h4">Enter your mobile number</Typography>
             <form onSubmit={getOtp} style={{ width: '100%', display: 'flex', flexDirection: 'column' }}>
                 <select onChange={handleCountryChange} value={selectedCountry.code} style={{ marginBottom: '16px' }}>
@@ -92,6 +94,7 @@ const MobileNumberForm = () => {
                     {loading ? 'Sending...' : 'Send OTP'}
                 </Button>
             </form>
+        </div>
         </div>
     );
 };

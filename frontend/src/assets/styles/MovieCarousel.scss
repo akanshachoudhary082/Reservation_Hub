@@ -1,0 +1,21 @@
+.slider {
+    display: flex;
+    overflow-x: auto;
+    padding: 20px;
+}
+
+.movie-card {
+    min-width: 150px;
+    margin-right: 10px;
+    text-align: center;
+}
+
+.movie-card img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+button {
+    margin-top: 20px;
+}

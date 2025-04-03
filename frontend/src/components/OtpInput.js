@@ -1,21 +1,26 @@
-// src/components/OtpInput.js
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom'; // Use useNavigate for routing
-import { verifyotpAction } from '../redux/actions/verifyotpAction'; // Import the action to verify OTP
-//import '../assets/styles/OtpInput.scss'; // Import the SCSS file
-import { Button, TextField, Typography } from '@mui/material'; // Import Material UI components
-
+import { useNavigate } from 'react-router-dom';
+import { verifyotpAction } from '../redux/actions/verifyotpAction'; 
+import { Button, Typography } from '@mui/material'; 
+import '../assets/styles/OtpInput.scss'; // Import the SCSS file
 
 const OtpInput = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const [otp, setOtp] = useState('');
+    const [otp, setOtp] = useState(['', '', '', '', '', '']); // Array for each digit
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
 
-    const handleInputChange = (e) => {
-        setOtp(e.target.value);
+    const handleInputChange = (index, value) => {
+        const newOtp = [...otp];
+        newOtp[index] = value.slice(-1); // Only keep the last character
+        setOtp(newOtp);
+
+        // Move to the next input if the current one is filled
+        if (value && index < otp.length - 1) {
+            document.getElementById(`otp-input-${index + 1}`).focus();
+        }
     };
 
     const handleSubmit = async (e) => {
@@ -23,16 +28,16 @@ const OtpInput = () => {
         setLoading(true);
         setError('');
 
-        // Validate OTP (you can add more validation if needed)
-        if (otp.length !== 6) {
+        const otpString = otp.join('');
+        if (otpString.length !== 6) {
             setError('Please enter a valid 6-digit OTP');
             setLoading(false);
             return;
         }
 
         try {
-            await dispatch(verifyotpAction(otp)); // Dispatch the action to verify OTP
-            navigate('/success'); // Redirect to a success page or dashboard
+            await dispatch(verifyotpAction(otpString)); 
+            navigate('/success');
         } catch (error) {
             console.error('Error verifying OTP:', error);
             setError('Failed to verify OTP. Please try again.');
@@ -42,30 +47,38 @@ const OtpInput = () => {
     };
 
     return (
-        <div className="otp-input">
-            <Typography variant="h4">Enter OTP</Typography>
-            <form onSubmit={handleSubmit} style={{ width: '100%', display: 'flex', flexDirection: 'column' }}>
-                <TextField
-                    label="OTP"
-                    variant="outlined"
-                    fullWidth
-                    value={otp}
-                    onChange={handleInputChange}
-                    required
-                    style={{ marginBottom: '16px' }} // Space below the input field
-                />
-                {error && <Typography className="error-message">{error}</Typography>}
-                <Button
-                    type="submit"
-                    variant="contained"
-                    color="primary"
-                    className="submit-button"
-                    disabled={loading}
-                    style={{ marginTop: '16px' }} // Ensure spacing above the button
-                >
-                    {loading ? 'Verifying...' : 'Verify OTP'}
-                </Button>
-            </form>
+        <div className="otp-container">
+            <div className="otp-input">
+                <div className="text-box">
+                    <Typography variant="h4">Enter OTP</Typography>
+                </div>
+                <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                    <div className="input-container">
+                        {otp.map((digit, index) => (
+                            <input
+                                key={index}
+                                id={`otp-input-${index}`}
+                                type="text"
+                                maxLength="1"
+                                value={digit}
+                                onChange={(e) => handleInputChange(index, e.target.value)}
+                                className={`input-box ${error ? 'error' : ''}`}
+                            />
+                        ))}
+                    </div>
+                    {error && <Typography className="error-message">{error}</Typography>}
+                    <Button
+                        type="submit"
+                        variant="contained"
+                        color="primary"
+                        className="submit-button"
+                        disabled={loading}
+                        style={{ marginTop: '16px' }} 
+                    >
+                        {loading ? 'Verifying...' : 'Verify OTP'}
+                    </Button>
+                </form>
+            </div>
         </div>
     );
 };

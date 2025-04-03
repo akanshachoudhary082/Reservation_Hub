@@ -24,7 +24,7 @@ const Navbar = () => {
     };
 
     return (
-        <AppBar position="static" sx={{ backgroundColor: '#4f4f4f' }}>
+        <AppBar position="static" sx={{ backgroundColor: '#000000' }}>
             <Toolbar>
                 {/* Logo */}
                 <Link to="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
