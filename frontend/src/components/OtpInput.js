@@ -56,6 +56,7 @@ const OtpInput = () => {
                     <div className="input-container">
                         {otp.map((digit, index) => (
                             <input
+                                autoFocus={index===0}
                                 key={index}
                                 id={`otp-input-${index}`}
                                 type="text"
@@ -63,6 +64,7 @@ const OtpInput = () => {
                                 value={digit}
                                 onChange={(e) => handleInputChange(index, e.target.value)}
                                 className={`input-box ${error ? 'error' : ''}`}
+                                
                             />
                         ))}
                     </div>

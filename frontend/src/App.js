@@ -1,3 +1,4 @@
+/* eslint-disable no-template-curly-in-string */
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';  // For routing
 
@@ -11,7 +12,7 @@ import Footer from './components/Footer';  // Importing the Footer component
 import Home from './pages/Home';  // Home page
 import AboutUs from './pages/AboutUs';
 import Transport from './pages/Transport';  // Transport page
-import TransportServiceDetails from './pages/TransportServiceDetails'; 
+import TransportServiceDetails from './pages/TransportServiceDetails';
 import Movies from './pages/Movies';  // Theatre page
 import Events from './pages/Events';  // Event page
 import ContactUs from './pages/ContactUs'; // Contact Us page
@@ -20,8 +21,9 @@ import '../src/assets/styles/style.scss';
 import MobileNumberForm from '../src/components/MobileNumberForm';
 import OtpInput from './components/OtpInput';
 import OtpSuccessPage from './pages/OtpSuccessPage';
-import Register from './pages/Register';  
+import Register from './pages/Register';
 import SelectCity from './components/SelectCity';
+import CitySelectionPopUp from './components/CitySelectionPopup';
 import MovieCarousel from './components/MovieCarousel';
 
 
@@ -30,33 +32,33 @@ const App = () => {
   return (
     <Router>
       <div className='background'>
-      <Navbar /> 
+        <Navbar />
 
-<Container  className='container'> </Container>
+        <Container className='container'> </Container>
 
-<Container sx={{ minHeight: '80vh' }}> 
-  <Routes>
-    <Route path="/" element={<Home />} />  
-    <Route path="/" element={<MovieCarousel />} />
-    <Route path="/aboutUs" element={<AboutUs />} /> 
-    <Route path="/transport" element={<Transport />} />  
-    <Route path="/details/:id" element={<TransportServiceDetails />} />  
-    <Route path="/movies" element={<Movies />} />  
-    <Route path="/events" element={<Events />} />  
-    <Route path="/contactus" element={<ContactUs />} /> 
-    <Route path="/login" element={<MobileNumberForm />} />  
-    <Route path="/signin" element={< SignIn/>} /> 
-    <Route path="/otp-sent" element={<OtpInput />} />
-    <Route path="/success" element={<OtpSuccessPage />} />
-    <Route path="/register" element={<Register />} />  
-    <Route path="/select-city" element={<SelectCity />} />
-    <Route path="*" element={<div>404 - Page Not Found</div>} /> 
-  </Routes>
-</Container>
-<Footer />  
+        <Container sx={{ minHeight: '80vh' }}>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/" element={<MovieCarousel />} />
+            <Route path="/aboutUs" element={<AboutUs />} />
+            <Route path="/transport" element={<Transport />} />
+            <Route path="/details/:id" element={<TransportServiceDetails />} />
+            <Route path="/movies" element={<Movies />} />
+            <Route path="/events" element={<Events />} />
+            <Route path="/contactus" element={<ContactUs />} />
+            <Route path="/login" element={<MobileNumberForm />} />
+            <Route path="/signin" element={< SignIn />} />
+            <Route path="/otp-sent" element={<OtpInput />} />
+            <Route path="/success" element={<OtpSuccessPage />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/select-city" element={<SelectCity />} />
+            <Route path="*" element={<div>404 - Page Not Found</div>} />
+          </Routes>
+        </Container>
+        <Footer />
 
       </div>
-      
+
     </Router>
   );
 };

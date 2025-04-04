@@ -48,7 +48,7 @@ const Transport = () => {
           textAlign: 'center',
           marginBottom: '30px',
           fontSize: { xs: '1.5rem', sm: '2rem' },
-          color: 'white', 
+          color: 'white', // Responsive typography
           fontFamily: 'Bebas Neue',
           fontWeight: 800, 
         }}

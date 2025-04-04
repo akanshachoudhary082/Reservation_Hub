@@ -9,7 +9,7 @@ export const loginUser  = (fullNumber) => async (dispatch) => {
     dispatch({ type: LOGIN_REQUEST });
     try {
         
-        const response = await axios.post('http://localhost:3002/api/send-otp', { fullNumber });
+        const response = await axios.post('http://localhost:3002/send-otp', { fullNumber });
         
         dispatch({ type: LOGIN_SUCCESS, payload: response.data });
 

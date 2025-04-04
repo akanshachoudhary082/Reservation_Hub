@@ -14,7 +14,7 @@ const MovieCarousel = () => {
         const fetchMovies = async () => {
             dispatch({ type: 'FETCH_MOVIES_REQUEST' });
             try {
-                const response = await axios.get(`http://localhost:3000/api/get-movies`);
+                const response = await axios.get(`http://localhost:3000/get-movies`);
                 dispatch({ type: 'FETCH_MOVIES_SUCCESS', payload: response.data });
             } catch (error) {
                 dispatch({ type: 'FETCH_MOVIES_FAILURE', payload: error.message });
