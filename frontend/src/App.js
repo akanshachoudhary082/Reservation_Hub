@@ -11,6 +11,7 @@ import Footer from './components/Footer';  // Importing the Footer component
 import Home from './pages/Home';  // Home page
 import AboutUs from './pages/AboutUs';
 import Transport from './pages/Transport';  // Transport page
+import TransportServiceDetails from './pages/TransportServiceDetails'; 
 import Movies from './pages/Movies';  // Theatre page
 import Events from './pages/Events';  // Event page
 import ContactUs from './pages/ContactUs'; // Contact Us page
@@ -19,39 +20,40 @@ import '../src/assets/styles/style.scss';
 import MobileNumberForm from '../src/components/MobileNumberForm';
 import OtpInput from './components/OtpInput';
 import OtpSuccessPage from './pages/OtpSuccessPage';
-import Register from './pages/Register';  // Register page
+import Register from './pages/Register';  
 import SelectCity from './components/SelectCity';
 import MovieCarousel from './components/MovieCarousel';
-/* Custom Components - End */
+
+
 
 const App = () => {
   return (
     <Router>
       <div className='background'>
-      <Navbar />  {/* Navbar that will be shown across all pages */}
+      <Navbar /> 
 
-<Container  className='container'> {/* Add minHeight to make sure footer stays at the bottom */}</Container>
+<Container  className='container'> </Container>
 
-<Container sx={{ minHeight: '80vh' }}> {/* Add minHeight to make sure footer stays at the bottom */}
-
+<Container sx={{ minHeight: '80vh' }}> 
   <Routes>
-    <Route path="/" element={<Home />} />  {/* Home Page */}
+    <Route path="/" element={<Home />} />  
     <Route path="/" element={<MovieCarousel />} />
     <Route path="/aboutUs" element={<AboutUs />} /> 
-    <Route path="/transport" element={<Transport />} />  {/* Transport Service */}
-    <Route path="/movies" element={<Movies />} />  {/* Theatre Service */}
-    <Route path="/events" element={<Events />} />  {/* Events Service */}
-    <Route path="/contactus" element={<ContactUs />} />  {/* Contact Us */}
-    <Route path="/login" element={<MobileNumberForm />} />  {/* Login page */}
+    <Route path="/transport" element={<Transport />} />  
+    <Route path="/details/:id" element={<TransportServiceDetails />} />  
+    <Route path="/movies" element={<Movies />} />  
+    <Route path="/events" element={<Events />} />  
+    <Route path="/contactus" element={<ContactUs />} /> 
+    <Route path="/login" element={<MobileNumberForm />} />  
     <Route path="/signin" element={< SignIn/>} /> 
     <Route path="/otp-sent" element={<OtpInput />} />
     <Route path="/success" element={<OtpSuccessPage />} />
-    <Route path="/register" element={<Register />} />  {/* Register page */}
+    <Route path="/register" element={<Register />} />  
     <Route path="/select-city" element={<SelectCity />} />
-    <Route path="*" element={<div>404 - Page Not Found</div>} /> {/* Catch-all for 404 */}
+    <Route path="*" element={<div>404 - Page Not Found</div>} /> 
   </Routes>
 </Container>
-<Footer />  {/* Footer displayed at the bottom */}
+<Footer />  
 
       </div>
       

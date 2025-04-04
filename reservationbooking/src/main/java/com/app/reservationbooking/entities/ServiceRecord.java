@@ -29,8 +29,11 @@ public class ServiceRecord extends BaseEntity {
 //	@JoinColumn(name = "user_id", nullable = false)
 //	private User user;
 
-	@OneToOne(mappedBy = "services", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private ServiceDetails details;
+//	@OneToOne(mappedBy = "services", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+//	private ServiceDetails details;
+
+	@OneToMany(mappedBy = "services", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private List<ServiceDetails> details;
 
 
 }

@@ -1,180 +1,101 @@
-// // src/pages/Transport.js
-
-// import React from 'react';
-// import { Card, CardContent, CardMedia, Grid, Typography, Button } from '@mui/material';
-
-// // Import your images
-// import busImage from '../assets/images/bus-image.jpg';
-// import trainImage from '../assets/images/train-image.jpg';
-// import flightImage from '../assets/images/flight-image.png';
-
-// const Transport = () => {
-//   return (
-//     <div>
-//       <Typography variant="h4" sx={{ textAlign: 'center', marginBottom: '30px' }}>
-//         Choose Your Transport
-//       </Typography>
-//       <Grid container spacing={3} justifyContent="center">
-//         {/* Bus Card */}
-//         <Grid item xs={12} sm={4}>
-//           <Card>
-//             <CardMedia
-//               component="img"
-//               height="200"
-//               image={busImage} 
-//               alt="Bus"
-//             />
-//             <CardContent>
-//               <Typography variant="h6">Bus</Typography>
-//               <Typography variant="body2" color="textSecondary">
-//                 Affordable and convenient travel by bus.
-//               </Typography>
-//               <Button variant="contained" sx={{ marginTop: '10px' }}>Book Now</Button>
-//             </CardContent>
-//           </Card>
-//         </Grid>
-
-//         {/* Train Card */}
-//         <Grid item xs={12} sm={4}>
-//           <Card>
-//             <CardMedia
-//               component="img"
-//               height="200"
-//               image={trainImage}  
-//               alt="Train"
-//             />
-//             <CardContent>
-//               <Typography variant="h6">Train</Typography>
-//               <Typography variant="body2" color="textSecondary">
-//                 Comfortable and scenic train journeys.
-//               </Typography>
-//               <Button variant="contained" sx={{ marginTop: '10px' }}>Book Now</Button>
-//             </CardContent>
-//           </Card>
-//         </Grid>
-
-//         {/* Flight Card */}
-//         <Grid item xs={12} sm={4}>
-//           <Card>
-//             <CardMedia
-//               component="img"
-//               height="200"
-//               image={flightImage}  
-//               alt="Flight"
-//             />
-//             <CardContent>
-//               <Typography variant="h6">Flight</Typography>
-//               <Typography variant="body2" color="textSecondary">
-//                 Fast and convenient air travel options.
-//               </Typography>
-//               <Button variant="contained" sx={{ marginTop: '10px' }}>Book Now</Button>
-//             </CardContent>
-//           </Card>
-//         </Grid>
-//       </Grid>
-//     </div>
-//   );
-// };
-
-// export default Transport;
-
-// src/pages/Transport.js
-
-import React from 'react';
-import { Card, CardContent, CardMedia, Grid, Typography, Button } from '@mui/material';
-
-// Import your images
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import axios from 'axios';
+import { setServiceDetails, setLoading, setError } from '../redux/actions/transportServiceDetailsAction';
+import { Grid, Typography, Card, CardContent, CardMedia, Button } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 import busImage from '../assets/images/bus-image.jpg';
 import trainImage from '../assets/images/train-image.jpg';
 import flightImage from '../assets/images/flight-image.png';
 
 const Transport = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate(); 
+  const { serviceDetails, loading, error } = useSelector((state) => state.transportServiceDetails);
+
+  useEffect(() => {
+   
+    const fetchServiceDetails = async () => {
+      dispatch(setLoading()); 
+      try {
+        const response = await axios.get('http://localhost:8080/details'); 
+        console.log("API Response:", response.data); 
+        dispatch(setServiceDetails(response.data)); 
+      } catch (err) {
+        dispatch(setError(err.message));
+      }
+    };
+
+    fetchServiceDetails();
+  }, [dispatch]);
+
+  
+  if (loading) return <Typography variant="h6" textAlign="center">Loading transport services...</Typography>;
+
+  
+  if (error) return <Typography variant="h6" color="error" textAlign="center">Error: {error}</Typography>;
+
+  const transportServices = serviceDetails.filter((service) => 
+    service.detailType === 'BUS' || service.detailType === 'TRAIN' || service.detailType === 'FLIGHT'
+  );
+
+
   return (
     <div>
-      <Typography 
-        variant="h4" 
-        sx={{ 
-          textAlign: 'center', 
-          marginTop: '30px',
-          marginBottom: '30px', 
+      <Typography
+        variant="h4"
+        sx={{
+          textAlign: 'center',
+          marginBottom: '30px',
           fontSize: { xs: '1.5rem', sm: '2rem' },
-          color: 'gray', // Responsive typography
+          color: 'white', 
+          fontFamily: 'Bebas Neue',
+          fontWeight: 800, 
         }}
       >
-        Choose Your Transport
+        BOOK YOUR TICKETS NOW!
       </Typography>
+
       <Grid container spacing={2} justifyContent="center">
-        {/* Bus Card */}
-        <Grid item xs={12} sm={4} md={3}>
-          <Card>
-            <CardMedia
-              component="img"
-              height="auto"
-              image={busImage}
-              alt="Bus"
-              sx={{ 
-                objectFit: 'cover', 
-                width: '100%', 
-                height: { xs: '150px', sm: '200px' }, // Adjust image height for smaller screens
-              }}
-            />
-            <CardContent>
-              <Typography variant="h6" sx={{ fontSize: { xs: '1rem', sm: '1.25rem' } }}>Bus</Typography>
-              <Typography variant="body2" color="textSecondary" sx={{ fontSize: { xs: '0.875rem', sm: '1rem' } }}>
-                Affordable and convenient travel by bus.
-              </Typography>
-              <Button variant="contained" sx={{ marginTop: '10px' }}>Book Now</Button>
-            </CardContent>
-          </Card>
-        </Grid>
-
-        {/* Train Card */}
-        <Grid item xs={12} sm={4} md={3}>
-          <Card>
-            <CardMedia
-              component="img"
-              height="auto"
-              image={trainImage}
-              alt="Train"
-              sx={{ 
-                objectFit: 'cover', 
-                width: '100%', 
-                height: { xs: '150px', sm: '200px' }, // Adjust image height for smaller screens
-              }}
-            />
-            <CardContent>
-              <Typography variant="h6" sx={{ fontSize: { xs: '1rem', sm: '1.25rem' } }}>Train</Typography>
-              <Typography variant="body2" color="textSecondary" sx={{ fontSize: { xs: '0.875rem', sm: '1rem' } }}>
-                Comfortable and scenic train journeys.
-              </Typography>
-              <Button variant="contained" sx={{ marginTop: '10px' }}>Book Now</Button>
-            </CardContent>
-          </Card>
-        </Grid>
-
-        {/* Flight Card */}
-        <Grid item xs={12} sm={4} md={3}>
-          <Card>
-            <CardMedia
-              component="img"
-              height="auto"
-              image={flightImage}
-              alt="Flight"
-              sx={{ 
-                objectFit: 'cover', 
-                width: '100%', 
-                height: { xs: '150px', sm: '200px' }, // Adjust image height for smaller screens
-              }}
-            />
-            <CardContent>
-              <Typography variant="h6" sx={{ fontSize: { xs: '1rem', sm: '1.25rem' } }}>Flight</Typography>
-              <Typography variant="body2" color="textSecondary" sx={{ fontSize: { xs: '0.875rem', sm: '1rem' } }}>
-                Fast and convenient air travel options.
-              </Typography>
-              <Button variant="contained" sx={{ marginTop: '10px' }}>Book Now</Button>
-            </CardContent>
-          </Card>
-        </Grid>
+        {transportServices && transportServices.length > 0 ? (
+          transportServices.map((service) => (
+            <Grid item xs={12} sm={4} md={3} key={service.detailId}>
+              <Card>
+                <CardMedia
+                  component="img"
+                  height="auto"
+                  image={
+                    service.detailType === 'BUS' ? busImage :
+                    service.detailType === 'TRAIN' ? trainImage :
+                    service.detailType === 'FLIGHT' ? flightImage :
+                    busImage 
+                  }
+                  alt={service.detailType}
+                  sx={{
+                    objectFit: 'cover',
+                    width: '100%',
+                    height: { xs: '150px', sm: '200px' },
+                  }}
+                />
+                <CardContent>
+                  
+                  <Typography variant="h6" sx={{ fontSize: { xs: '1rem', sm: '1.25rem' } }}>
+                    {service.detailType}
+                  </Typography>
+                  <Button
+                    variant="contained"
+                    sx={{ marginTop: '10px' }}
+                    onClick={() => navigate(`/details/${service.detailId}`)} 
+                  >
+                    Book Now
+                  </Button>
+                </CardContent>
+              </Card>
+            </Grid>
+          ))
+        ) : (
+          <Typography>No transport services available</Typography>
+        )}
       </Grid>
     </div>
   );

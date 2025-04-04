@@ -16,11 +16,12 @@ import java.util.List;
 @Setter
 @Builder
 @ToString
+@SequenceGenerator(name = "details_seq", sequenceName = "details_detail_id_seq", allocationSize = 1)
 public class ServiceDetails extends BaseEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO, generator = "details_seq")
-	@SequenceGenerator(name = "details_seq", sequenceName = "details_detail_id_seq", allocationSize = 1)
+
 	@Column(name = "detail_id", nullable = false)
 	private Long detailId;
 
@@ -46,7 +47,11 @@ public class ServiceDetails extends BaseEntity {
 	@Column(name = "venue")
 	private String venue;
 
-	@OneToOne
+//	@OneToOne
+//	@JoinColumn(name = "service_id", nullable = false)
+//	private ServiceRecord services;
+
+	@ManyToOne
 	@JoinColumn(name = "service_id", nullable = false)
 	private ServiceRecord services;
 

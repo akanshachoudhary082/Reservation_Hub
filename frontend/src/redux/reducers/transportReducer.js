@@ -1,29 +1,37 @@
-// src/redux/reducers/transportReducer.js
+import { SET_TRANSPORT_DATA, SET_LOADING, SET_ERROR } from '../actions/transportActionType';
 
-import {
-    FETCH_TRANSPORT_REQUEST,
-    FETCH_TRANSPORT_SUCCESS,
-    FETCH_TRANSPORT_FAILURE,
-  } from '../actions/transportActions';
-  
-  const initialState = {
-    loading: false,
-    transportServices: [], // To store transport data (e.g., Bus, Train, Flight)
-    error: null,
-  };
-  
-  const transportReducer = (state = initialState, action) => {
-    switch (action.type) {
-      case FETCH_TRANSPORT_REQUEST:
-        return { ...state, loading: true };
-      case FETCH_TRANSPORT_SUCCESS:
-        return { ...state, loading: false, transportServices: action.payload };
-      case FETCH_TRANSPORT_FAILURE:
-        return { ...state, loading: false, error: action.payload };
-      default:
-        return state;
-    }
-  };
-  
-  export default transportReducer;
-  
+const initialState = {
+  services: [],   
+  loading: false, 
+  error: null,    
+};
+
+const transportReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case SET_TRANSPORT_DATA:
+      return {
+        ...state,
+        services: action.payload,  
+        loading: false,            
+        error: null,               
+      };
+
+    case SET_LOADING:
+      return {
+        ...state,
+        loading: true, 
+      };
+
+    case SET_ERROR:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload, 
+      };
+
+    default:
+      return state;
+  }
+};
+
+export default transportReducer;

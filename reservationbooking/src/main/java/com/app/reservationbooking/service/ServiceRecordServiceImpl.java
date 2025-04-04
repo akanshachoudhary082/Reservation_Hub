@@ -1,6 +1,7 @@
 package com.app.reservationbooking.service;
 
 import com.app.reservationbooking.dto.ServiceRecordDTO;
+import com.app.reservationbooking.entities.ServiceDetails;
 import com.app.reservationbooking.entities.ServiceRecord;
 import com.app.reservationbooking.customexception.ResourceNotFoundException;
 import com.app.reservationbooking.repository.ServiceRecordRepository;
@@ -45,8 +46,8 @@ public class ServiceRecordServiceImpl implements ServiceRecordService {
                 .orElseThrow(() -> new ResourceNotFoundException("Service not found with id " + serviceRecordId));
 
         existingService.setServiceType(serviceRecordDTO.getServiceType());
-        existingService.setUser(serviceRecordDTO.getUser());
-        existingService.setDetails(serviceRecordDTO.getDetails());
+        //existingService.setUser(serviceRecordDTO.getUser());
+        existingService.setDetails((List<ServiceDetails>) serviceRecordDTO.getDetails());
 
         existingService = serviceRecordRepository.save(existingService);
         return ServiceRecordConverterUtils.convertEntityToDTO(existingService);
