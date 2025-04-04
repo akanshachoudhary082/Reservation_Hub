@@ -1,5 +1,9 @@
 package com.app.reservationbooking.dto;
 
+import com.app.reservationbooking.entities.BaseEntity;
+import com.app.reservationbooking.entities.ServiceDetails;
+import com.app.reservationbooking.entities.ServiceRecord;
+import com.app.reservationbooking.entities.User;
 import com.app.reservationbooking.enums.ServiceType;
 import lombok.*;
 
@@ -8,9 +12,18 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class ServiceRecordDTO {
-    private Long serviceId;
+@ToString
+public class ServiceRecordDTO extends BaseEntity {
+
+    private Long serviceRecordId;
+
+
     private ServiceType serviceType;
-    private Long userId;
-    private Long detailsId;
+
+    private User user;
+
+    private ServiceDetails details;
+
+    public ServiceRecordDTO(ServiceRecord service) {
+    }
 }

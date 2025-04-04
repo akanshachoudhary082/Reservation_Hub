@@ -4,30 +4,37 @@ import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.MappedSuperclass;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @MappedSuperclass
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
 public class BaseEntity {
-    @Id
-    @GeneratedValue
-    private Long id;
+    @Column(name="created_by")
+    private String createdBy;
+
     @CreationTimestamp
     @Column(name="creation_date")
-    private LocalDate creationDate;
+    private LocalDateTime creationDate;
+
+    @Column(name="updated_by")
+    private String updatedBy;
+
     @UpdateTimestamp
     @Column(name="updated_on")
-    private LocalDate updatedOn;
+    private LocalDateTime updatedOn;
 
-    @Override
-    public String toString() {
-        return "BaseEntity [id=" + id + ", creationDate=" + creationDate + ", updatedOn=" + updatedOn + "]";
-    }
+
+    @Column(name="is_active")
+    private Boolean isActive;
+
 
 }

@@ -1,6 +1,6 @@
 package com.app.reservationbooking.enums;
 
-public enum DetailType {
+public enum ServiceDetailType {
 	BUS,
 	
 	TRAIN,

@@ -1,6 +1,6 @@
 package com.app.reservationbooking.enums;
 
-public enum ReservationStatus {
+public enum BookingStatus {
 	PENDING,
 	
 	CONFIRMED,

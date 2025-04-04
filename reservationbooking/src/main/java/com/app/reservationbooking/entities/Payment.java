@@ -5,74 +5,59 @@ import java.util.UUID;
 
 import com.app.reservationbooking.enums.PaymentMethod;
 import com.app.reservationbooking.enums.PaymentStatus;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Entity
 @Table(name = "payment")
 @Getter
 @Setter
+@ToString
 public class Payment {
 
-	    @Id
-	    @GeneratedValue(strategy = GenerationType.IDENTITY)
-	    @Column(name = "payment_id", nullable = false)
-	    private Long paymentId;
+	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "payment_seq")
+	@SequenceGenerator(name = "payment_seq", sequenceName = "payment_payment_id_seq", allocationSize = 1)
+	@Column(name = "payment_id", nullable = false)
+	private Long paymentId;
 
-	    @ManyToOne
-	    @JoinColumn(name = "service_id", nullable = false)
-	    private ServiceRecord services;
+	@ManyToOne
+	@JoinColumn(name = "service_id", nullable = false)
+	private ServiceRecord services;
 
-	    @ManyToOne
-	    @JoinColumn(name = "user_id", nullable = false)
-	    private User user; 
+	@ManyToOne
+	@JoinColumn(name = "user_id", nullable = false)
+	private User user;
 
-	    @ManyToOne
-	    @JoinColumn(name = "reservation_id", nullable = false)
-	    private Reservation reservation; 
+	@OneToOne(mappedBy = "payment", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private Booking reservation;
 
-	    @Column(name = "amount", nullable = false)
-	    private Double amount; 
+	@Column(name = "amount", nullable = false)
+	private Double amount;
 
-	    @Enumerated(EnumType.STRING)
-	    @Column(name = "payment_method", nullable = false)
-	    private PaymentMethod paymentMethod; 
-	    
-	    @Enumerated(EnumType.STRING)
-	    @Column(name = "payment_status", nullable = false)
-	    private PaymentStatus paymentStatus; 
+	@Enumerated(EnumType.STRING)
+	@Column(name = "payment_method", nullable = false)
+	private PaymentMethod paymentMethod;
 
-	    @Column(name = "transaction_id", unique = true, nullable = false)
-	    private String transactionId; 
+	@Enumerated(EnumType.STRING)
+	@Column(name = "payment_status", nullable = false)
+	private PaymentStatus paymentStatus;
 
-	    @Column(name = "payment_date", nullable = false)
-	    private LocalDateTime paymentDate;
+	@Column(name = "transaction_id", unique = true, nullable = false)
+	private String transactionId;
 
-	    public Payment() {
-	        super();
-	        this.transactionId = generateTransactionId(); // Generate ID on creation
-	        this.paymentDate = LocalDateTime.now(); // Set payment date to current time
-	    }
+	@Column(name = "payment_date", nullable = false)
+	private LocalDateTime paymentDate;
 
-	    private String generateTransactionId() {
-	        return UUID.randomUUID().toString(); // Generates a unique transaction ID
-	    }
+	public Payment() {
+		super();
+		this.transactionId = generateTransactionId();
+		this.paymentDate = LocalDateTime.now();
+	}
 
-
-		@Override
-		public String toString() {
-			return "Payment [paymentId=" + paymentId + ", services=" + services + ", user=" + user + ", reservation="
-					+ reservation + ", amount=" + amount + ", paymentMethod=" + paymentMethod + ", paymentStatus="
-					+ paymentStatus + ", transactionId=" + transactionId + ", paymentDate=" + paymentDate + "]";
-		} 
+	private String generateTransactionId() {
+		return UUID.randomUUID().toString();
+	}
 }
