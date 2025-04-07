@@ -17,34 +17,35 @@ public class ServiceDetailsController {
     @Autowired
     private ServiceDetailsService detailsService;
 
-    // Get all details
+
     @GetMapping
     public List<ServiceDetailsDTO> getAllDetails() {
         return detailsService.getAllDetails();
     }
 
-    // Get details by ID
+
+
     @GetMapping("/{id}")
     public ResponseEntity<ServiceDetailsDTO> getDetailsById(@PathVariable Long id) throws ResourceNotFoundException {
         ServiceDetailsDTO detailsDTO = detailsService.getDetailsById(id);
         return ResponseEntity.ok(detailsDTO);
     }
 
-    // Create new details
+
     @PostMapping("/create-details")
     public ResponseEntity<ServiceDetailsDTO> createDetails(@RequestBody ServiceDetailsDTO detailsDTO) {
         ServiceDetailsDTO createdDetails = detailsService.createDetails(detailsDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdDetails);
     }
 
-    // Update details by ID
+
     @PutMapping("/{id}")
     public ResponseEntity<ServiceDetailsDTO> updateDetails(@PathVariable Long id, @RequestBody ServiceDetailsDTO detailsDTO) throws ResourceNotFoundException {
         ServiceDetailsDTO updatedDetails = detailsService.updateDetails(id, detailsDTO);
         return ResponseEntity.ok(updatedDetails);
     }
 
-    // Delete details by ID
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteDetails(@PathVariable Long id) throws ResourceNotFoundException {
         detailsService.deleteDetails(id);

@@ -20,7 +20,6 @@ public class ServiceRecordDTO extends BaseEntity {
 
     private ServiceType serviceType;
 
-   // private User user;
 
     private ServiceDetails details;
 }

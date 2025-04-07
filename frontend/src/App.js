@@ -1,11 +1,8 @@
+
 import React from 'react';
+
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';  // For routing
-
-/* Material-UI Components - Start */
 import { Container } from '@mui/material';
-/* Material-UI Components - End */
-
-/* Custom Components - Start */
 import Navbar from './components/Navbar';  // Importing the Navbar component
 import Footer from './components/Footer';  // Importing the Footer component
 import Home from './pages/Home';  // Home page

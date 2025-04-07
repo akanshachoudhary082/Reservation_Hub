@@ -141,7 +141,6 @@ const Navbar = () => {
                     </Box>
                 </Drawer>
             </AppBar>
-
             <CitySelectionPopup
                 open={openPopup}
                 onClose={() => setOpenPopup(false)}

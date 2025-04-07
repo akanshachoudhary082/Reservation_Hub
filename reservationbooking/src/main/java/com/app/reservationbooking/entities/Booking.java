@@ -32,7 +32,7 @@ public class Booking extends BaseEntity {
     @Enumerated(EnumType.STRING)
     @Column(name = "status", nullable = false)
     private BookingStatus status;
-
+    
     @Column(name = "booking_date", nullable = false)
     private LocalDateTime bookingDate;
 

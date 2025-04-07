@@ -22,6 +22,9 @@ public class Seat extends BaseEntity {
 	@Column(name = "seat_id", nullable = false)
 	private Long seatId;
 
+	@Column(name = "seat_number")
+	private Long seatNumber;
+
 	@Enumerated(EnumType.STRING)
 	@Column(name = "seat_type", nullable = false)
 	private SeatType seatType;

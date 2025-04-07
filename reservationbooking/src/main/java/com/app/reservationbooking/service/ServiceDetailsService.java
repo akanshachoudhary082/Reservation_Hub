@@ -2,7 +2,9 @@ package com.app.reservationbooking.service;
 
 import com.app.reservationbooking.customexception.ResourceNotFoundException;
 import com.app.reservationbooking.dto.ServiceDetailsDTO;
+import com.app.reservationbooking.entities.ServiceDetails;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public interface ServiceDetailsService {
@@ -16,4 +18,6 @@ public interface ServiceDetailsService {
     ServiceDetailsDTO updateDetails(Long detailId, ServiceDetailsDTO detailsDTO) throws ResourceNotFoundException;
 
     void deleteDetails(Long detailId) throws ResourceNotFoundException;
+
+
 }

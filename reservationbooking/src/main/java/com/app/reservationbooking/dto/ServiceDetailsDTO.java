@@ -4,6 +4,8 @@ import com.app.reservationbooking.entities.BaseEntity;
 import com.app.reservationbooking.enums.ServiceDetailType;
 import lombok.*;
 
+import java.time.LocalDate;
+
 
 @Getter
 @Setter
@@ -16,16 +18,6 @@ public class ServiceDetailsDTO extends BaseEntity {
     private Long detailId;
     
     private ServiceDetailType detailType;
-
-    private String source;
-
-    private String destination;
-
-    private String departureTime;
-
-    private String arrivalTime;
-
-    private String venue;
 
     private Long serviceId;
 
