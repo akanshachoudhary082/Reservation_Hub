@@ -1,7 +1,5 @@
-// src/pages/Home.js
-
 import React from 'react';
-import Transport from './Transport'; // Import the Transport component
+import Transport from './Transport'; 
 import '../assets/styles/style.scss';
 import MovieCarousel from '../components/MovieCarousel';
  

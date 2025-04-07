@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import axios from 'axios';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchMovies } from '../redux/actions/movieActions'; // Import the action
 import '../assets/styles/Movies.scss';
 
 const Movies = () => {
@@ -8,30 +9,14 @@ const Movies = () => {
     const queryParams = new URLSearchParams(location.search);
     const city = queryParams.get('city'); // Get the city from the URL
 
-    const [movies, setMovies] = useState([]); // State to hold movies
-    const [loading, setLoading] = useState(true); // State to manage loading
-    const [error, setError] = useState(null); // State to manage errors
+    const dispatch = useDispatch();
+    const { movies, loading, error } = useSelector(state => state.movies); // Access movies state from Redux
 
     useEffect(() => {
-        const fetchMovies = async () => {
-            setLoading(true); // Set loading to true before fetching
-            setError(null); // Reset error state
-            try {
-                const response = await axios.get(`http://localhost:3000/get-movies`, {
-                    params: { city }, // Pass city as a query parameter
-                });
-                setMovies(response.data); // Set the movies from the response
-            } catch (err) {
-                setError(err.message); // Set error message if fetching fails
-            } finally {
-                setLoading(false); // Set loading to false after fetching
-            }
-        };
-
         if (city) {
-            fetchMovies(); // Fetch movies if city is available
+            dispatch(fetchMovies(city)); // Dispatch the action to fetch movies
         }
-    }, [city]); // Dependency array includes city
+    }, [city, dispatch]); // Dependency array includes city and dispatch
 
     return (
         <div>

@@ -56,7 +56,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
-import { setServiceDetails, setLoading, setError } from '../redux/actions/transportServiceDetailsAction';
+import { setServiceDetails, setError } from '../redux/actions/transportServiceDetailsAction';
 import { Typography, Button, FormControl, InputLabel, Select, MenuItem, Grid } from '@mui/material';
 import { useLocation } from 'react-router-dom';  
 

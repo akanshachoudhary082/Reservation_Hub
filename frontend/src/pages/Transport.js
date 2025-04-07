@@ -18,7 +18,7 @@ const Transport = () => {
     const fetchServiceDetails = async () => {
       dispatch(setLoading()); 
       try {
-        const response = await axios.get('http://localhost:8080/details'); 
+        const response = await axios.get('http://localhost:3000/details'); 
         console.log("API Response:", response.data); 
         dispatch(setServiceDetails(response.data)); 
       } catch (err) {

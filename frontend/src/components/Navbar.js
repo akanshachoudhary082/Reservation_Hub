@@ -8,7 +8,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import MenuIcon from '@mui/icons-material/Menu'; 
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { toggleDrawer, openProfileMenu, closeProfileMenu } from '../redux/actions/navbarActions';  
-import CitySelectionPopup from '../components/CitySelectionPopup'; // Import the CitySelectionPopup component
+import CitySelectionPopup from '../components/CitySelectionPopup'; 
 
 const Navbar = () => {
     const dispatch = useDispatch();
@@ -142,12 +142,6 @@ const Navbar = () => {
                 </Drawer>
             </AppBar>
 
-            {/* City Selection Popup */}
-            <CitySelectionPopup
-                open={openPopup}
-                onClose={() => setOpenPopup(false)}
-                onSelectCity={handleCitySelectforEvents}
-            />
             <CitySelectionPopup
                 open={openPopup}
                 onClose={() => setOpenPopup(false)}

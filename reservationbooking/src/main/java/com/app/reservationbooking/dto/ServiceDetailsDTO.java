@@ -14,7 +14,7 @@ import lombok.*;
 public class ServiceDetailsDTO extends BaseEntity {
 
     private Long detailId;
-
+    
     private ServiceDetailType detailType;
 
     private String source;
@@ -28,4 +28,5 @@ public class ServiceDetailsDTO extends BaseEntity {
     private String venue;
 
     private Long serviceId;
+
 }

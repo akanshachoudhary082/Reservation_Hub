@@ -9,11 +9,11 @@ const initialState = {
 const movieReducer = (state = initialState, action) => {
     switch (action.type) {
         case SET_MOVIES_REQUEST:
-            return { ...state, loading: true };
+            return { ...state, loading: true, error: null };
         case SET_MOVIES_SUCCESS:
-            return { loading: false, movies: action.payload, error: '' };
+            return { ...state, loading: false, movies: action.payload};
         case SET_MOVIES_FAILURE:
-            return { loading: false, movies: [], error: action.payload };
+            return { ...state, loading: false, error: action.payload };
         default:
             return state;
     }

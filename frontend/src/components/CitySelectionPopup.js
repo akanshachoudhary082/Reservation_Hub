@@ -1,4 +1,3 @@
-// src/components/CitySelectionPopup.js
 import React from 'react';
 import { Dialog, DialogTitle, DialogContent, DialogActions, Button, Typography } from '@mui/material';
 import '../assets/styles/CityPopup.scss';

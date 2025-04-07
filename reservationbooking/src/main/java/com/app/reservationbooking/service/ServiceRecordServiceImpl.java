@@ -8,7 +8,6 @@ import com.app.reservationbooking.repository.ServiceRecordRepository;
 import com.app.reservationbooking.utility.ServiceRecordConverterUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.stream.Collectors;
 

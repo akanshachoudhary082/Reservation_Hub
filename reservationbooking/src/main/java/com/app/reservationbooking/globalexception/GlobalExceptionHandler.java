@@ -1,4 +1,4 @@
-package com.app.reservationbooking.gobalexception;
+package com.app.reservationbooking.globalexception;
 
 import com.app.reservationbooking.customexception.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
