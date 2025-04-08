@@ -16,8 +16,8 @@ public class MoviesController {
     @Autowired
     MovieService movieService;
 
-    @GetMapping("/get-movies")
-    public ResponseEntity<List<AdminConfiguration>> getMovies(@RequestParam AdminConfiguration moduleCategory){
+    @GetMapping("/get-movies/{moduleCategory}")
+    public ResponseEntity<List<AdminConfiguration>> getMovies(@PathVariable AdminConfiguration moduleCategory){
 
         List <AdminConfiguration> movies =  movieService.getAllMovies(moduleCategory);
 
@@ -25,5 +25,17 @@ public class MoviesController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         }
         return ResponseEntity.ok(movies);
+    }
+
+    @GetMapping("/get-movies")
+    public ResponseEntity<List<AdminConfiguration>> getAllMovies(){
+
+        List <AdminConfiguration> moviesList = movieService.getMovies();
+
+        if (moviesList.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
+
+        return ResponseEntity.ok(moviesList);
     }
 }

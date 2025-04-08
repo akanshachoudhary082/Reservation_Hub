@@ -2,7 +2,7 @@ import { createStore, combineReducers } from 'redux';
 import navbarReducer from './reducers/navbarReducer'; 
 import footerReducer from './reducers/footerReducer';
 import transportReducer from './reducers/transportReducer';
-import movieReducer from './reducers/movieReducer';
+import moviesReducer from './reducers/movieReducer';
 import loginReducer from './reducers/loginReducer';
 import transportServiceDetailsReducer from './reducers/transportServiceDetailsReducer';
 
@@ -12,7 +12,7 @@ const rootReducer = combineReducers({
     transport: transportReducer,
     transportServiceDetails: transportServiceDetailsReducer,
     login: loginReducer,
-    movie: movieReducer,
+    movies: moviesReducer,
 });
 
 const store = createStore(

@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface MovieService {
     List<AdminConfiguration> getAllMovies(AdminConfiguration moduleCategory);
+
+    List<AdminConfiguration> getMovies();
 }

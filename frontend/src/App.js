@@ -18,6 +18,7 @@ import OtpSuccessPage from './pages/OtpSuccessPage';
 import Register from './pages/Register';
 import CitySelectionPopUp from './components/CitySelectionPopup';
 import MovieCarousel from './components/MovieCarousel';
+import Movies from './pages/Movies';
 /* Custom Components - End */
 
 const App = () => {
@@ -43,6 +44,7 @@ const App = () => {
             <Route path="/otp-sent" element={<OtpInput />} />
             <Route path="/success" element={<OtpSuccessPage />} />
             <Route path="/register" element={<Register />} />
+            <Route path="/movies?city={city}" element={<Movies />} />
             <Route path="*" element={<div>404 - Page Not Found</div>} />
           </Routes>
         </Container>

@@ -2,16 +2,16 @@ import { SET_MOVIES_REQUEST, SET_MOVIES_SUCCESS, SET_MOVIES_FAILURE } from '../a
 
 const initialState = {
     loading: false,
-    movies: [],
+    movieCatalog: [],
     error: '',
 };
 
 const movieReducer = (state = initialState, action) => {
     switch (action.type) {
         case SET_MOVIES_REQUEST:
-            return { ...state, loading: true, error: null };
+            return { ...state, loading: true, error: '' };
         case SET_MOVIES_SUCCESS:
-            return { ...state, loading: false, movies: action.payload};
+            return { ...state, loading: false, movieCatalog: action.payload };
         case SET_MOVIES_FAILURE:
             return { ...state, loading: false, error: action.payload };
         default:

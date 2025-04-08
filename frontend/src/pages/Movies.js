@@ -1,8 +1,11 @@
-import React, { useEffect } from 'react';
+// src/components/Movies.js
+
+import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchMovies } from '../redux/actions/movieActions'; // Import the action
+import { setMoviesSuccess, setMoviesFailure } from '../redux/actions/movieAction'; // Import the action creators
 import '../assets/styles/Movies.scss';
+import axios from 'axios';
 
 const Movies = () => {
     const location = useLocation();
@@ -10,22 +13,35 @@ const Movies = () => {
     const city = queryParams.get('city'); // Get the city from the URL
 
     const dispatch = useDispatch();
-    const { movies, loading, error } = useSelector(state => state.movies); // Access movies state from Redux
+    const { movieCatalog, loading, error } = useSelector(state => state); // Access movies state from Redux
+    const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
-        if (city) {
-            dispatch(fetchMovies(city)); // Dispatch the action to fetch movies
-        }
+        const fetchMovies = async () => {
+            if (city) {
+                setIsLoading(true);
+                try {
+                    const response = await axios.get(`http://get-movies/movies?city=${city}`);
+                    dispatch(setMoviesSuccess(response.data));
+                } catch (error) {
+                    dispatch(setMoviesFailure(error.message));
+                } finally {
+                    setIsLoading(false);
+                }
+            }
+        };
+
+        fetchMovies();
     }, [city, dispatch]); // Dependency array includes city and dispatch
 
     return (
         <div>
             <h1>Movies in {city}</h1>
-            {loading && <p>Loading movies...</p>}
+            {isLoading && <p>Loading movies...</p>}
             {error && <p>Error: {error}</p>}
             <div className="movie-catalog">
-                {movies.length > 0 ? (
-                    movies.map((movie) => (
+                {movieCatalog.length > 0 ? (
+                    movieCatalog.map((movie) => (
                         <div key={movie.id} className="movie-card">
                             <h2>{movie.title}</h2>
                             <p>{movie.description}</p>

@@ -8,5 +8,5 @@ import java.util.List;
 @Repository
 public interface MoviesRepository extends JpaRepository<AdminConfiguration, Long> {
 
-    List<AdminConfiguration> findMoviesByCity(AdminConfiguration moduleCategory);
+    List<AdminConfiguration> findByCity(AdminConfiguration moduleCategory);
 }
