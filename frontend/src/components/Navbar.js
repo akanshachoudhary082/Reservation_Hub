@@ -10,6 +10,7 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { toggleDrawer, openProfileMenu, closeProfileMenu } from '../redux/actions/navbarActions';  
 import CitySelectionPopup from '../components/CitySelectionPopup'; 
 
+
 const Navbar = () => {
     const dispatch = useDispatch();
     const { openDrawer, profileMenuAnchorEl } = useSelector(state => state.navbar); 
@@ -57,7 +58,7 @@ const Navbar = () => {
                             src={logo}
                             alt="Logo"
                             style={{
-                                width: '150px',
+                                width: '100px',
                                 height: 'auto',
                                 marginRight: 10,
                             }}
@@ -121,7 +122,7 @@ const Navbar = () => {
 
                 {/* Profile Menu (Dropdown) */}
                 <Menu anchorEl={profileMenuAnchorEl} open={Boolean(profileMenuAnchorEl)} onClose={handleProfileMenuClose}>
-                    <MenuItem onClick={handleProfileMenuClose}>My Account</MenuItem>
+                     <MenuItem component={Link} to="/account" onClick={handleProfileMenuClose}>My Account</MenuItem>
                     <MenuItem component={ Link} to="/login" onClick={handleProfileMenuClose}>Login</MenuItem>
                     <MenuItem component={Link} to="/signin" onClick={handleProfileMenuClose}>SignIn</MenuItem>
                     <MenuItem component={Link} to="/register" onClick={handleProfileMenuClose}>Register</MenuItem>

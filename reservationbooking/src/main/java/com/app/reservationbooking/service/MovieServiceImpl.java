@@ -15,7 +15,7 @@ public class MovieServiceImpl implements MovieService{
     @Override
     public List<AdminConfiguration> getAllMovies(AdminConfiguration moduleCategory) {
 
-        return moviesRepository.findByCity(moduleCategory);
+        return moviesRepository.findAll();
     }
 
     @Override

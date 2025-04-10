@@ -17,7 +17,9 @@ public class UserConverterUtils {
                 user.getMobileNumber(),
                 user.getUserEmail(),
                 user.getRole(),
+                user.getCountryCode(),
                 user.getPassword()
+
         );
     }
 
@@ -32,6 +34,7 @@ public class UserConverterUtils {
         user.setMobileNumber(userRespDTO.getMobileNumber());
         user.setUserEmail(userRespDTO.getUserEmail());
         user.setRole(userRespDTO.getRole());
+        user.setCountryCode(userRespDTO.getCountryCode());
         user.setPassword(userRespDTO.getPassword());
         return user;
     }

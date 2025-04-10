@@ -9,7 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
-
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/users")
 public class UserController {
@@ -31,7 +31,7 @@ public class UserController {
     }
 
     // Create a new user
-    @PostMapping("/create-user")
+    @PostMapping("/register")
     public ResponseEntity<UserRespDTO> createUser(@RequestBody UserRespDTO userRespDTO) {
         UserRespDTO createdUser = userService.createUser(userRespDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdUser);

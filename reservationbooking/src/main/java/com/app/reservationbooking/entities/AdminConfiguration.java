@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
+
 @Getter
 @Setter
 @Entity
@@ -27,14 +29,17 @@ public class AdminConfiguration {
     @Column(name = "module_name", nullable = false)
     private String name;                 // Name of Transport Service OR Name of Theatre
 
-    @Column(name = "config_1")
-    private String config1;              // Starting Time (For Movies, Events, Transport) OR Departure City (For Transport, For Movies - null)
+    @Column(name = "start_point")
+    private LocalDateTime startPoint;               // Starting Time (For Movies, Events, Transport) OR Departure City (For Transport, For Movies - null)
 
-    @Column(name = "config_2")
-    private String config2;              // Ending Time (For Movies, Events, Transport) OR Destination City (For Transport, For Movies - null)
+    @Column(name = "end_point")
+    private LocalDateTime endPoint;               // Ending Time (For Movies, Events, Transport) OR Destination City (For Transport, For Movies - null)
 
-    @Column(name = "config_3")
-    private String config3;              // For Transport - Cities between Departure and Destination OR For Movies - Description of Movies
+    @Column(name = "description")
+    private String description;
+    // For Transport: Cities in between
+    // For Movies: Description of the movie
+    // For Events: Event details
 
     @Column(name = "price_of_ticket", nullable = false)
     private double priceOfTicket;

@@ -53,6 +53,7 @@ public class UserServiceImpl implements UserService {
         existingUser.setLastName(userRespDTO.getLastName());
         existingUser.setMobileNumber(userRespDTO.getMobileNumber());
         existingUser.setUserEmail(userRespDTO.getUserEmail());
+        existingUser.setCountryCode(userRespDTO.getCountryCode());
         existingUser.setRole(userRespDTO.getRole());
 
 

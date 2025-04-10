@@ -15,16 +15,17 @@ import '../src/assets/styles/style.scss';
 import MobileNumberForm from '../src/components/MobileNumberForm';
 import OtpInput from './components/OtpInput';
 import OtpSuccessPage from './pages/OtpSuccessPage';
-import Register from './pages/Register';
 import CitySelectionPopUp from './components/CitySelectionPopup';
 import MovieCarousel from './components/MovieCarousel';
 import Movies from './pages/Movies';
+import RegisterForm from './pages/RegisterForm';
+import MyAccount from './pages/MyAccount';
 /* Custom Components - End */
 
 const App = () => {
   return (
     <Router>
-      <div className='background'>
+       <div className='background'>
         <Navbar />
 
         <Container className='container'> </Container>
@@ -32,7 +33,7 @@ const App = () => {
         <Container sx={{ minHeight: '80vh' }}>
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/" element={<MovieCarousel />} />
+            {/* <Route path="/" element={<MovieCarousel />} /> */}
             <Route path="/aboutUs" element={<AboutUs />} />
             <Route path="/transport" element={<Transport />} />
             <Route path="/details/:id" element={<TransportServiceDetails />} />
@@ -43,13 +44,14 @@ const App = () => {
             <Route path="/signin" element={< SignIn />} />
             <Route path="/otp-sent" element={<OtpInput />} />
             <Route path="/success" element={<OtpSuccessPage />} />
-            <Route path="/register" element={<Register />} />
+            <Route path="/register" element={<RegisterForm />} />
+            <Route path="/account" element={<MyAccount />} />
             <Route path="/movies?city={city}" element={<Movies />} />
             <Route path="*" element={<div>404 - Page Not Found</div>} />
           </Routes>
         </Container>
         <Footer />
-      </div>
+        </div>
     </Router>
   );
 };

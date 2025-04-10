@@ -13,11 +13,19 @@ import lombok.*;
 public class UserRespDTO extends BaseEntity {
 
     private Long userId;
+
     private String firstName;
+
     private String lastName;
+
     private String mobileNumber;
+
     private String userEmail;
+
     private Role role;
+
     private String password;
+
+    private String countryCode;
 
 }
