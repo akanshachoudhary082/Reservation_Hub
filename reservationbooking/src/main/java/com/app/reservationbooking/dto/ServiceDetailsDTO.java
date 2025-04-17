@@ -4,8 +4,6 @@ import com.app.reservationbooking.entities.BaseEntity;
 import com.app.reservationbooking.enums.ServiceDetailType;
 import lombok.*;
 
-import java.time.LocalDate;
-
 
 @Getter
 @Setter

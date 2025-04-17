@@ -5,29 +5,45 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 
+/**
+ * Global exception handler to catch and handle exceptions across the entire application.
+ */
+@RestControllerAdvice
 public class GlobalExceptionHandler {
 
+    /**
+     * Handles ResourceNotFoundException and returns a 404 NOT FOUND status with a detailed error message.
+     *
+     * @param ex      the thrown ResourceNotFoundException
+     * @param request the current web request
+     * @return ResponseEntity with error message and HTTP 404 status
+     */
     @ExceptionHandler(ResourceNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public ResponseEntity<String> handleResourceNotFoundException(ResourceNotFoundException ex, WebRequest request){
-
+    public ResponseEntity<String> handleResourceNotFoundException(ResourceNotFoundException ex, WebRequest request) {
         String errorMessage = String.format("Error in %s at %s: %s",
                 ex.getStackTrace()[0].getClassName(),
                 ex.getStackTrace()[0].getMethodName(),
                 ex.getMessage());
 
         return new ResponseEntity<>(errorMessage, HttpStatus.NOT_FOUND);
-
     }
 
+    /**
+     * Handles all other generic exceptions and returns a 500 INTERNAL SERVER ERROR status with a detailed error message.
+     *
+     * @param ex      the thrown Exception
+     * @param request the current web request
+     * @return ResponseEntity with error message and HTTP 500 status
+     */
     @ExceptionHandler(Exception.class)
     public ResponseEntity<String> handleGlobalException(Exception ex, WebRequest request) {
-
         String errorMessage = String.format("Error in %s at %s: %s",
-                ex.getStackTrace()[0].getClassName(), // Class name
-                ex.getStackTrace()[0].getMethodName(), // Method name
+                ex.getStackTrace()[0].getClassName(),
+                ex.getStackTrace()[0].getMethodName(),
                 ex.getMessage());
 
         return new ResponseEntity<>(errorMessage, HttpStatus.INTERNAL_SERVER_ERROR);

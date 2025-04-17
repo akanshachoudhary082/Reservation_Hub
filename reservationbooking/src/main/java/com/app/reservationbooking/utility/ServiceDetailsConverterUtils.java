@@ -9,6 +9,12 @@ public class ServiceDetailsConverterUtils {
 
     private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
 
+    /**
+     * Converts a ServiceDetails entity to a ServiceDetailsDTO.
+     *
+     * @param details The ServiceDetails entity to convert.
+     * @return A ServiceDetailsDTO representing the entity, or null if the entity is null.
+     */
     public static ServiceDetailsDTO convertEntityToDTO(ServiceDetails details) {
         if (details == null) {
             return null;
@@ -21,6 +27,12 @@ public class ServiceDetailsConverterUtils {
                 .build();
     }
 
+    /**
+     * Converts a ServiceDetailsDTO to a ServiceDetails entity.
+     *
+     * @param detailsDTO The ServiceDetailsDTO to convert.
+     * @return A ServiceDetails entity representing the DTO, or null if the DTO is null.
+     */
     public static ServiceDetails convertToEntity(ServiceDetailsDTO detailsDTO) {
         if (detailsDTO == null) {
             return null;

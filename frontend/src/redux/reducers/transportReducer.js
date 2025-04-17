@@ -1,4 +1,4 @@
-import { SET_TRANSPORT_DATA, SET_LOADING, SET_ERROR } from '../actions/transportActionType';
+import { SET_TRANSPORT_DATA, SET_LOADING, SET_ERROR } from '../actions/transportActionTypes';
 
 const initialState = {
   services: [],   

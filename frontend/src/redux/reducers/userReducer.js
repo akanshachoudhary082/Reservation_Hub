@@ -50,7 +50,7 @@ const userReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: false,
-        userInfo: action.payload, // update userInfo with latest data
+        userInfo: action.payload,
         updateSuccess: true,
         error: null,
       };

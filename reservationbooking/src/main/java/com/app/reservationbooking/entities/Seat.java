@@ -14,6 +14,7 @@ import lombok.*;
 @Getter
 @Setter
 @ToString
+@Builder
 public class Seat extends BaseEntity {
 
 	@Id
@@ -40,12 +41,8 @@ public class Seat extends BaseEntity {
 	@OneToMany(mappedBy = "seat", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<Booking> bookings;
 
-//	    @ManyToOne
-//	    @JoinColumn(name = "user_id", nullable = false)
-//	    private User user;
-
-//	    @ManyToOne
-//	    @JoinColumn(name = "detail_id", nullable = false)
-//	    private ServiceDetails serviceDetails;
+	@ManyToOne
+	@JoinColumn(name = "detail_id", nullable = false)
+	private ServiceDetails serviceDetails;
 
 }

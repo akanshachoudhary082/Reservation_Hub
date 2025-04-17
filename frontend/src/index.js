@@ -1,13 +1,13 @@
 import React from "react";
-import ReactDOM from "react-dom/client";  // Use 'react-dom/client' in React 18
+import ReactDOM from "react-dom/client";  
 import App from "./App";
-import { Provider } from "react-redux";  // Import Provider from react-redux
-import store from "./redux/store";  // Import the Redux store
+import { Provider } from "react-redux";  
+import store from "./redux/store";  
 
-const root = ReactDOM.createRoot(document.getElementById('root'));  // Create root
-root.render(  // Use the new render method
+const root = ReactDOM.createRoot(document.getElementById('root'));  
+root.render(  
   <React.StrictMode>
-    <Provider store={store}>  {/* Wrap your app with the Redux Provider */}
+    <Provider store={store}>  
       <App />
     </Provider>
   </React.StrictMode>

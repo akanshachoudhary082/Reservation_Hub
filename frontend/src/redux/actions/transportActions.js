@@ -1,4 +1,4 @@
-import { SET_TRANSPORT_DATA, SET_LOADING, SET_ERROR } from './transportActionType';
+import { SET_TRANSPORT_DATA, SET_LOADING, SET_ERROR } from './transportActionTypes';
 
 // Action creator to set transport data
 export const setTransportData = (data) => ({

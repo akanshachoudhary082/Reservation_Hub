@@ -9,6 +9,7 @@ import Home from './pages/Home';  // Home page
 import AboutUs from './pages/AboutUs';
 import Transport from './pages/Transport';  // Transport page
 import TransportServiceDetails from './pages/TransportServiceDetails';
+import TransportSeatSelectionPage from './pages/TransportSeatSelectionPage';
 import ContactUs from './pages/ContactUs'; // Contact Us page
 import SignIn from './pages/SignIn';  // SignIn page
 import '../src/assets/styles/style.scss';
@@ -33,10 +34,11 @@ const App = () => {
         <Container sx={{ minHeight: '80vh' }}>
           <Routes>
             <Route path="/" element={<Home />} />
-            {/* <Route path="/" element={<MovieCarousel />} /> */}
+            <Route path="/" element={<MovieCarousel />} />
             <Route path="/aboutUs" element={<AboutUs />} />
             <Route path="/transport" element={<Transport />} />
-            <Route path="/details/:id" element={<TransportServiceDetails />} />
+            <Route path="/details/:transport" element={<TransportServiceDetails />} />
+            <Route path="/seats/:transport" element={<TransportSeatSelectionPage />} />
             <Route path="/movies" element={<CitySelectionPopUp />} />
             <Route path="/events" element={<CitySelectionPopUp />} />
             <Route path="/contactus" element={<ContactUs />} />
@@ -47,6 +49,7 @@ const App = () => {
             <Route path="/register" element={<RegisterForm />} />
             <Route path="/account" element={<MyAccount />} />
             <Route path="/movies?city={city}" element={<Movies />} />
+            
             <Route path="*" element={<div>404 - Page Not Found</div>} />
           </Routes>
         </Container>

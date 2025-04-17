@@ -8,20 +8,31 @@ import java.util.List;
 
 public class ServiceRecordConverterUtils {
 
+    /**
+     * Converts a ServiceRecord entity to a ServiceRecordDTO.
+     *
+     * @param serviceRecord The ServiceRecord entity to convert.
+     * @return A ServiceRecordDTO representing the entity.
+     */
     public static ServiceRecordDTO convertEntityToDTO(ServiceRecord serviceRecord) {
         return ServiceRecordDTO.builder()
                 .serviceRecordId(serviceRecord.getServiceRecordId())
                 .serviceType(serviceRecord.getServiceType())
-                .details((ServiceDetails) serviceRecord.getDetails())
+                .details((ServiceDetails) serviceRecord.getDetails()) // Assuming serviceRecord.getDetails() is a list of ServiceDetails
                 .build();
     }
 
+    /**
+     * Converts a ServiceRecordDTO to a ServiceRecord entity.
+     *
+     * @param serviceRecordDTO The ServiceRecordDTO to convert.
+     * @return A ServiceRecord entity representing the DTO.
+     */
     public static ServiceRecord convertToEntity(ServiceRecordDTO serviceRecordDTO) {
         return ServiceRecord.builder()
                 .serviceRecordId(serviceRecordDTO.getServiceRecordId())
                 .serviceType(serviceRecordDTO.getServiceType())
-                .details((List<ServiceDetails>) serviceRecordDTO.getDetails())
+                .details((List<ServiceDetails>) serviceRecordDTO.getDetails()) // Assuming serviceRecordDTO.getDetails() is a List of ServiceDetails
                 .build();
     }
 }
-

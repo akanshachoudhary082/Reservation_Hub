@@ -3,8 +3,10 @@ package com.app.reservationbooking.entities;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Getter
@@ -12,6 +14,7 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "admin_config")
 @AllArgsConstructor
+@NoArgsConstructor
 public class AdminConfiguration {
 
     @Id
@@ -43,4 +46,9 @@ public class AdminConfiguration {
 
     @Column(name = "price_of_ticket", nullable = false)
     private double priceOfTicket;
+
+    @Column(name = "available_on", nullable = false)
+    private LocalDate availableOn;
+
+
 }

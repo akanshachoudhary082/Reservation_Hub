@@ -1,19 +1,17 @@
-// src/components/Movies.js
-
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { setMoviesSuccess, setMoviesFailure } from '../redux/actions/movieAction'; // Import the action creators
+import { setMoviesSuccess, setMoviesFailure } from '../redux/actions/movieAction'; 
 import '../assets/styles/Movies.scss';
 import axios from 'axios';
 
 const Movies = () => {
     const location = useLocation();
     const queryParams = new URLSearchParams(location.search);
-    const city = queryParams.get('city'); // Get the city from the URL
+    const city = queryParams.get('city'); 
 
     const dispatch = useDispatch();
-    const { movieCatalog, loading, error } = useSelector(state => state); // Access movies state from Redux
+    const { movieCatalog, loading, error } = useSelector(state => state); 
     const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
@@ -32,7 +30,7 @@ const Movies = () => {
         };
 
         fetchMovies();
-    }, [city, dispatch]); // Dependency array includes city and dispatch
+    }, [city, dispatch]); 
 
     return (
         <div>
@@ -45,7 +43,7 @@ const Movies = () => {
                         <div key={movie.id} className="movie-card">
                             <h2>{movie.title}</h2>
                             <p>{movie.description}</p>
-                            {/* Add more movie details as needed */}
+
                         </div>
                     ))
                 ) : (

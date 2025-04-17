@@ -7,6 +7,8 @@ import loginReducer from './reducers/loginReducer';
 import transportServiceDetailsReducer from './reducers/transportServiceDetailsReducer';
 import userReducer from './reducers/userReducer';
 import contactReducer from './reducers/contactReducer';
+import transportSeatReducer from './reducers/transportSeatReducer';
+
 
 const rootReducer = combineReducers({
     navbar: navbarReducer, 
@@ -15,14 +17,16 @@ const rootReducer = combineReducers({
     transportServiceDetails: transportServiceDetailsReducer,
     login: loginReducer,
     movies: moviesReducer,
-    user: userReducer, // handles registration and profile update
-    contact: contactReducer
+    user: userReducer, 
+    contact: contactReducer,
+    transportSeats: transportSeatReducer,
     
+  
 });
 
 const store = createStore(
     rootReducer,
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__() // Enables Redux DevTools
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__() 
   )
 
 export default store;
