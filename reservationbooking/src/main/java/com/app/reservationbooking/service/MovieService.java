@@ -1,11 +1,10 @@
 package com.app.reservationbooking.service;
 
-import com.app.reservationbooking.entities.AdminConfiguration;
-
+import com.app.reservationbooking.dto.MovieDTO; // Import the MovieDTO class
 import java.util.List;
 
 public interface MovieService {
-    List<AdminConfiguration> getAllMovies(AdminConfiguration moduleCategory);
+    List<MovieDTO> getMoviesByModuleCategory(String moduleCategory); // Change return type to List<MovieDTO>
 
-    List<AdminConfiguration> getMovies();
+    List<MovieDTO> getMoviesByDescriptionAndModuleCategory(String description, String city);
 }

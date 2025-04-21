@@ -8,7 +8,7 @@ import transportServiceDetailsReducer from './reducers/transportServiceDetailsRe
 import userReducer from './reducers/userReducer';
 import contactReducer from './reducers/contactReducer';
 import transportSeatReducer from './reducers/transportSeatReducer';
-
+import eventReducer from './reducers/eventReducer';
 
 const rootReducer = combineReducers({
     navbar: navbarReducer, 
@@ -17,11 +17,10 @@ const rootReducer = combineReducers({
     transportServiceDetails: transportServiceDetailsReducer,
     login: loginReducer,
     movies: moviesReducer,
-    user: userReducer, 
     contact: contactReducer,
     transportSeats: transportSeatReducer,
-    
-  
+    user: userReducer, // handles registration and profile update
+    events: eventReducer,
 });
 
 const store = createStore(

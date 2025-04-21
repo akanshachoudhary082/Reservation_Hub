@@ -1,15 +1,58 @@
-import React from 'react';
-import { useLocation } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchEventsRequest, fetchEventsSuccess, fetchEventsFailure } from '../redux/actions/eventAction';
+import EventCard from '../components/EventCard';
+import '../assets/styles/Events.scss';
+import axios from 'axios';
+import Grid from '@mui/material/Grid'; 
 
 const Events = () => {
-    const location = useLocation();
-    const queryParams = new URLSearchParams(location.search);
-    const city = queryParams.get('city'); 
+    const dispatch = useDispatch();
+    const { loading, events, error } = useSelector((state) => state.events); 
+    const selectedCity = useSelector((state) => state.events.selectedCity); 
+
+    console.log("Selected City:", selectedCity); 
+
+    useEffect(() => {
+        const fetchEventsByCity = async (city) => {
+            dispatch(fetchEventsRequest());
+            try {
+                const response = await axios.get(`http://localhost:8080/events/get-events/${city}`);
+                console.log(response.data); 
+                dispatch(fetchEventsSuccess(response.data)); 
+            } catch (error) {
+                console.error("Error fetching events:", error); 
+                dispatch(fetchEventsFailure(error.message));
+            }
+        };
+
+        if (selectedCity) { 
+            fetchEventsByCity(selectedCity); 
+        }
+    }, [selectedCity, dispatch]);
+
+    if (loading) {
+        return <div>Loading events...</div>;
+    }
+
+    if (error) {
+        return <div>Error: {error}</div>;
+    }
 
     return (
-        <div>
-            <h1>Events in {city}</h1>
-        
+        <div className='event-background'>
+            <h1>Events in {selectedCity}</h1>
+            <Grid container spacing={2} justifyContent="center"> {/* Use Grid for layout */}
+                {events.length > 0 ? (
+                    events.map((event) => (
+                        <Grid item xs={12} sm={6} md={4} key={event.startPoint}> {/* Responsive grid item */}
+                            <EventCard event={event} /> 
+                        </Grid>
+                    ))
+                ) : (
+                    <p>No events are scheduled currently for {selectedCity}</p>
+                )}
+            </Grid>
         </div>
     );
 };

@@ -9,7 +9,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { toggleDrawer, openProfileMenu, closeProfileMenu } from '../redux/actions/navbarActions';  
 import CitySelectionPopup from '../components/CitySelectionPopup'; 
-
+import { setSelectedCity } from '../redux/actions/eventAction';
 
 const Navbar = () => {
     const dispatch = useDispatch();
@@ -24,7 +24,9 @@ const Navbar = () => {
     };
 
     const handleCitySelectforMovies = (city) => {
-        navigate(`/movies?city=${city}`); // Navigate to the Movies page with the selected city
+        dispatch(setSelectedCity(city)); // Dispatch action to set selected city
+        navigate(`/movies/${city}`); // Navigate to the Movies page with the selected city
+        setOpenPopup(false);
     };
 
     const handleEventsClick = () => {
@@ -33,7 +35,10 @@ const Navbar = () => {
     };
 
     const handleCitySelectforEvents = (city) => {
-        navigate(`/events?city=${city}`); // Navigate to the Events page with the selected city
+        console.log("Selected City for Events:", city); 
+        dispatch(setSelectedCity(city)); // Dispatch action to set selected city
+        navigate(`/events/${city}`); // Navigate to the Events page with the selected city
+        setOpenPopup(false);
     };
 
     const handleProfileMenuOpen = (event) => {
@@ -71,8 +76,6 @@ const Navbar = () => {
                             variant="outlined"
                             size="small"
                             placeholder="Search..."
-                            //color='gray'
-    
                             sx={(theme) => ({
                                 position: 'relative',
                                 borderRadius: theme.shape.borderRadius,
@@ -109,7 +112,7 @@ const Navbar = () => {
                     <Box sx={{ display: { xs: 'none', sm: 'flex' } }}>
                         <Button color="inherit" component={Link} to="/aboutUs">About</Button>
                         <Button color="inherit" component={Link} to="/transport">Transport</Button>
-                        <Button color="inherit" onClick={handleMoviesClick}>Movies</Button> {/* Trigger popup */}
+                        <Button color="inherit" onClick={handleMoviesClick}>Movies</Button>
                         <Button color="inherit" onClick={handleEventsClick}>Events</Button>
                         <Button color="inherit" component={Link} to="/contactUs">Contact</Button>
                     </Box>
@@ -122,8 +125,8 @@ const Navbar = () => {
 
                 {/* Profile Menu (Dropdown) */}
                 <Menu anchorEl={profileMenuAnchorEl} open={Boolean(profileMenuAnchorEl)} onClose={handleProfileMenuClose}>
-                     <MenuItem component={Link} to="/account" onClick={handleProfileMenuClose}>My Account</MenuItem>
-                    <MenuItem component={ Link} to="/login" onClick={handleProfileMenuClose}>Login</MenuItem>
+                    <MenuItem component={Link} to="/account" onClick={handleProfileMenuClose}>My Account</MenuItem>
+                    <MenuItem component={Link} to="/login" onClick={handleProfileMenuClose}>Login</MenuItem>
                     <MenuItem component={Link} to="/signin" onClick={handleProfileMenuClose}>SignIn</MenuItem>
                     <MenuItem component={Link} to="/register" onClick={handleProfileMenuClose}>Register</MenuItem>
                     <MenuItem onClick={handleProfileMenuClose}>Logout</MenuItem>
@@ -153,7 +156,6 @@ const Navbar = () => {
                     }
                 }}
             />
-            
         </>
     );
 };

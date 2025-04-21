@@ -1,9 +1,8 @@
 package com.app.reservationbooking.controller;
 
-import com.app.reservationbooking.entities.AdminConfiguration;
+import com.app.reservationbooking.dto.MovieDTO;
 import com.app.reservationbooking.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
@@ -14,28 +13,18 @@ import java.util.List;
 public class MoviesController {
 
     @Autowired
-    MovieService movieService;
+    private MovieService movieService;
 
-    @GetMapping("/get-movies/{moduleCategory}")
-    public ResponseEntity<List<AdminConfiguration>> getMovies(@PathVariable AdminConfiguration moduleCategory){
-
-        List <AdminConfiguration> movies =  movieService.getAllMovies(moduleCategory);
-
-        if (movies.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
-        }
-        return ResponseEntity.ok(movies);
+    @GetMapping("/get-movies/{city}")
+    public ResponseEntity<List<MovieDTO>> getMoviesByCity(@PathVariable String city) {
+        System.out.println(city);
+        List<MovieDTO> movies = movieService.getMoviesByModuleCategory(city);
+        return ResponseEntity.ok(movies); // Return the list of movies with imageData and config3
     }
 
-    @GetMapping("/get-movies")
-    public ResponseEntity<List<AdminConfiguration>> getAllMovies(){
-
-        List <AdminConfiguration> moviesList = movieService.getMovies();
-
-        if (moviesList.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
-        }
-
-        return ResponseEntity.ok(moviesList);
+    @GetMapping("get-showtimes/{description}?module_category={city}")
+    public ResponseEntity<List<MovieDTO>> getMovieTimings(@PathVariable String description, @PathVariable String city){
+        List<MovieDTO> movies = movieService.getMoviesByDescriptionAndModuleCategory(description, city);
+        return ResponseEntity.ok(movies);
     }
 }

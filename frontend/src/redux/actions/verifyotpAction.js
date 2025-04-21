@@ -1,4 +1,4 @@
-import { VERIFY_OTP } from '../actions/otpActionTypes'; 
+import { VERIFY_OTP } from './otpActionTypes'; 
 
 export const verifyotpAction = (otp) => async (dispatch) => {
     

@@ -1,55 +1,58 @@
-import React, { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setMoviesSuccess, setMoviesFailure } from '../redux/actions/movieAction'; 
+import { fetchMoviesRequest, fetchMoviesSuccess, fetchMoviesFailure } from '../redux/actions/movieAction';
+import MovieCard from '../components/MovieCard';
 import '../assets/styles/Movies.scss';
 import axios from 'axios';
+import Grid from '@mui/material/Grid'; 
 
 const Movies = () => {
-    const location = useLocation();
-    const queryParams = new URLSearchParams(location.search);
-    const city = queryParams.get('city'); 
-
     const dispatch = useDispatch();
-    const { movieCatalog, loading, error } = useSelector(state => state); 
-    const [isLoading, setIsLoading] = useState(false);
+    const { loading, movies, error } = useSelector((state) => state.movies); 
+    const selectedCity = useSelector((state) => state.movies.selectedCity); 
+
+    console.log("Selected City:", selectedCity); 
 
     useEffect(() => {
-        const fetchMovies = async () => {
-            if (city) {
-                setIsLoading(true);
-                try {
-                    const response = await axios.get(`http://get-movies/movies?city=${city}`);
-                    dispatch(setMoviesSuccess(response.data));
-                } catch (error) {
-                    dispatch(setMoviesFailure(error.message));
-                } finally {
-                    setIsLoading(false);
-                }
+        const fetchMoviesByCity = async (city) => {
+            dispatch(fetchMoviesRequest());
+            try {
+                const response = await axios.get(`http://localhost:8080/movies/get-movies/${city}`);
+                console.log(response.data); 
+                dispatch(fetchMoviesSuccess(response.data)); 
+            } catch (error) {
+                console.error("Error fetching movies:", error); 
+                dispatch(fetchMoviesFailure(error.message));
             }
         };
 
-        fetchMovies();
-    }, [city, dispatch]); 
+        if (selectedCity) { 
+            fetchMoviesByCity(selectedCity); 
+        }
+    }, [selectedCity, dispatch]);
+
+    if (loading) {
+        return <div>Loading movies...</div>;
+    }
+
+    if (error) {
+        return <div>Error: {error}</div>;
+    }
 
     return (
-        <div>
-            <h1>Movies in {city}</h1>
-            {isLoading && <p>Loading movies...</p>}
-            {error && <p>Error: {error}</p>}
-            <div className="movie-catalog">
-                {movieCatalog.length > 0 ? (
-                    movieCatalog.map((movie) => (
-                        <div key={movie.id} className="movie-card">
-                            <h2>{movie.title}</h2>
-                            <p>{movie.description}</p>
-
-                        </div>
+        <div className='movie-background'>
+            <h1>Movies in {selectedCity}</h1>
+            <Grid container spacing={2} justifyContent="center"> {/* Use Grid for layout */}
+                {movies.length > 0 ? (
+                    movies.map((movie) => (
+                        <Grid item xs={12} sm={6} md={4} key={movie.startPoint}> {/* Responsive grid item */}
+                            <MovieCard movie={movie} /> 
+                        </Grid>
                     ))
                 ) : (
-                    <p>No movies found for this city.</p>
+                    <p>No movies are scheduled currently for {selectedCity}</p>
                 )}
-            </div>
+            </Grid>
         </div>
     );
 };
