@@ -50,3 +50,6 @@ const BusSeatSelection = ({ seats }) => {
 
 export default BusSeatSelection;
 
+
+
+

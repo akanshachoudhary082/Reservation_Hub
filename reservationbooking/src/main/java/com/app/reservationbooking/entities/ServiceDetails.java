@@ -1,6 +1,10 @@
 package com.app.reservationbooking.entities;
 
 import com.app.reservationbooking.enums.ServiceDetailType;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -17,6 +21,7 @@ import java.util.List;
 @Setter
 @Builder
 @ToString
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property="detailId")
 @SequenceGenerator(name = "details_seq", sequenceName = "details_detail_id_seq", allocationSize = 1)
 public class ServiceDetails extends BaseEntity {
 
@@ -30,11 +35,12 @@ public class ServiceDetails extends BaseEntity {
     private ServiceDetailType detailType;
 
     @ManyToOne
+    //@JsonBackReference
     @JoinColumn(name = "service_id", nullable = false)
     private ServiceRecord services;
 
-    @OneToMany(mappedBy = "details", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Booking> bookings;
+//    @OneToMany(mappedBy = "details", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+//    private List<Booking> bookings;
 
 	@OneToMany(mappedBy = "serviceDetails", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<Seat> seats;

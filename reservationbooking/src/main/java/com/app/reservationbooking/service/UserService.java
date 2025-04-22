@@ -1,17 +1,20 @@
 package com.app.reservationbooking.service;
 
-import com.app.reservationbooking.dto.UserRespDTO;
+import com.app.reservationbooking.dto.UserRespSignup;
 import java.util.List;
 
 public interface UserService {
 
-    UserRespDTO getUserById(Long userId);
+    UserRespSignup userRegistration(UserRespSignup userRespDTO);
 
-    List<UserRespDTO> getAllUsers();
 
-    UserRespDTO createUser(UserRespDTO userRespDTO);
+    UserRespSignup getUserById(Long userId);
 
-    UserRespDTO updateUser(Long userId, UserRespDTO userRespDTO);
+    List<UserRespSignup> getAllUsers();
+
+    UserRespSignup createUser(UserRespSignup userRespDTO);
+
+    UserRespSignup updateUser(Long userId, UserRespSignup userRespDTO);
 
     void deleteUser(Long userId);
 }

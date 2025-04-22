@@ -1,7 +1,7 @@
 {
   "name": "frontend",
   "version": "0.1.0",
-  "proxy":"http://localhost:8080/",
+  "proxy": "https://localhost:8443",
   "private": true,
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
@@ -17,6 +17,7 @@
     "@toolpad/core": "^0.13.0",
     "axios": "^1.8.4",
     "firebase": "^11.6.0",
+    "js-cookie": "^3.0.5",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-google-recaptcha": "^3.1.0",

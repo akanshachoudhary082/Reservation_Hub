@@ -5,10 +5,13 @@ import { Link, useNavigate } from 'react-router-dom';
 import { alpha } from '@mui/material/styles'; 
 import logo from '../assets/images/Reservation_Hub_Logo.jpg'; 
 import SearchIcon from '@mui/icons-material/Search'; 
+import Cookies from 'js-cookie';
 import MenuIcon from '@mui/icons-material/Menu'; 
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { toggleDrawer, openProfileMenu, closeProfileMenu } from '../redux/actions/navbarActions';  
 import CitySelectionPopup from '../components/CitySelectionPopup'; 
+import axios from 'axios';
+
 
 
 const Navbar = () => {
@@ -18,22 +21,37 @@ const Navbar = () => {
     const [openPopup, setOpenPopup] = useState(false);
     const navigate = useNavigate();
 
+
+    const handleLogout = async () => {
+        try {
+            await axios.post('https://localhost:8443/users/logout', {}, {
+                withCredentials: true, 
+            });
+    
+            Cookies.remove('jwtToken'); 
+            handleProfileMenuClose();
+            navigate('/login');
+        } catch (error) {
+            console.error('Logout failed:', error);
+        }
+    };
+    
     const handleMoviesClick = () => {
         setContext('movies');
-        setOpenPopup(true); // Open the city selection popup
+        setOpenPopup(true); 
     };
 
     const handleCitySelectforMovies = (city) => {
-        navigate(`/movies?city=${city}`); // Navigate to the Movies page with the selected city
+        navigate(`/movies?city=${city}`); 
     };
 
     const handleEventsClick = () => {
         setContext('events');
-        setOpenPopup(true); // Open the city selection popup
+        setOpenPopup(true); 
     };
 
     const handleCitySelectforEvents = (city) => {
-        navigate(`/events?city=${city}`); // Navigate to the Events page with the selected city
+        navigate(`/events?city=${city}`); 
     };
 
     const handleProfileMenuOpen = (event) => {
@@ -126,7 +144,7 @@ const Navbar = () => {
                     <MenuItem component={ Link} to="/login" onClick={handleProfileMenuClose}>Login</MenuItem>
                     <MenuItem component={Link} to="/signin" onClick={handleProfileMenuClose}>SignIn</MenuItem>
                     <MenuItem component={Link} to="/register" onClick={handleProfileMenuClose}>Register</MenuItem>
-                    <MenuItem onClick={handleProfileMenuClose}>Logout</MenuItem>
+                    <MenuItem onClick={handleLogout}>Logout</MenuItem> {/* Handle Logout */}
                 </Menu>
 
                 {/* Drawer (Hamburger Menu) */}

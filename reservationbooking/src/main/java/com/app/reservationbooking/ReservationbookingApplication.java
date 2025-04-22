@@ -1,11 +1,15 @@
 package com.app.reservationbooking;
 
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
+import org.springframework.context.annotation.ComponentScan;
 
-//@SpringBootApplication
-@SpringBootApplication(exclude = {SecurityAutoConfiguration.class})
+@SpringBootApplication
+//@SpringBootApplication(exclude = {SecurityAutoConfiguration.class})
+@ComponentScan(basePackages = "com.app.reservationbooking")
+
 public class ReservationbookingApplication {
 
 	public static void main(String[] args) {

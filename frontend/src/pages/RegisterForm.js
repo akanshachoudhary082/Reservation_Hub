@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import {
   TextField,
   Button,
@@ -10,19 +10,15 @@ import {
 } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import {
-  USER_REGISTER_REQUEST,
-  USER_REGISTER_SUCCESS,
-  USER_REGISTER_FAIL,
-} from '../redux/actions/userActionTypes';
 import axios from 'axios';
+import { USER_REGISTER_REQUEST, USER_REGISTER_SUCCESS, USER_REGISTER_FAIL } from '../redux/actions/userActionTypes';
 import countryPhoneCodes from '../assets/countryPhoneCodes.json';
-import '../assets/styles/register.scss';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
+import '../assets/styles/register.scss';
 
 const generateCaptcha = () => {
   const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-  return Array.from({ length: 6 }, () => chars[Math.floor(Math.random() * chars.length)]).join('');
+  return Array.from({ length: 6 }, () => chars[Math.floor(Math.random() * chars.length)]).join(''); 
 };
 
 const RegisterForm = () => {
@@ -38,7 +34,7 @@ const RegisterForm = () => {
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
-    countryCode: '+91',
+    countryCode: '',
     mobileNumber: '',
     userEmail: '',
     password: '',
@@ -61,9 +57,10 @@ const RegisterForm = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+    const trimmedValue = value.trim();
     setFormData((prev) => ({
       ...prev,
-      [name]: value,
+      [name]: trimmedValue,
     }));
 
     if (['password', 'confirmPassword'].includes(name)) setPasswordError('');
@@ -73,12 +70,16 @@ const RegisterForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (formData.password !== formData.confirmPassword) {
+    const trimmedMobile = formData.mobileNumber.trim();
+    const trimmedPassword = formData.password.trim();
+    const trimmedConfirmPassword = formData.confirmPassword.trim();
+
+    if (trimmedPassword !== trimmedConfirmPassword) {
       setPasswordError('Passwords do not match');
       return;
     }
 
-    if (!/^\d{10}$/.test(formData.mobileNumber)) {
+    if (!/^\d{10}$/.test(trimmedMobile)) {
       setMobileError('Mobile number must be exactly 10 digits');
       return;
     }
@@ -88,39 +89,39 @@ const RegisterForm = () => {
       return;
     }
 
-    const { confirmPassword, countryCode, mobileNumber, ...rest } = formData;
+    const { confirmPassword, countryCode, ...rest } = formData;
+
     const payload = {
       ...rest,
-      mobileNumber: `${countryCode}${mobileNumber}`,
+      mobileNumber: `${countryCode}${trimmedMobile}`,
+      password: trimmedPassword,
     };
 
     try {
       dispatch({ type: USER_REGISTER_REQUEST });
 
-      const response = await axios.post('/users/register', payload);
+      const response = await axios.post('https://localhost:8443/users/signup', payload);
 
       dispatch({
         type: USER_REGISTER_SUCCESS,
         payload: response.data,
       });
+
+      // Navigate to login page after successful registration
+      navigate('/login');
     } catch (error) {
       dispatch({
         type: USER_REGISTER_FAIL,
         payload: error.response?.data?.message || 'Registration failed',
       });
+      console.error('Registration failed:', error);
     }
   };
-
-  useEffect(() => {
-    if (userInfo) {
-      navigate('/my-account');
-    }
-  }, [userInfo, navigate]);
 
   return (
     <div className="register-page">
       <div className="register-container">
-        <Typography variant="h4" align="center" gutterBottom>
+        <Typography variant="h4" align="center" gutterBottom style={{ color: 'white' }}>
           Register
         </Typography>
 
@@ -130,6 +131,7 @@ const RegisterForm = () => {
           sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}
         >
           <TextField
+           className="custom-textfield"
             label="First Name"
             name="firstName"
             required
@@ -137,6 +139,7 @@ const RegisterForm = () => {
             onChange={handleChange}
           />
           <TextField
+           className="custom-textfield"
             label="Last Name"
             name="lastName"
             required
@@ -148,27 +151,20 @@ const RegisterForm = () => {
             <Autocomplete
               options={countryOptions}
               getOptionLabel={(option) => `${option.dial_code} (${option.code})`}
-              isOptionEqualToValue={(option, value) =>
-                option.dial_code === value.dial_code
-              }
-              value={
-                countryOptions.find(
-                  (c) => c.dial_code === formData.countryCode
-                ) || null
-              }
+              isOptionEqualToValue={(option, value) => option.dial_code === value.dial_code}
+              value={countryOptions.find((c) => c.dial_code === formData.countryCode) || null}
               onChange={(event, newValue) => {
                 setFormData((prev) => ({
                   ...prev,
-                  countryCode: newValue ? newValue.dial_code : '',
+                  countryCode: newValue ? newValue.dial_code : prev.countryCode,
                 }));
               }}
-              renderInput={(params) => (
-                <TextField {...params} label="Country Code" required />
-              )}
+              renderInput={(params) => <TextField className="custom-textfield" {...params} label="Country Code" required />}
               sx={{ minWidth: 150 }}
             />
 
             <TextField
+            className="custom-textfield"
               label="Mobile Number"
               name="mobileNumber"
               required
@@ -182,6 +178,7 @@ const RegisterForm = () => {
           </Box>
 
           <TextField
+           className="custom-textfield"
             label="Email"
             name="userEmail"
             type="email"
@@ -191,6 +188,7 @@ const RegisterForm = () => {
           />
 
           <TextField
+           className="custom-textfield"
             label="Password"
             name="password"
             type={showPassword ? 'text' : 'password'}
@@ -200,7 +198,7 @@ const RegisterForm = () => {
             InputProps={{
               endAdornment: (
                 <InputAdornment position="end">
-                  <IconButton onClick={() => setShowPassword((prev) => !prev)} edge="end">
+                  <IconButton onClick={() => setShowPassword((prev) => !prev)} edge="end" sx={{ color: 'rgba(255,255,255,0.5)' }}>
                     {showPassword ? <VisibilityOff /> : <Visibility />}
                   </IconButton>
                 </InputAdornment>
@@ -209,6 +207,7 @@ const RegisterForm = () => {
           />
 
           <TextField
+           className="custom-textfield"
             label="Confirm Password"
             name="confirmPassword"
             type={showConfirmPassword ? 'text' : 'password'}
@@ -218,7 +217,7 @@ const RegisterForm = () => {
             InputProps={{
               endAdornment: (
                 <InputAdornment position="end">
-                  <IconButton onClick={() => setShowConfirmPassword((prev) => !prev)} edge="end">
+                  <IconButton onClick={() => setShowConfirmPassword((prev) => !prev)} edge="end" sx={{ color:' rgba(255,255,255,0.5)' }}>
                     {showConfirmPassword ? <VisibilityOff /> : <Visibility />}
                   </IconButton>
                 </InputAdornment>
@@ -239,26 +238,28 @@ const RegisterForm = () => {
             >
               {captcha}
             </Typography>
-            <Button onClick={refreshCaptcha} variant="outlined">
+            <Button className="refresh-button" onClick={refreshCaptcha} variant="outlined">
               Refresh
             </Button>
           </Box>
 
           <TextField
+            className="custom-textfield"
             label="Enter Captcha"
             value={captchaInput}
             onChange={(e) => {
               setCaptchaInput(e.target.value);
-              setCaptchaError('');
+              if (captchaError && e.target.value === captcha) setCaptchaError('');
             }}
             required
             error={!!captchaError}
             helperText={captchaError}
           />
 
-          <Button type="submit" variant="contained" color="primary" disabled={loading}>
+          <Button class="register-button" type="submit" variant="contained"  disabled={loading}>
             {loading ? 'Registering...' : 'Register'}
           </Button>
+
           {error && <Typography color="error">{error}</Typography>}
         </Box>
       </div>

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import axios from 'axios';
+import Cookies from 'js-cookie'; 
 import { Typography, Button, TextField, Grid, Paper, IconButton, Box, InputAdornment } from '@mui/material';
 import { SwapVert, Search, LocationOn, Flag } from '@mui/icons-material';
 
@@ -30,14 +31,28 @@ const TransportServiceDetails = () => {
       sourceCity: source.trim(),
       destinationCity: destination.trim(),
       availableOn: selectedDate,
-      moduleCode: transport.toUpperCase() // ensure it matches backend expectations
+      moduleCode: transport.toUpperCase() 
     };
 
     try {
       setLoading(true);
       setErrorMessage('');
       setHasSearched(true);
-      const response = await axios.post('http://localhost:8080/transport/search', requestDTO);
+
+    
+      const token = Cookies.get('jwtToken'); 
+      if (!token) {
+        setErrorMessage('Authentication token is missing.');
+        return;
+      }
+
+
+      const response = await axios.post('/transport/search', requestDTO, {
+        headers: {
+          'Authorization': `Bearer ${token}`, 
+        },
+      });
+
       if (Array.isArray(response.data)) {
         setAvailableServices(response.data);
       } else {

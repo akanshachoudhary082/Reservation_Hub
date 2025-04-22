@@ -1,41 +1,34 @@
 package com.app.reservationbooking.utility;
 
-import com.app.reservationbooking.dto.UserRespDTO;
+import com.app.reservationbooking.dto.UserRespSignup;
 import com.app.reservationbooking.entities.User;
+
 
 public class UserConverterUtils {
 
-    // Convert User entity to UserRespDTO
-    public static UserRespDTO convertToDTO(User user) {
-        if (user == null) {
-            return null;
-        }
-        return new UserRespDTO(
+    public static UserRespSignup convertToDTO(User user) {
+        if (user == null) return null;
+
+        return new UserRespSignup(
                 user.getUserId(),
                 user.getFirstName(),
                 user.getLastName(),
                 user.getMobileNumber(),
                 user.getUserEmail(),
-                user.getRole(),
-                user.getCountryCode(),
-                user.getPassword()
-
+                user.getRole()
         );
     }
 
-    // Convert UserRespDTO to User entity
-    public static User convertToEntity(UserRespDTO userRespDTO) {
-        if (userRespDTO == null) {
-            return null;
-        }
+    public static User convertToEntity(UserRespSignup dto) {
+        if (dto == null) return null;
+
         User user = new User();
-        user.setFirstName(userRespDTO.getFirstName());
-        user.setLastName(userRespDTO.getLastName());
-        user.setMobileNumber(userRespDTO.getMobileNumber());
-        user.setUserEmail(userRespDTO.getUserEmail());
-        user.setRole(userRespDTO.getRole());
-        user.setCountryCode(userRespDTO.getCountryCode());
-        user.setPassword(userRespDTO.getPassword());
+        user.setFirstName(dto.getFirstName());
+        user.setLastName(dto.getLastName());
+        user.setMobileNumber(dto.getMobileNumber());
+        user.setUserEmail(dto.getUserEmail());
+        user.setRole(dto.getRole());
+        user.setPassword(dto.getPassword()); // will be encoded later
         return user;
     }
 }

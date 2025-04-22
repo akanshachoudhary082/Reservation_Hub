@@ -32,6 +32,7 @@ public class ServiceRecordServiceImpl implements ServiceRecordService {
     @Override
     public List<ServiceRecordDTO> getAllServices() {
         log.debug("Fetching all service records from the database.");
+        log.info("Fetching all service records from the database.");
         List<ServiceRecord> services = serviceRecordRepository.findAll();
         if (services.isEmpty()) {
             log.warn("No service records found in the database.");
@@ -42,6 +43,15 @@ public class ServiceRecordServiceImpl implements ServiceRecordService {
                 .map(ServiceRecordConverterUtils::convertEntityToDTO)
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public List<ServiceRecord> getAllServiceRecords() {
+
+        List<ServiceRecord> services = serviceRecordRepository.findAll();
+       return services;
+    }
+
+
 
     /**
      * Retrieves a specific service record by its ID.

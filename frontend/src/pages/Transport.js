@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
+import Cookies from 'js-cookie';
 import { setServiceDetails, setLoading, setError } from '../redux/actions/transportServiceDetailsAction';
 import { Grid, Typography, Card, CardContent, CardMedia, Button, Box } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
@@ -17,8 +18,15 @@ const Transport = () => {
     const fetchServiceDetails = async () => {
       dispatch(setLoading());
 
+      const token = Cookies.get('jwtToken'); 
+      console.log('Using token:', token);
+
       try {
-        const response = await axios.get('http://localhost:8080/details'); 
+        const response = await axios.get('https://localhost:8443/details', {
+          headers: {
+            Authorization: `Bearer ${token}`, 
+          },
+        });
         dispatch(setServiceDetails(response.data));
       } catch (err) {
         dispatch(setError(err.message));

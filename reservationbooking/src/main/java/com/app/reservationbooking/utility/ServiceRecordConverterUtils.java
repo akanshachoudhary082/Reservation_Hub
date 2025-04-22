@@ -18,7 +18,7 @@ public class ServiceRecordConverterUtils {
         return ServiceRecordDTO.builder()
                 .serviceRecordId(serviceRecord.getServiceRecordId())
                 .serviceType(serviceRecord.getServiceType())
-                .details((ServiceDetails) serviceRecord.getDetails()) // Assuming serviceRecord.getDetails() is a list of ServiceDetails
+                .details((ServiceDetails) serviceRecord.getDetails())
                 .build();
     }
 
@@ -32,7 +32,7 @@ public class ServiceRecordConverterUtils {
         return ServiceRecord.builder()
                 .serviceRecordId(serviceRecordDTO.getServiceRecordId())
                 .serviceType(serviceRecordDTO.getServiceType())
-                .details((List<ServiceDetails>) serviceRecordDTO.getDetails()) // Assuming serviceRecordDTO.getDetails() is a List of ServiceDetails
+                .details((List<ServiceDetails>) serviceRecordDTO.getDetails())
                 .build();
     }
 }

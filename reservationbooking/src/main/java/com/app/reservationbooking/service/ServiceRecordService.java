@@ -2,6 +2,7 @@ package com.app.reservationbooking.service;
 
 import com.app.reservationbooking.dto.ServiceRecordDTO;
 import com.app.reservationbooking.customexception.ResourceNotFoundException;
+import com.app.reservationbooking.entities.ServiceRecord;
 
 import java.util.List;
 
@@ -17,6 +18,7 @@ public interface ServiceRecordService {
      */
     List<ServiceRecordDTO> getAllServices();
 
+    public List<ServiceRecord> getAllServiceRecords();
     /**
      * Retrieves a specific service record by its ID.
      *

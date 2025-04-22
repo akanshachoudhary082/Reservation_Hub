@@ -36,12 +36,23 @@ public class Booking extends BaseEntity {
     @Column(name = "booking_date", nullable = false)
     private LocalDateTime bookingDate;
 
-    @Column(name = "time_slot", nullable = false)
-    private String timeSlot;
+    @Column(name = "start_point", nullable = false)
+    private LocalDateTime startPoint;               // Starting Time (For Movies, Events, Transport) OR Departure City (For Transport, For Movies - null)
 
-    @ManyToOne
-    @JoinColumn(name = "detail_id", nullable = false)
-    private ServiceDetails details;
+    @Column(name = "end_point",nullable = false)
+    private LocalDateTime endPoint;
+
+
+
+//    @Column(name = "time_slot", nullable = false)
+//    private String timeSlot;
+
+//    @ManyToOne
+//    @JoinColumn(name = "detail_id", nullable = false)
+//    private ServiceDetails details;
+
+     @Column(name = "detail_id", nullable = false)
+      private Long detailId;
 
     @OneToOne
     @JoinColumn(name = "payment_id", nullable = false)

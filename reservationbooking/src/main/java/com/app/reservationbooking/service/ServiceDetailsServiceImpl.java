@@ -7,6 +7,7 @@ import com.app.reservationbooking.entities.ServiceRecord;
 import com.app.reservationbooking.repository.ServiceDetailsRepository;
 import com.app.reservationbooking.repository.ServiceRecordRepository;
 import com.app.reservationbooking.utility.ServiceDetailsConverterUtils;
+import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -45,6 +46,7 @@ public class ServiceDetailsServiceImpl implements ServiceDetailsService {
      * @return Corresponding ServiceDetailsDTO.
      * @throws ResourceNotFoundException if the service detail is not found.
      */
+    @Transactional
     @Override
     public ServiceDetailsDTO getDetailsById(Long detailId) throws ResourceNotFoundException {
         // Log first, then throw exception if not found

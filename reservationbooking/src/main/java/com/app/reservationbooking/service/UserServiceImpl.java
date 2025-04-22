@@ -1,11 +1,12 @@
 package com.app.reservationbooking.service;
 
-import com.app.reservationbooking.dto.UserRespDTO;
+import com.app.reservationbooking.dto.UserRespSignup;
 import com.app.reservationbooking.entities.User;
 import com.app.reservationbooking.repository.UserRepository;
 import com.app.reservationbooking.utility.UserConverterUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,34 +18,50 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private UserRepository userDao;
+
     @Override
-    public UserRespDTO getUserById(Long userId) {
+    public UserRespSignup userRegistration(UserRespSignup dto) {
+        User user = UserConverterUtils.convertToEntity(dto);
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        User savedUser = userRepository.save(user);
+        return UserConverterUtils.convertToDTO(savedUser);
+    }
+
+
+
+    @Override
+    public UserRespSignup getUserById(Long userId) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new RuntimeException("User not found"));
-        return UserConverterUtils.convertToDTO(user); // Using the utility method for conversion
+        return UserConverterUtils.convertToDTO(user);
     }
 
     @Override
-    public List<UserRespDTO> getAllUsers() {
+    public List<UserRespSignup> getAllUsers() {
         List<User> users = userRepository.findAll();
         return users.stream()
-                .map(UserConverterUtils::convertToDTO) // Convert each User to UserRespDTO
+                .map(UserConverterUtils::convertToDTO)
                 .collect(Collectors.toList());
     }
 
     @Override
-    public UserRespDTO createUser(UserRespDTO userRespDTO) {
+    public UserRespSignup createUser(UserRespSignup userRespDTO) {
 
         User user = UserConverterUtils.convertToEntity(userRespDTO);
 
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         user.setPassword( passwordEncoder. encode(user.getPassword()));
         User savedUser = userRepository.save(user);
-        return UserConverterUtils.convertToDTO(savedUser); // Return the saved user as DTO
+        return UserConverterUtils.convertToDTO(savedUser);
     }
 
     @Override
-    public UserRespDTO updateUser(Long userId, UserRespDTO userRespDTO) {
+    public UserRespSignup updateUser(Long userId, UserRespSignup userRespDTO) {
         User existingUser = userRepository.findById(userId)
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
@@ -53,7 +70,6 @@ public class UserServiceImpl implements UserService {
         existingUser.setLastName(userRespDTO.getLastName());
         existingUser.setMobileNumber(userRespDTO.getMobileNumber());
         existingUser.setUserEmail(userRespDTO.getUserEmail());
-        existingUser.setCountryCode(userRespDTO.getCountryCode());
         existingUser.setRole(userRespDTO.getRole());
 
 
