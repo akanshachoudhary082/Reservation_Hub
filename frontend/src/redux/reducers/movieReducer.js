@@ -1,19 +1,42 @@
-import { SET_MOVIES_REQUEST, SET_MOVIES_SUCCESS, SET_MOVIES_FAILURE } from '../actions/movieAction';
+import {
+    SET_MOVIES_REQUEST,
+    SET_MOVIES_SUCCESS,
+    SET_MOVIES_FAILURE,
+    SET_SELECTED_CITY,
+} from '../actions/movieAction';
 
 const initialState = {
     loading: false,
-    movieCatalog: [],
-    error: '',
+    movies: [],
+    error: null,
+    selectedCity: null, 
 };
 
 const movieReducer = (state = initialState, action) => {
     switch (action.type) {
         case SET_MOVIES_REQUEST:
-            return { ...state, loading: true, error: '' };
+            return {
+                ...state,
+                loading: true,
+                error: null,
+            };
         case SET_MOVIES_SUCCESS:
-            return { ...state, loading: false, movieCatalog: action.payload };
+            return {
+                ...state,
+                loading: false,
+                movies: action.payload,
+            };
         case SET_MOVIES_FAILURE:
-            return { ...state, loading: false, error: action.payload };
+            return {
+                ...state,
+                loading: false,
+                error: action.payload,
+            };
+        case SET_SELECTED_CITY:
+            return {
+                ...state,
+                selectedCity: action.payload, 
+            };
         default:
             return state;
     }

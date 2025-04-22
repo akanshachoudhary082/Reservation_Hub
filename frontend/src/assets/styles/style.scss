@@ -1,9 +1,15 @@
 body {
-    margin: 0;
+    margin: 0; /* Remove default margin */
+    padding: 0; /* Remove default padding */
+    background-image: url('../images/purple_background_image.png');
+    background-size:cover;
+    background-repeat: no-repeat;
+    width: 100%; /* Ensure full width */
+    height: 100%; /* Ensure full height */
+    overflow-x: hidden; /* Prevent horizontal scrolling */
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
     color: #050505;
-    font-family: 'Roboto', sans-serif;
   }
   
 
@@ -15,11 +21,4 @@ body {
     margin-top: auto;
 }
 
-.background{
-  background-image: url('../images/purple_background_image.png');
-  padding: 0;
-  margin: 0;
-  background-size: cover;
-  background-repeat: no-repeat;
-}
 

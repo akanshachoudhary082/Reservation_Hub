@@ -1,16 +1,12 @@
 import React from 'react';
 import Transport from './Transport'; 
 import '../assets/styles/style.scss';
-import MovieCarousel from '../components/MovieCarousel';
-
-
+ 
 const Home = () => {
   return (
-   
-      <div >
-         <h1>Home Page is Working</h1>
+    <div >
+      <div className='background'>
       <Transport />
-      <MovieCarousel />
       </div>
   );
 };

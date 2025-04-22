@@ -1,6 +1,4 @@
-
 import React from 'react';
-
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';  // For routing
 import { Container } from '@mui/material';
 import Navbar from './components/Navbar';  // Importing the Navbar component
@@ -17,44 +15,44 @@ import MobileNumberForm from '../src/components/MobileNumberForm';
 import OtpInput from './components/OtpInput';
 import OtpSuccessPage from './pages/OtpSuccessPage';
 import CitySelectionPopUp from './components/CitySelectionPopup';
-import MovieCarousel from './components/MovieCarousel';
 import Movies from './pages/Movies';
 import RegisterForm from './pages/RegisterForm';
 import MyAccount from './pages/MyAccount';
-/* Custom Components - End */
+import Events from './pages/Events';
+import MovieShowtimes from './components/MovieShowtimes';
 
 const App = () => {
   return (
     <Router>
-       <div className='background'>
+      <div>
         <Navbar />
 
-        <Container className='container'> </Container>
+        <Container className='container'></Container>
 
         <Container sx={{ minHeight: '80vh' }}>
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/" element={<MovieCarousel />} />
             <Route path="/aboutUs" element={<AboutUs />} />
             <Route path="/transport" element={<Transport />} />
             <Route path="/details/:transport" element={<TransportServiceDetails />} />
             <Route path="/seats/:transport" element={<TransportSeatSelectionPage />} />
-            <Route path="/movies" element={<CitySelectionPopUp />} />
+            <Route path="/movies" element={<CitySelectionPopUp />} /> {/* City selection for movies */}
+            <Route path="/movies/:city" element={<Movies />} /> {/* Movies page with city */}
             <Route path="/events" element={<CitySelectionPopUp />} />
+            <Route path="/events/:city" element={<Events />} />
             <Route path="/contactus" element={<ContactUs />} />
             <Route path="/login" element={<MobileNumberForm />} />
-            <Route path="/signin" element={< SignIn />} />
+            <Route path="/signin" element={<SignIn />} />
             <Route path="/otp-sent" element={<OtpInput />} />
             <Route path="/success" element={<OtpSuccessPage />} />
             <Route path="/register" element={<RegisterForm />} />
             <Route path="/account" element={<MyAccount />} />
-            <Route path="/movies?city={city}" element={<Movies />} />
-            
+            <Route path="/movies/:startPoint" element={<MovieShowtimes />} /> {/* Showtimes for selected movie */}
             <Route path="*" element={<div>404 - Page Not Found</div>} />
           </Routes>
         </Container>
         <Footer />
-        </div>
+      </div>
     </Router>
   );
 };
