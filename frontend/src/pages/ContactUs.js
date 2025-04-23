@@ -278,7 +278,7 @@ const ContactUs = () => {
   };
 
   const handleSubmit = async (e) => {
-    debugger
+    //debugger
     e.preventDefault();
     if (!validate()) return;
 

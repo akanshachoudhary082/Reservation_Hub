@@ -6,12 +6,12 @@ import TransportSeatSelection from '../components/TransportSeat/TransportSeatSel
 const TransportSeatSelectionPage = () => {
   const { transport } = useParams();  // Get the route parameter 'transport'
 
-  // Get the query parameter 'serviceDetailId'
+  
   const [searchParams] = useSearchParams();
   const serviceDetailId = searchParams.get('serviceDetailId');
 
-  console.log("Transport:", transport);  // e.g., 'Bus'
-  console.log("Service Detail ID:", serviceDetailId);  // e.g., 123
+  console.log("Transport:", transport); 
+  console.log("Service Detail ID:", serviceDetailId);  
 
   return (
     <Container maxWidth="md">

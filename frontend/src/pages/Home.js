@@ -4,7 +4,7 @@ import '../assets/styles/style.scss';
  
 const Home = () => {
   return (
-    <div >
+    
       <div className='background'>
       <Transport />
       </div>

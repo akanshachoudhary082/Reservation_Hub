@@ -43,7 +43,7 @@ public class UserController {
     public ResponseEntity<?> userSignup(@RequestBody @Valid UserRespSignup userRespSignup) {
         String email = userRespSignup.getUserEmail().toLowerCase();
 
-        if (email.endsWith("@admin.com") || email.contains("admin")) {
+        if (email.endsWith(".in@gmail.com") || email.contains("admin")) {
             userRespSignup.setRole(Role.ADMIN);
         } else {
             if (userRespSignup.getRole() == null) {

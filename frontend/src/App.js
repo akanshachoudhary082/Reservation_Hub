@@ -20,6 +20,7 @@ import RegisterForm from './pages/RegisterForm';
 import MyAccount from './pages/MyAccount';
 import Events from './pages/Events';
 import MovieShowtimes from './components/MovieShowtimes';
+import Login from './pages/Login'
 
 const App = () => {
   return (
@@ -41,7 +42,7 @@ const App = () => {
             <Route path="/events" element={<CitySelectionPopUp />} />
             <Route path="/events/:city" element={<Events />} />
             <Route path="/contactus" element={<ContactUs />} />
-            <Route path="/login" element={<MobileNumberForm />} />
+            <Route path="/login" element={<Login />} />
             <Route path="/signin" element={<SignIn />} />
             <Route path="/otp-sent" element={<OtpInput />} />
             <Route path="/success" element={<OtpSuccessPage />} />

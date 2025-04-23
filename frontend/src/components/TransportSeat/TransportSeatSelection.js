@@ -18,7 +18,7 @@ const TransportSeatSelection = () => {
   const serviceDetailId = new URLSearchParams(location.search).get('serviceDetailId');
 
   useEffect(() => {
-    // Check if serviceDetailId is available, otherwise show an error
+    
     if (!serviceDetailId) {
       dispatch(setTransportSeatsError('Service ID is missing.'));
       return;
@@ -27,27 +27,26 @@ const TransportSeatSelection = () => {
     const fetchSeats = async () => {
       dispatch(setLoading(true));
       try {
-        // Fetch available seats from the backend
-        const response = await axios.get(`/seats/available/${serviceDetailId}`); // HTTPS URL
-
-        // Store the fetched seats in the Redux store
+       
+        const response = await axios.get(`/seats/available/${serviceDetailId}`); 
+        
         dispatch(setTransportSeats(response.data));
 
-        // Store transport and seat selection in cookies with the secure flag (for HTTPS)
-        Cookies.set('selectedTransport', transport, { secure: true, sameSite: 'Strict' });  // Store transport type securely
-        Cookies.set('selectedSeats', JSON.stringify(response.data), { secure: true, sameSite: 'Strict' });  // Store seats data securely
+        
+        Cookies.set('selectedTransport', transport, { secure: true, sameSite: 'Strict' });  
+        Cookies.set('selectedSeats', JSON.stringify(response.data), { secure: true, sameSite: 'Strict' });  
 
       } catch (err) {
-        // Dispatch error action if the request fails
+       
         dispatch(setTransportSeatsError('Failed to load seats.'));
       } finally {
         dispatch(setLoading(false));
       }
     };
 
-    // Call the function to fetch seats on component mount
+    
     fetchSeats();
-  }, [serviceDetailId, dispatch, transport]); // Re-run when serviceDetailId or transport changes
+  }, [serviceDetailId, dispatch, transport]); 
 
   const renderSeatComponent = () => {
     switch (transport.toUpperCase()) {

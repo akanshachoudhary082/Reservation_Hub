@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import Cookies from 'js-cookie'; //  Import js-cookie
+import Cookies from 'js-cookie'; 
 import { TextField, Button, Typography, Snackbar, Alert } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 
@@ -19,7 +19,7 @@ const EmailPasswordForm = () => {
     const trimmedEmail = email.trim();
     const trimmedPassword = password.trim();
 
-    //  Define the payload with email and password
+    
     const payload = {
       email: trimmedEmail,
       password: trimmedPassword,
@@ -27,16 +27,16 @@ const EmailPasswordForm = () => {
 
     axios
       .post(
-        'https://localhost:8443/users/signin', // Replace with your actual URL
+        'https://localhost:8443/users/signin', 
         payload,
         {
           headers: {
-            'Content-Type': 'application/json', // Set content type to JSON
+            'Content-Type': 'application/json', 
           },
         }
       )
       .then(async(response) => {
-        debugger
+        //debugger
         setErrorMessage('');
         setSuccessMessageOpen(true);
 
@@ -46,11 +46,11 @@ const EmailPasswordForm = () => {
         console.log('token---',token,response);
         
         if (token) {
-          await Cookies.set('jwtToken', token,{ expires: 1 }); // Store token for 1 day
+          await Cookies.set('jwtToken', token,{ expires: 1 }); 
 
         }
         if(response?.status == 200){
-          await navigate('/home')
+          await navigate('/')
         }
 
       })

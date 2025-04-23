@@ -11,6 +11,8 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { toggleDrawer, openProfileMenu, closeProfileMenu } from '../redux/actions/navbarActions';  
 import CitySelectionPopup from '../components/CitySelectionPopup'; 
 import { setSelectedCity } from '../redux/actions/eventAction';
+import axios from 'axios';
+
 
 const Navbar = () => {
     const dispatch = useDispatch();

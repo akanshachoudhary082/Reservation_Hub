@@ -38,7 +38,7 @@ public class UserRespSignup extends BaseEntity {
             message = "Password must contain at least 1 uppercase, 1 lowercase, 1 digit, and 1 special character")
     private String password;
 
-    
+
     private Role role;
 
     private String captcha;
