@@ -141,7 +141,7 @@ const Navbar = () => {
                     </IconButton>
                 </Toolbar>
 
-                {/* Profile Menu (Dropdown) */}
+            
                 <Menu anchorEl={profileMenuAnchorEl} open={Boolean(profileMenuAnchorEl)} onClose={handleProfileMenuClose}>
                     <MenuItem component={Link} to="/account" onClick={handleProfileMenuClose}>My Account</MenuItem>
                     <MenuItem component={Link} to="/login" onClick={handleProfileMenuClose}>Login</MenuItem>
@@ -150,7 +150,7 @@ const Navbar = () => {
                     <MenuItem onClick={handleLogout}>Logout</MenuItem> {/* Handle Logout */}
                 </Menu>
 
-                {/* Drawer (Hamburger Menu) */}
+                
                 <Drawer anchor="right" open={openDrawer} onClose={handleDrawerToggle}>
                     <Box sx={{ width: 250 }} role="presentation" onClick={handleDrawerToggle} onKeyDown={handleDrawerToggle}>
                         <List>

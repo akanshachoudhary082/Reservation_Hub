@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useLocation } from 'react-router-dom';
 import axios from 'axios';
-import Cookies from 'js-cookie'; // Import js-cookie to handle cookies
+import Cookies from 'js-cookie'; 
 import { setTransportSeats, setLoading, setTransportSeatsError } from '../../redux/actions/transportSeatActions';
 
 import BusSeatSelection from './BusSeatSelection';
@@ -61,7 +61,7 @@ const TransportSeatSelection = () => {
     }
   };
 
-  // Handle loading and error states
+
   if (loading) return <div>Loading seats...</div>;
   if (error) return <div>{error}</div>;
 
