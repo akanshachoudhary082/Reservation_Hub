@@ -10,7 +10,7 @@ import java.util.List;
 public interface TransportSeatService {
 
 
-    List<TransportSeatDTO> getSeatsByAdminConfigId(Long adminConfigId);
+    List<TransportSeatDTO> getSeatsByDetailId(Long detailId);
 
 
     List<TransportSeatDTO> getAllSeats();

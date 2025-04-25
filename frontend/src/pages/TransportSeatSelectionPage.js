@@ -6,18 +6,15 @@ import TransportSeatSelection from '../components/TransportSeat/TransportSeatSel
 const TransportSeatSelectionPage = () => {
   const { transport } = useParams();  
   const [searchParams] = useSearchParams();
-  const adminId = searchParams.get('adminConfigId');
-
-  console.log("Transport:", transport);
-  console.log("Admin ID (serviceDetailId):", adminId);
-
+  const detailId = searchParams.get('detailId'); 
+  
   return (
     <Container maxWidth="md">
       <Box sx={{ mt: 4, mb: 2 }}>
         <Typography variant="h4" align="center" gutterBottom>
           Select Your Seat
         </Typography>
-        <TransportSeatSelection transport={transport} adminId={adminId} /> 
+        <TransportSeatSelection transport={transport} detailId={detailId} /> 
       </Box>
     </Container>
   );

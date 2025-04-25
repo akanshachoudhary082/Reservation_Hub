@@ -11,6 +11,8 @@ import lombok.*;
 public class TransportSeatDTO {
     private Long seatId;
 
+    private Long detailId;
+
     private Long seatNumber;
 
     private SeatType seatType;
@@ -19,5 +21,4 @@ public class TransportSeatDTO {
 
     private SeatStatus status;
 
-    private Long adminConfigId;
 }

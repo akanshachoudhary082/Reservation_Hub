@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 @ToString
 public class TransportSearchDTO extends BaseEntity {
 
-    private long id;
+    private Long id;
 
     private String moduleCode; // e.g., Bus, Train, Flight
 
@@ -36,5 +36,8 @@ public class TransportSearchDTO extends BaseEntity {
     private String sourceCity;
 
     private String destinationCity;
+
+    private Long detailId;
+
 
 }

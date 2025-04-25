@@ -14,9 +14,10 @@ public class TransportSearchConverterUtils {
      * @param destinationCity The destination city (optional).
      * @return A TransportDTO representing the entity with populated city fields.
      */
+
     public static TransportSearchDTO convertToDTO(AdminConfiguration config, String sourceCity, String destinationCity) {
-        TransportSearchDTO dto = com.app.reservationbooking.dto.TransportSearchDTO.builder()
-                .id(config.getAdminConfigId())
+        TransportSearchDTO dto = TransportSearchDTO.builder()
+                .id(config.getAdminConfigId())  // This is your `detailId`
                 .moduleCode(config.getModuleCode())
                 .moduleCategory(config.getModuleCategory())
                 .name(config.getName())
@@ -25,6 +26,7 @@ public class TransportSearchConverterUtils {
                 .description(config.getDescription())
                 .price(config.getPriceOfTicket())
                 .availableOn(config.getAvailableOn())
+                .detailId(config.getDetailId())  // Ensure this is set!
                 .build();
 
         // Set source and destination cities
@@ -46,6 +48,7 @@ public class TransportSearchConverterUtils {
 
         return dto;
     }
+
 
     /**
      * Converts a TransportDTO to an AdminConfiguration entity.

@@ -9,7 +9,6 @@ import { SwapVert, Search, LocationOn, Flag } from '@mui/icons-material';
 const TransportServiceDetails = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
   const { transport } = useParams();
 
   const [source, setSource] = useState('');
@@ -31,7 +30,7 @@ const TransportServiceDetails = () => {
       sourceCity: source.trim(),
       destinationCity: destination.trim(),
       availableOn: selectedDate,
-      moduleCode: transport.toUpperCase() 
+      moduleCode: transport.toUpperCase(),
     };
 
     try {
@@ -39,20 +38,18 @@ const TransportServiceDetails = () => {
       setErrorMessage('');
       setHasSearched(true);
 
-    
-      const token = Cookies.get('jwtToken'); 
+      const token = Cookies.get('jwtToken');
       if (!token) {
         setErrorMessage('Authentication token is missing.');
         return;
       }
 
-
       const response = await axios.post('/transport/search', requestDTO, {
         headers: {
-          'Authorization': `Bearer ${token}`, 
+          'Authorization': `Bearer ${token}`,
         },
       });
-      console.log("search response .....",response.data);
+
       if (Array.isArray(response.data)) {
         setAvailableServices(response.data);
       } else {
@@ -185,25 +182,26 @@ const TransportServiceDetails = () => {
           <Typography>No services available for this route.</Typography>
         )}
 
-        <Grid container spacing={2}>
-          {availableServices.map((service) => (
-            <Grid item xs={12} sm={6} md={4} lg={3} key={service.id}>
-              <Paper sx={{ padding: 2, borderRadius: 2, backgroundColor: '#f9f9f9', boxShadow: 2 }}>
-                <Typography variant="h6" gutterBottom>{service.name}</Typography>
-                <Typography variant="body2">Start Time: {new Date(service.startPoint).toLocaleTimeString()}</Typography>
-                <Typography variant="body2">End Time: {new Date(service.endPoint).toLocaleTimeString()}</Typography>
-                <Typography variant="body2" sx={{ mt: 1, fontWeight: 'bold' }}>₹{service.price}</Typography>
-                <Button
-                  variant="contained"
-                  sx={{ marginTop: '10px', borderRadius: 2, backgroundColor: '#43a047', '&:hover': { backgroundColor: '#388e3c' } }}
-                  onClick={() => navigate(`/seats/${transport}?adminConfigId=${service.id}`)}  // Pass the correct serviceDetailId here
-                >
-                  Book Now
-                </Button>
-              </Paper>
-            </Grid>
-          ))}
-        </Grid>
+<Grid container spacing={2}>
+  {availableServices.map((service) => (
+    <Grid item xs={12} sm={6} md={4} lg={3} key={service.id}>
+      <Paper sx={{ padding: 2, borderRadius: 2, backgroundColor: '#f9f9f9', boxShadow: 2 }}>
+        <Typography variant="h6" gutterBottom>{service.name}</Typography>
+        <Typography variant="body2">Start Time: {new Date(service.startPoint).toLocaleTimeString()}</Typography>
+        <Typography variant="body2">End Time: {new Date(service.endPoint).toLocaleTimeString()}</Typography>
+        <Typography variant="body2" sx={{ mt: 1, fontWeight: 'bold' }}>₹{service.price}</Typography>
+        <Button
+          variant="contained"
+          sx={{ marginTop: '10px', borderRadius: 2, backgroundColor: '#43a047', '&:hover': { backgroundColor: '#388e3c' } }}
+          onClick={() => navigate(`/seats/${transport}?detailId=${service.detailId}`)} // Correctly passing detailId here
+        >
+          Book Now
+        </Button>
+      </Paper>
+    </Grid>
+  ))}
+</Grid>
+
       </Box>
     </div>
   );

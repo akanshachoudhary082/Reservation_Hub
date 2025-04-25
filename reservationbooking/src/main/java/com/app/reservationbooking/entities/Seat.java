@@ -23,8 +23,8 @@ public class Seat extends BaseEntity {
 	@Column(name = "seat_id", nullable = false)
 	private Long seatId;
 
-	@Column(name = "admin_config_id", nullable = false)
-	private long adminConfigId;
+	@Column(name = "detail_id", nullable = false)
+	private Long detailId;
 
 	@Column(name = "seat_number")
 	private Long seatNumber;

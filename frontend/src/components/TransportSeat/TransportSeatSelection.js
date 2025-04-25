@@ -8,20 +8,22 @@ import BusSeatSelection from './BusSeatSelection';
 import TrainSeatSelection from './TrainSeatSelection';
 import FlightSeatSelection from './FlightSeatSelection';
 
-const TransportSeatSelection = ({ transport, adminId }) => {
+const TransportSeatSelection = ({ transport, detailId }) => {
   const dispatch = useDispatch();
   const { loading, transportSeats: seats, error } = useSelector((state) => state.transportSeats);
 
   useEffect(() => {
-    if (!adminId) {
-      dispatch(setTransportSeatsError('Admin ID is missing.'));
+    if (!detailId) {
+      console.log("missing.....")
+      dispatch(setTransportSeatsError('Service detail ID is missing.............................'));
       return;
     }
 
     const fetchSeats = async () => {
+      
       dispatch(setLoading(true));
       try {
-        const response = await axios.get(`/seats/admin/${adminId}`);
+        const response = await axios.get(`/seats/service/${detailId}`);
         dispatch(setTransportSeats(response.data));
 
         Cookies.set('selectedTransport', transport, { secure: true, sameSite: 'Strict' });
@@ -35,7 +37,7 @@ const TransportSeatSelection = ({ transport, adminId }) => {
     };
 
     fetchSeats();
-  }, [adminId, dispatch, transport]);
+  }, [detailId, dispatch, transport]);
 
   const renderSeatComponent = () => {
     switch ((transport || '').toUpperCase()) {

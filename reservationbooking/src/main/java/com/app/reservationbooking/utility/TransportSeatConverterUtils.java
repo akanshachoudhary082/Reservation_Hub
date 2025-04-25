@@ -185,13 +185,6 @@ package com.app.reservationbooking.utility;
 //                .count();
 //    }
 //}
-//
-//
-//
-//
-//
-//
-
 
 import com.app.reservationbooking.dto.TransportSeatDTO;
 import com.app.reservationbooking.entities.Seat;
@@ -201,19 +194,20 @@ public class TransportSeatConverterUtils {
     // Convert Seat entity to TransportSeatDTO using builder
     public static TransportSeatDTO convertToDTO(Seat seat) {
         return TransportSeatDTO.builder()
-                .seatId(seat.getSeatId())
-                .adminConfigId(seat.getAdminConfigId())
+                .seatId(seat.getSeatId())  // This remains the same
                 .seatNumber(seat.getSeatNumber())
                 .seatType(seat.getSeatType())
                 .classType(seat.getClassType())
                 .status(seat.getStatus())
+                .detailId(seat.getDetailId())  // Ensure that detailId is included here
                 .build();
     }
+
 
     // Convert TransportSeatDTO to Seat entity using builder
     public static Seat convertToEntity(TransportSeatDTO dto) {
         return Seat.builder()
-                .adminConfigId(dto.getAdminConfigId())
+                .detailId(dto.getDetailId())  // No change here; it's correctly setting the detailId
                 .seatNumber(dto.getSeatNumber())
                 .seatType(dto.getSeatType())
                 .classType(dto.getClassType())
@@ -221,3 +215,4 @@ public class TransportSeatConverterUtils {
                 .build();
     }
 }
+
