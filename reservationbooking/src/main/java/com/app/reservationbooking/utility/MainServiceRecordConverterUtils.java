@@ -1,12 +1,12 @@
 package com.app.reservationbooking.utility;
 
-import com.app.reservationbooking.dto.ServiceRecordDTO;
-import com.app.reservationbooking.entities.ServiceDetails;
-import com.app.reservationbooking.entities.ServiceRecord;
+import com.app.reservationbooking.dto.MainServiceRecordDTO;
+import com.app.reservationbooking.entities.SubServiceDetails;
+import com.app.reservationbooking.entities.MainServiceRecord;
 
 import java.util.List;
 
-public class ServiceRecordConverterUtils {
+public class MainServiceRecordConverterUtils {
 
     /**
      * Converts a ServiceRecord entity to a ServiceRecordDTO.
@@ -14,11 +14,11 @@ public class ServiceRecordConverterUtils {
      * @param serviceRecord The ServiceRecord entity to convert.
      * @return A ServiceRecordDTO representing the entity.
      */
-    public static ServiceRecordDTO convertEntityToDTO(ServiceRecord serviceRecord) {
-        return ServiceRecordDTO.builder()
+    public static MainServiceRecordDTO convertEntityToDTO(MainServiceRecord serviceRecord) {
+        return MainServiceRecordDTO.builder()
                 .serviceRecordId(serviceRecord.getServiceRecordId())
                 .serviceType(serviceRecord.getServiceType())
-                .details((ServiceDetails) serviceRecord.getDetails())
+                .details((SubServiceDetails) serviceRecord.getDetails())
                 .build();
     }
 
@@ -28,11 +28,11 @@ public class ServiceRecordConverterUtils {
      * @param serviceRecordDTO The ServiceRecordDTO to convert.
      * @return A ServiceRecord entity representing the DTO.
      */
-    public static ServiceRecord convertToEntity(ServiceRecordDTO serviceRecordDTO) {
-        return ServiceRecord.builder()
+    public static MainServiceRecord convertToEntity(MainServiceRecordDTO serviceRecordDTO) {
+        return MainServiceRecord.builder()
                 .serviceRecordId(serviceRecordDTO.getServiceRecordId())
                 .serviceType(serviceRecordDTO.getServiceType())
-                .details((List<ServiceDetails>) serviceRecordDTO.getDetails())
+                .details((List<SubServiceDetails>) serviceRecordDTO.getDetails())
                 .build();
     }
 }

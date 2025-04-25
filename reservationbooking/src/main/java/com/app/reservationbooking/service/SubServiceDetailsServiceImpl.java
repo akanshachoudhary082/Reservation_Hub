@@ -1,12 +1,12 @@
 package com.app.reservationbooking.service;
 
 import com.app.reservationbooking.customexception.ResourceNotFoundException;
-import com.app.reservationbooking.dto.ServiceDetailsDTO;
-import com.app.reservationbooking.entities.ServiceDetails;
-import com.app.reservationbooking.entities.ServiceRecord;
-import com.app.reservationbooking.repository.ServiceDetailsRepository;
-import com.app.reservationbooking.repository.ServiceRecordRepository;
-import com.app.reservationbooking.utility.ServiceDetailsConverterUtils;
+import com.app.reservationbooking.dto.SubServiceDetailsDTO;
+import com.app.reservationbooking.entities.SubServiceDetails;
+import com.app.reservationbooking.entities.MainServiceRecord;
+import com.app.reservationbooking.repository.SubServiceDetailsRepository;
+import com.app.reservationbooking.repository.MainServiceRecordRepository;
+import com.app.reservationbooking.utility.SubServiceDetailsConverterUtils;
 import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,13 +17,13 @@ import java.util.stream.Collectors;
 
 @Slf4j
 @Service
-public class ServiceDetailsServiceImpl implements ServiceDetailsService {
+public class SubServiceDetailsServiceImpl implements SubServiceDetailsService {
 
     @Autowired
-    private ServiceDetailsRepository detailsRepository;
+    private SubServiceDetailsRepository detailsRepository;
 
     @Autowired
-    private ServiceRecordRepository serviceRecordRepository;
+    private MainServiceRecordRepository serviceRecordRepository;
 
     /**
      * Retrieves all service details records from the database.
@@ -31,11 +31,11 @@ public class ServiceDetailsServiceImpl implements ServiceDetailsService {
      * @return List of ServiceDetailsDTO objects.
      */
     @Override
-    public List<ServiceDetailsDTO> getAllDetails() {
+    public List<SubServiceDetailsDTO> getAllDetails() {
         log.info("Fetching all service details records");
-        List<ServiceDetails> details = detailsRepository.findAll();
+        List<SubServiceDetails> details = detailsRepository.findAll();
         return details.stream()
-                .map(ServiceDetailsConverterUtils::convertEntityToDTO)  // Convert each Details entity to DTO
+                .map(SubServiceDetailsConverterUtils::convertEntityToDTO)  // Convert each Details entity to DTO
                 .collect(Collectors.toList());
     }
 
@@ -48,16 +48,16 @@ public class ServiceDetailsServiceImpl implements ServiceDetailsService {
      */
     @Transactional
     @Override
-    public ServiceDetailsDTO getDetailsById(Long detailId) throws ResourceNotFoundException {
+    public SubServiceDetailsDTO getDetailsById(Long detailId) throws ResourceNotFoundException {
         // Log first, then throw exception if not found
-        ServiceDetails details = detailsRepository.findById(detailId)
+        SubServiceDetails details = detailsRepository.findById(detailId)
                 .orElseThrow(() -> {
                     log.error("Details not found with id: {}", detailId);
                     return new ResourceNotFoundException("Details not found with id " + detailId);
                 });
 
         log.info("Fetching service detail with ID: {}", detailId);
-        return ServiceDetailsConverterUtils.convertEntityToDTO(details);  // Convert entity to DTO
+        return SubServiceDetailsConverterUtils.convertEntityToDTO(details);  // Convert entity to DTO
     }
 
     /**
@@ -69,7 +69,7 @@ public class ServiceDetailsServiceImpl implements ServiceDetailsService {
      * @throws ResourceNotFoundException if the associated ServiceRecord is not found.
      */
     @Override
-    public ServiceDetailsDTO createDetails(ServiceDetailsDTO detailsDTO) {
+    public SubServiceDetailsDTO createDetails(SubServiceDetailsDTO detailsDTO) {
         if (detailsDTO.getServiceId() == null) {
             log.error("serviceId cannot be null");
             throw new IllegalArgumentException("serviceId cannot be null");
@@ -77,19 +77,19 @@ public class ServiceDetailsServiceImpl implements ServiceDetailsService {
 
         log.info("Creating service detail with serviceId: {}", detailsDTO.getServiceId());
 
-        ServiceRecord serviceRecord = serviceRecordRepository.findById(detailsDTO.getServiceId())
+        MainServiceRecord serviceRecord = serviceRecordRepository.findById(detailsDTO.getServiceId())
                 .orElseThrow(() -> {
                     log.error("ServiceRecord not found with id: {}", detailsDTO.getServiceId());
                     return new ResourceNotFoundException("ServiceRecord not found with id " + detailsDTO.getServiceId());
                 });
 
-        ServiceDetails details = ServiceDetailsConverterUtils.convertToEntity(detailsDTO);
+        SubServiceDetails details = SubServiceDetailsConverterUtils.convertToEntity(detailsDTO);
         details.setServices(serviceRecord);  // Link the ServiceRecord
 
         details = detailsRepository.save(details);  // Save to database
         log.info("Created service detail with ID: {}", details.getDetailId());
 
-        return ServiceDetailsConverterUtils.convertEntityToDTO(details);  // Return as DTO
+        return SubServiceDetailsConverterUtils.convertEntityToDTO(details);  // Return as DTO
     }
 
     /**
@@ -101,10 +101,10 @@ public class ServiceDetailsServiceImpl implements ServiceDetailsService {
      * @throws ResourceNotFoundException if the service detail is not found.
      */
     @Override
-    public ServiceDetailsDTO updateDetails(Long detailId, ServiceDetailsDTO detailsDTO) throws ResourceNotFoundException {
+    public SubServiceDetailsDTO updateDetails(Long detailId, SubServiceDetailsDTO detailsDTO) throws ResourceNotFoundException {
         log.info("Updating service detail with ID: {}", detailId);
 
-        ServiceDetails existingDetails = detailsRepository.findById(detailId)
+        SubServiceDetails existingDetails = detailsRepository.findById(detailId)
                 .orElseThrow(() -> {
                     log.error("Details not found with id: {}", detailId);
                     return new ResourceNotFoundException("Details not found with id " + detailId);
@@ -118,7 +118,7 @@ public class ServiceDetailsServiceImpl implements ServiceDetailsService {
         existingDetails = detailsRepository.save(existingDetails);  // Save updated details
         log.info("Updated service detail with ID: {}", detailId);
 
-        return ServiceDetailsConverterUtils.convertEntityToDTO(existingDetails);
+        return SubServiceDetailsConverterUtils.convertEntityToDTO(existingDetails);
     }
 
     /**
@@ -131,7 +131,7 @@ public class ServiceDetailsServiceImpl implements ServiceDetailsService {
     public void deleteDetails(Long detailId) throws ResourceNotFoundException {
         log.info("Deleting service detail with ID: {}", detailId);
 
-        ServiceDetails existingDetails = detailsRepository.findById(detailId)
+        SubServiceDetails existingDetails = detailsRepository.findById(detailId)
                 .orElseThrow(() -> {
                     log.error("Details not found with id: {}", detailId);
                     return new ResourceNotFoundException("Details not found with id: " + detailId);

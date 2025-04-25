@@ -1,9 +1,9 @@
 package com.app.reservationbooking.service;
 
-import com.app.reservationbooking.dto.TransportDTO;
+import com.app.reservationbooking.dto.TransportSearchDTO;
 import com.app.reservationbooking.entities.AdminConfiguration;
-import com.app.reservationbooking.repository.TransportRepository;
-import com.app.reservationbooking.utility.TransportConverterUtils;
+import com.app.reservationbooking.repository.TransportSearchRepository;
+import com.app.reservationbooking.utility.TransportSearchConverterUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,13 +14,13 @@ import java.util.stream.Collectors;
 
 @Slf4j
 @Service
-public class TransportServiceImpl implements TransportService {
+public class TransportSearchServiceImpl implements TransportSearchService {
 
     @Autowired
-    private TransportRepository transportRepository;
+    private TransportSearchRepository transportRepository;
 
     @Override
-    public List<TransportDTO> searchAvailableTransports(TransportDTO requestDTO) {
+    public List<TransportSearchDTO> searchAvailableTransports(TransportSearchDTO requestDTO) {
         // Log the incoming search criteria
         log.info("Searching for available transports with criteria: sourceCity={}, destinationCity={}, availableOn={}, moduleCode={}",
                 requestDTO.getSourceCity(), requestDTO.getDestinationCity(), requestDTO.getAvailableOn(), requestDTO.getModuleCode());
@@ -57,9 +57,16 @@ public class TransportServiceImpl implements TransportService {
             return List.of(); // Return empty list if no transports are found
         }
 
+        //TODO - step 1 get module code from configs.getM.. eg BUS
+        //TODO - step 2 use below query
+        //select * from details d
+        //inner join seats s
+        //on d.detail_id = s.detail_id
+        //where detail_type = 'BUS';
+
         // Map the found configurations to DTOs and return
         return configs.stream()
-                .map(config -> TransportConverterUtils.convertToDTO(config, requestDTO.getSourceCity(), requestDTO.getDestinationCity()))
+                .map(config -> TransportSearchConverterUtils.convertToDTO(config, requestDTO.getSourceCity(), requestDTO.getDestinationCity()))
                 .collect(Collectors.toList());
     }
 }

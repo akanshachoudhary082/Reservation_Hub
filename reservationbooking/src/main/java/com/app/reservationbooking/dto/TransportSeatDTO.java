@@ -19,5 +19,5 @@ public class TransportSeatDTO {
 
     private SeatStatus status;
 
-    private Long serviceDetailsId;
+    private Long adminConfigId;
 }

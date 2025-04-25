@@ -1,7 +1,7 @@
 package com.app.reservationbooking.dto;
 
 import com.app.reservationbooking.entities.BaseEntity;
-import com.app.reservationbooking.enums.ServiceDetailType;
+import com.app.reservationbooking.enums.SubServiceDetailType;
 import lombok.*;
 
 
@@ -11,11 +11,11 @@ import lombok.*;
 @AllArgsConstructor
 @Builder
 @ToString
-public class ServiceDetailsDTO extends BaseEntity {
+public class SubServiceDetailsDTO extends BaseEntity {
 
     private Long detailId;
     
-    private ServiceDetailType detailType;
+    private SubServiceDetailType detailType;
 
     private Long serviceId;
 

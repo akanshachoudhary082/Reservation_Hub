@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class TransportDTO extends BaseEntity {
+public class TransportSearchDTO extends BaseEntity {
 
     private long id;
 

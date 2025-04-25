@@ -25,7 +25,7 @@ public class Payment {
 
 	@ManyToOne
 	@JoinColumn(name = "service_id", nullable = false)
-	private ServiceRecord services;
+	private MainServiceRecord services;
 
 	@ManyToOne
 	@JoinColumn(name = "user_id", nullable = false)

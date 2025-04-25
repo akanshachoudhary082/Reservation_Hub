@@ -1,11 +1,11 @@
 package com.app.reservationbooking.utility;
 
-import com.app.reservationbooking.dto.ServiceDetailsDTO;
-import com.app.reservationbooking.entities.ServiceDetails;
-import com.app.reservationbooking.entities.ServiceRecord;
+import com.app.reservationbooking.dto.SubServiceDetailsDTO;
+import com.app.reservationbooking.entities.SubServiceDetails;
+import com.app.reservationbooking.entities.MainServiceRecord;
 import java.time.format.DateTimeFormatter;
 
-public class ServiceDetailsConverterUtils {
+public class SubServiceDetailsConverterUtils {
 
     private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
 
@@ -15,12 +15,12 @@ public class ServiceDetailsConverterUtils {
      * @param details The ServiceDetails entity to convert.
      * @return A ServiceDetailsDTO representing the entity, or null if the entity is null.
      */
-    public static ServiceDetailsDTO convertEntityToDTO(ServiceDetails details) {
+    public static SubServiceDetailsDTO convertEntityToDTO(SubServiceDetails details) {
         if (details == null) {
             return null;
         }
 
-        return ServiceDetailsDTO.builder()
+        return SubServiceDetailsDTO.builder()
                 .detailId(details.getDetailId())
                 .detailType(details.getDetailType())
                 .serviceId(details.getServices() != null ? details.getServices().getServiceRecordId() : null) // Ensure serviceId is set
@@ -33,19 +33,19 @@ public class ServiceDetailsConverterUtils {
      * @param detailsDTO The ServiceDetailsDTO to convert.
      * @return A ServiceDetails entity representing the DTO, or null if the DTO is null.
      */
-    public static ServiceDetails convertToEntity(ServiceDetailsDTO detailsDTO) {
+    public static SubServiceDetails convertToEntity(SubServiceDetailsDTO detailsDTO) {
         if (detailsDTO == null) {
             return null;
         }
 
         // Here we handle the serviceId field to get the corresponding ServiceRecord
-        ServiceRecord serviceRecord = null;
+        MainServiceRecord serviceRecord = null;
         if (detailsDTO.getServiceId() != null) {
-            serviceRecord = new ServiceRecord();
+            serviceRecord = new MainServiceRecord();
             serviceRecord.setServiceRecordId(detailsDTO.getServiceId());  // Assuming serviceId is just an ID
         }
 
-        return ServiceDetails.builder()
+        return SubServiceDetails.builder()
                 .detailType(detailsDTO.getDetailType())
                 .services(serviceRecord) // Set the ServiceRecord object here
                 .build();

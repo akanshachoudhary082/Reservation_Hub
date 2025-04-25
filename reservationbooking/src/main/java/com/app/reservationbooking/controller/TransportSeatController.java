@@ -1,61 +1,51 @@
 package com.app.reservationbooking.controller;
 
 import com.app.reservationbooking.dto.TransportSeatDTO;
-import com.app.reservationbooking.service.TransportSeatServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.app.reservationbooking.service.TransportSeatService;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
 @RestController
 @RequestMapping("/seats")
+@RequiredArgsConstructor
+@Slf4j
 public class TransportSeatController {
 
-    @Autowired
-    private TransportSeatServiceImpl transportSeatService;
+    private final TransportSeatService transportSeatService;
 
-    // Get all seats for a service detail ID
-    @GetMapping("/service/{detailId}")
-    public ResponseEntity<List<TransportSeatDTO>> getSeatsByServiceDetailId(@PathVariable Long detailId) {
-        List<TransportSeatDTO> seats = transportSeatService.getSeatsByServiceDetailId(detailId);
-        return ResponseEntity.ok(seats);
+    @GetMapping("/admin/{adminConfigId}")
+    public ResponseEntity<List<TransportSeatDTO>> getSeatsByAdminConfig(@PathVariable Long adminConfigId) {
+        log.info("Fetching seats for AdminConfig ID: {}", adminConfigId);
+        return ResponseEntity.ok(transportSeatService.getSeatsByAdminConfigId(adminConfigId));
     }
 
-    // Create a new seat
-    @PostMapping("/")
-    public ResponseEntity<TransportSeatDTO> createSeat(@RequestBody TransportSeatDTO transportSeatDTO) {
-        TransportSeatDTO createdSeat = transportSeatService.createSeat(transportSeatDTO);
-        return ResponseEntity.status(HttpStatus.CREATED).body(createdSeat);
+    @PostMapping
+    public ResponseEntity<TransportSeatDTO> createSeat(@RequestBody TransportSeatDTO dto) {
+        log.info("Received request to create seat: {}", dto);
+        return ResponseEntity.ok(transportSeatService.createSeat(dto));
     }
 
-    // Update an existing seat
     @PutMapping("/{seatId}")
-    public ResponseEntity<TransportSeatDTO> updateSeat(@PathVariable Long seatId, @RequestBody TransportSeatDTO transportSeatDTO) {
-        TransportSeatDTO updatedSeat = transportSeatService.updateSeat(seatId, transportSeatDTO);
-        return ResponseEntity.ok(updatedSeat);
+    public ResponseEntity<TransportSeatDTO> updateSeat(@PathVariable Long seatId, @RequestBody TransportSeatDTO dto) {
+        log.info("Received request to update seat ID {}: {}", seatId, dto);
+        return ResponseEntity.ok(transportSeatService.updateSeat(seatId, dto));
     }
 
-    // Delete a seat by ID
+    @GetMapping("/all")
+    public ResponseEntity<List<TransportSeatDTO>> getAllSeats() {
+        log.info("Fetching all seats");
+        return ResponseEntity.ok(transportSeatService.getAllSeats());
+    }
+
     @DeleteMapping("/{seatId}")
     public ResponseEntity<Void> deleteSeat(@PathVariable Long seatId) {
+        log.info("Received request to delete seat ID: {}", seatId);
         transportSeatService.deleteSeat(seatId);
         return ResponseEntity.noContent().build();
-    }
-
-    // Get available seats for a service detail ID
-    @GetMapping("/available/{detailId}")
-    public ResponseEntity<List<TransportSeatDTO>> getAvailableSeatsByDetailId(@PathVariable Long detailId) {
-        List<TransportSeatDTO> availableSeats = transportSeatService.getSeatsByServiceDetailId(detailId);
-        return ResponseEntity.ok(availableSeats);
-    }
-
-    // Check if seats are available for a service detail ID
-    @GetMapping("/availability/{detailId}")
-    public ResponseEntity<Boolean> checkSeatAvailability(@PathVariable Long detailId) {
-        boolean isAvailable = transportSeatService.areSeatsAvailableByDetailId(detailId);
-        return ResponseEntity.ok(isAvailable);
     }
 }

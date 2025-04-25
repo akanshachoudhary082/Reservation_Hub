@@ -1,55 +1,44 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams, useLocation } from 'react-router-dom';
 import axios from 'axios';
-import Cookies from 'js-cookie'; 
+import Cookies from 'js-cookie';
 import { setTransportSeats, setLoading, setTransportSeatsError } from '../../redux/actions/transportSeatActions';
 
 import BusSeatSelection from './BusSeatSelection';
 import TrainSeatSelection from './TrainSeatSelection';
 import FlightSeatSelection from './FlightSeatSelection';
 
-const TransportSeatSelection = () => {
-  const { transport } = useParams();
-  const location = useLocation();
+const TransportSeatSelection = ({ transport, adminId }) => {
   const dispatch = useDispatch();
   const { loading, transportSeats: seats, error } = useSelector((state) => state.transportSeats);
 
-  const serviceDetailId = new URLSearchParams(location.search).get('serviceDetailId');
-
   useEffect(() => {
-    
-    if (!serviceDetailId) {
-      dispatch(setTransportSeatsError('Service ID is missing.'));
+    if (!adminId) {
+      dispatch(setTransportSeatsError('Admin ID is missing.'));
       return;
     }
 
     const fetchSeats = async () => {
       dispatch(setLoading(true));
       try {
-       
-        const response = await axios.get(`/seats/available/${serviceDetailId}`); 
-        
+        const response = await axios.get(`/seats/admin/${adminId}`);
         dispatch(setTransportSeats(response.data));
 
-        
-        Cookies.set('selectedTransport', transport, { secure: true, sameSite: 'Strict' });  
-        Cookies.set('selectedSeats', JSON.stringify(response.data), { secure: true, sameSite: 'Strict' });  
+        Cookies.set('selectedTransport', transport, { secure: true, sameSite: 'Strict' });
+        Cookies.set('selectedSeats', JSON.stringify(response.data), { secure: true, sameSite: 'Strict' });
 
       } catch (err) {
-       
         dispatch(setTransportSeatsError('Failed to load seats.'));
       } finally {
         dispatch(setLoading(false));
       }
     };
 
-    
     fetchSeats();
-  }, [serviceDetailId, dispatch, transport]); 
+  }, [adminId, dispatch, transport]);
 
   const renderSeatComponent = () => {
-    switch (transport.toUpperCase()) {
+    switch ((transport || '').toUpperCase()) {
       case 'BUS':
         return <BusSeatSelection seats={seats} />;
       case 'TRAIN':
@@ -61,9 +50,8 @@ const TransportSeatSelection = () => {
     }
   };
 
-
   if (loading) return <div>Loading seats...</div>;
-  if (error) return <div>{error}</div>;
+  if (error) return <div style={{ color: 'red' }}>{error}</div>;
 
   return (
     <div>

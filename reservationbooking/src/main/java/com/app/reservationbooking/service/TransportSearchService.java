@@ -1,13 +1,13 @@
 package com.app.reservationbooking.service;
 
-import com.app.reservationbooking.dto.TransportDTO;
+import com.app.reservationbooking.dto.TransportSearchDTO;
 
 import java.util.List;
 
 /**
  * Service interface for transport-related operations such as searching available transport services.
  */
-public interface TransportService {
+public interface TransportSearchService {
 
     /**
      * Searches for available transport services based on the given search criteria.
@@ -18,5 +18,5 @@ public interface TransportService {
      *                   moduleCode, and availableOn.
      * @return A list of matching TransportDTOs.
      */
-    List<TransportDTO> searchAvailableTransports(TransportDTO requestDTO);
+    List<TransportSearchDTO> searchAvailableTransports(TransportSearchDTO requestDTO);
 }

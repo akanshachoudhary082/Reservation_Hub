@@ -1,11 +1,11 @@
 package com.app.reservationbooking.service;
 
-import com.app.reservationbooking.dto.ServiceRecordDTO;
-import com.app.reservationbooking.entities.ServiceDetails;
-import com.app.reservationbooking.entities.ServiceRecord;
+import com.app.reservationbooking.dto.MainServiceRecordDTO;
+import com.app.reservationbooking.entities.SubServiceDetails;
+import com.app.reservationbooking.entities.MainServiceRecord;
 import com.app.reservationbooking.customexception.ResourceNotFoundException;
-import com.app.reservationbooking.repository.ServiceRecordRepository;
-import com.app.reservationbooking.utility.ServiceRecordConverterUtils;
+import com.app.reservationbooking.repository.MainServiceRecordRepository;
+import com.app.reservationbooking.utility.MainServiceRecordConverterUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,10 +19,10 @@ import java.util.stream.Collectors;
  */
 @Slf4j
 @Service
-public class ServiceRecordServiceImpl implements ServiceRecordService {
+public class MainServiceRecordServiceImpl implements MainServiceRecordService {
 
     @Autowired
-    private ServiceRecordRepository serviceRecordRepository;
+    private MainServiceRecordRepository serviceRecordRepository;
 
     /**
      * Retrieves all available service records.
@@ -30,24 +30,24 @@ public class ServiceRecordServiceImpl implements ServiceRecordService {
      * @return List of ServiceRecordDTO representing all service records.
      */
     @Override
-    public List<ServiceRecordDTO> getAllServices() {
+    public List<MainServiceRecordDTO> getAllServices() {
         log.debug("Fetching all service records from the database.");
         log.info("Fetching all service records from the database.");
-        List<ServiceRecord> services = serviceRecordRepository.findAll();
+        List<MainServiceRecord> services = serviceRecordRepository.findAll();
         if (services.isEmpty()) {
             log.warn("No service records found in the database.");
         } else {
             log.info("Successfully fetched {} service records.", services.size());
         }
         return services.stream()
-                .map(ServiceRecordConverterUtils::convertEntityToDTO)
+                .map(MainServiceRecordConverterUtils::convertEntityToDTO)
                 .collect(Collectors.toList());
     }
 
     @Override
-    public List<ServiceRecord> getAllServiceRecords() {
+    public List<MainServiceRecord> getAllServiceRecords() {
 
-        List<ServiceRecord> services = serviceRecordRepository.findAll();
+        List<MainServiceRecord> services = serviceRecordRepository.findAll();
        return services;
     }
 
@@ -61,15 +61,15 @@ public class ServiceRecordServiceImpl implements ServiceRecordService {
      * @throws ResourceNotFoundException if no service record is found with the provided ID.
      */
     @Override
-    public ServiceRecordDTO getServiceById(Long serviceRecordId) throws ResourceNotFoundException {
+    public MainServiceRecordDTO getServiceById(Long serviceRecordId) throws ResourceNotFoundException {
         log.debug("Fetching service record with ID: {}", serviceRecordId);
-        ServiceRecord serviceRecord = serviceRecordRepository.findById(serviceRecordId)
+        MainServiceRecord serviceRecord = serviceRecordRepository.findById(serviceRecordId)
                 .orElseThrow(() -> {
                     log.error("Service record not found with id: {}", serviceRecordId);
                     return new ResourceNotFoundException("Service not found with id " + serviceRecordId);
                 });
         log.info("Service record with ID {} found successfully.", serviceRecordId);
-        return ServiceRecordConverterUtils.convertEntityToDTO(serviceRecord);
+        return MainServiceRecordConverterUtils.convertEntityToDTO(serviceRecord);
     }
 
 
@@ -80,23 +80,23 @@ public class ServiceRecordServiceImpl implements ServiceRecordService {
      * @return The created ServiceRecordDTO.
      */
     @Override
-    public ServiceRecordDTO createService(ServiceRecordDTO serviceRecordDTO) {
+    public MainServiceRecordDTO createService(MainServiceRecordDTO serviceRecordDTO) {
         log.debug("Creating a new service record with type: {}", serviceRecordDTO.getServiceType());
 
         // Check for duplicate service record (you can modify this check as needed)
-        Optional<ServiceRecord> existingService = serviceRecordRepository.findByServiceTypeAndDetails(
+        Optional<MainServiceRecord> existingService = serviceRecordRepository.findByServiceTypeAndDetails(
                 serviceRecordDTO.getServiceType(),
                 serviceRecordDTO.getDetails());  // Assuming serviceRecordDTO contains enough fields for duplication check
 
         if (existingService.isPresent()) {
             log.warn("Duplicate service record found. Skipping creation for service type: {}.", serviceRecordDTO.getServiceType());
-            return ServiceRecordConverterUtils.convertEntityToDTO(existingService.get());
+            return MainServiceRecordConverterUtils.convertEntityToDTO(existingService.get());
         }
 
-        ServiceRecord serviceRecord = ServiceRecordConverterUtils.convertToEntity(serviceRecordDTO);
+        MainServiceRecord serviceRecord = MainServiceRecordConverterUtils.convertToEntity(serviceRecordDTO);
         serviceRecord = serviceRecordRepository.save(serviceRecord);
         log.info("Service record created with ID: {}", serviceRecord.getServiceRecordId());
-        return ServiceRecordConverterUtils.convertEntityToDTO(serviceRecord);
+        return MainServiceRecordConverterUtils.convertEntityToDTO(serviceRecord);
     }
 
     /**
@@ -108,20 +108,20 @@ public class ServiceRecordServiceImpl implements ServiceRecordService {
      * @throws ResourceNotFoundException if the service record is not found.
      */
     @Override
-    public ServiceRecordDTO updateService(Long serviceRecordId, ServiceRecordDTO serviceRecordDTO) throws ResourceNotFoundException {
+    public MainServiceRecordDTO updateService(Long serviceRecordId, MainServiceRecordDTO serviceRecordDTO) throws ResourceNotFoundException {
         log.debug("Attempting to update service record with ID: {}", serviceRecordId);
-        ServiceRecord existingService = serviceRecordRepository.findById(serviceRecordId)
+        MainServiceRecord existingService = serviceRecordRepository.findById(serviceRecordId)
                 .orElseThrow(() -> {
                     log.error("Service record not found with id: {}", serviceRecordId);
                     return new ResourceNotFoundException("Service not found with id " + serviceRecordId);
                 });
 
         existingService.setServiceType(serviceRecordDTO.getServiceType());
-        existingService.setDetails((List<ServiceDetails>) serviceRecordDTO.getDetails());
+        existingService.setDetails((List<SubServiceDetails>) serviceRecordDTO.getDetails());
 
         existingService = serviceRecordRepository.save(existingService);
         log.info("Service record with ID {} updated successfully.", serviceRecordId);
-        return ServiceRecordConverterUtils.convertEntityToDTO(existingService);
+        return MainServiceRecordConverterUtils.convertEntityToDTO(existingService);
     }
 
     /**
@@ -133,7 +133,7 @@ public class ServiceRecordServiceImpl implements ServiceRecordService {
     @Override
     public void deleteService(Long serviceRecordId) throws ResourceNotFoundException {
         log.debug("Attempting to delete service record with ID: {}", serviceRecordId);
-        ServiceRecord existingService = serviceRecordRepository.findById(serviceRecordId)
+        MainServiceRecord existingService = serviceRecordRepository.findById(serviceRecordId)
                 .orElseThrow(() -> {
                     return new ResourceNotFoundException("Service not found with id " + serviceRecordId);
                 });

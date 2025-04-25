@@ -11,7 +11,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Repository
-public interface TransportRepository extends JpaRepository<AdminConfiguration, Long> {
+public interface TransportSearchRepository extends JpaRepository<AdminConfiguration, Long> {
 
 
     /**

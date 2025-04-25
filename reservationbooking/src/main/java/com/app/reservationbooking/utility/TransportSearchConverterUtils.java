@@ -1,9 +1,9 @@
 package com.app.reservationbooking.utility;
 
-import com.app.reservationbooking.dto.TransportDTO;
+import com.app.reservationbooking.dto.TransportSearchDTO;
 import com.app.reservationbooking.entities.AdminConfiguration;
 
-public class TransportConverterUtils {
+public class TransportSearchConverterUtils {
 
     /**
      * Converts an AdminConfiguration entity to a TransportDTO.
@@ -14,8 +14,8 @@ public class TransportConverterUtils {
      * @param destinationCity The destination city (optional).
      * @return A TransportDTO representing the entity with populated city fields.
      */
-    public static TransportDTO convertToDTO(AdminConfiguration config, String sourceCity, String destinationCity) {
-        TransportDTO dto = TransportDTO.builder()
+    public static TransportSearchDTO convertToDTO(AdminConfiguration config, String sourceCity, String destinationCity) {
+        TransportSearchDTO dto = com.app.reservationbooking.dto.TransportSearchDTO.builder()
                 .id(config.getAdminConfigId())
                 .moduleCode(config.getModuleCode())
                 .moduleCategory(config.getModuleCategory())
@@ -54,7 +54,7 @@ public class TransportConverterUtils {
      * @param dto The TransportDTO to convert.
      * @return An AdminConfiguration entity representing the DTO.
      */
-    public static AdminConfiguration convertToEntity(TransportDTO dto) {
+    public static AdminConfiguration convertToEntity(TransportSearchDTO dto) {
         AdminConfiguration entity = new AdminConfiguration();
         entity.setAdminConfigId(dto.getId()); // Assuming your ID is in the DTO and can be set directly
         entity.setModuleCode(dto.getModuleCode());

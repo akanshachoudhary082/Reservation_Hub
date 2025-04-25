@@ -1,24 +1,24 @@
 package com.app.reservationbooking.service;
 
-import com.app.reservationbooking.dto.ServiceRecordDTO;
+import com.app.reservationbooking.dto.MainServiceRecordDTO;
 import com.app.reservationbooking.customexception.ResourceNotFoundException;
-import com.app.reservationbooking.entities.ServiceRecord;
+import com.app.reservationbooking.entities.MainServiceRecord;
 
 import java.util.List;
 
 /**
  * Service interface for handling operations related to ServiceRecord.
  */
-public interface ServiceRecordService {
+public interface MainServiceRecordService {
 
     /**
      * Retrieves a list of all service records.
      *
      * @return List of ServiceRecordDTO representing all available service records.
      */
-    List<ServiceRecordDTO> getAllServices();
+    List<MainServiceRecordDTO> getAllServices();
 
-    public List<ServiceRecord> getAllServiceRecords();
+    public List<MainServiceRecord> getAllServiceRecords();
     /**
      * Retrieves a specific service record by its ID.
      *
@@ -26,7 +26,7 @@ public interface ServiceRecordService {
      * @return ServiceRecordDTO corresponding to the given ID.
      * @throws ResourceNotFoundException if no service record is found with the provided ID.
      */
-    ServiceRecordDTO getServiceById(Long serviceRecordId);
+    MainServiceRecordDTO getServiceById(Long serviceRecordId);
 
     /**
      * Creates a new service record based on the given DTO.
@@ -34,7 +34,7 @@ public interface ServiceRecordService {
      * @param serviceRecordDTO DTO containing details of the service to be created.
      * @return The created ServiceRecordDTO.
      */
-    ServiceRecordDTO createService(ServiceRecordDTO serviceRecordDTO);
+    MainServiceRecordDTO createService(MainServiceRecordDTO serviceRecordDTO);
 
     /**
      * Updates an existing service record.
@@ -44,7 +44,7 @@ public interface ServiceRecordService {
      * @return The updated ServiceRecordDTO.
      * @throws ResourceNotFoundException if the service record is not found.
      */
-    ServiceRecordDTO updateService(Long serviceRecordId, ServiceRecordDTO serviceRecordDTO);
+    MainServiceRecordDTO updateService(Long serviceRecordId, MainServiceRecordDTO serviceRecordDTO);
 
     /**
      * Deletes a service record by its ID.

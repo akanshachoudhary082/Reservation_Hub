@@ -1,6 +1,6 @@
 package com.app.reservationbooking.enums;
 
-public enum ServiceType {
+public enum MainServiceType {
 	TRANSPORT,
 	
 	MOVIES,

@@ -1,17 +1,15 @@
 import React from 'react';
-import { useParams, useSearchParams } from 'react-router-dom';  // Import useSearchParams
-import { Container, Typography, Box } from '@mui/material'; 
+import { useParams, useSearchParams } from 'react-router-dom';
+import { Container, Typography, Box } from '@mui/material';
 import TransportSeatSelection from '../components/TransportSeat/TransportSeatSelection';
 
 const TransportSeatSelectionPage = () => {
-  const { transport } = useParams();  // Get the route parameter 'transport'
-
-  
+  const { transport } = useParams();  
   const [searchParams] = useSearchParams();
-  const serviceDetailId = searchParams.get('serviceDetailId');
+  const adminId = searchParams.get('adminConfigId');
 
-  console.log("Transport:", transport); 
-  console.log("Service Detail ID:", serviceDetailId);  
+  console.log("Transport:", transport);
+  console.log("Admin ID (serviceDetailId):", adminId);
 
   return (
     <Container maxWidth="md">
@@ -19,7 +17,7 @@ const TransportSeatSelectionPage = () => {
         <Typography variant="h4" align="center" gutterBottom>
           Select Your Seat
         </Typography>
-        <TransportSeatSelection />
+        <TransportSeatSelection transport={transport} adminId={adminId} /> 
       </Box>
     </Container>
   );

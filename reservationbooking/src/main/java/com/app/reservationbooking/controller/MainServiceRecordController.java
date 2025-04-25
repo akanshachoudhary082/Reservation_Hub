@@ -55,9 +55,9 @@
 package com.app.reservationbooking.controller;
 
 import com.app.reservationbooking.customexception.ResourceNotFoundException;
-import com.app.reservationbooking.dto.ServiceRecordDTO;
-import com.app.reservationbooking.entities.ServiceRecord;
-import com.app.reservationbooking.service.ServiceRecordService;
+import com.app.reservationbooking.dto.MainServiceRecordDTO;
+import com.app.reservationbooking.entities.MainServiceRecord;
+import com.app.reservationbooking.service.MainServiceRecordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -70,39 +70,39 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/services")
-public class ServiceRecordController {
+public class MainServiceRecordController {
 
     @Autowired
-    private ServiceRecordService serviceRecordService;
+    private MainServiceRecordService serviceRecordService;
 
     // Get all services
     @GetMapping
     @PreAuthorize("hasAuthority('CUSTOMER') or hasAuthority('ADMIN')")  // User and Admin can view services
-    public List<ServiceRecord> getAllServices() {
+    public List<MainServiceRecord> getAllServices() {
         return serviceRecordService.getAllServiceRecords();
     }
 
     // Get service by ID
     @GetMapping("/{id}")
     @PreAuthorize("hasAuthority('CUSTOMER') or hasAuthority('ADMIN')")  // User and Admin can view service by ID
-    public ResponseEntity<ServiceRecordDTO> getServiceById(@PathVariable Long id) throws ResourceNotFoundException {
-        ServiceRecordDTO serviceRecordDTO = serviceRecordService.getServiceById(id);
+    public ResponseEntity<MainServiceRecordDTO> getServiceById(@PathVariable Long id) throws ResourceNotFoundException {
+        MainServiceRecordDTO serviceRecordDTO = serviceRecordService.getServiceById(id);
         return ResponseEntity.ok(serviceRecordDTO);
     }
 
     // Create new service
     @PostMapping("/create-service")
     @PreAuthorize("hasAuthority('ADMIN')")  // Only Admin can create services
-    public ResponseEntity<ServiceRecordDTO> createService(@RequestBody ServiceRecordDTO serviceRecordDTO) {
-        ServiceRecordDTO createdService = serviceRecordService.createService(serviceRecordDTO);
+    public ResponseEntity<MainServiceRecordDTO> createService(@RequestBody MainServiceRecordDTO serviceRecordDTO) {
+        MainServiceRecordDTO createdService = serviceRecordService.createService(serviceRecordDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdService);
     }
 
     // Update service by ID
     @PutMapping("/{id}")
     @PreAuthorize("hasAuthority('ADMIN')")  // Only Admin can update services
-    public ResponseEntity<ServiceRecordDTO> updateService(@PathVariable Long id, @RequestBody ServiceRecordDTO serviceRecordDTO) throws ResourceNotFoundException {
-        ServiceRecordDTO updatedService = serviceRecordService.updateService(id, serviceRecordDTO);
+    public ResponseEntity<MainServiceRecordDTO> updateService(@PathVariable Long id, @RequestBody MainServiceRecordDTO serviceRecordDTO) throws ResourceNotFoundException {
+        MainServiceRecordDTO updatedService = serviceRecordService.updateService(id, serviceRecordDTO);
         return ResponseEntity.ok(updatedService);
     }
 

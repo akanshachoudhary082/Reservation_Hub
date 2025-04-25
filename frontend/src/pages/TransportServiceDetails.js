@@ -52,7 +52,7 @@ const TransportServiceDetails = () => {
           'Authorization': `Bearer ${token}`, 
         },
       });
-
+      console.log("search response .....",response.data);
       if (Array.isArray(response.data)) {
         setAvailableServices(response.data);
       } else {
@@ -196,7 +196,7 @@ const TransportServiceDetails = () => {
                 <Button
                   variant="contained"
                   sx={{ marginTop: '10px', borderRadius: 2, backgroundColor: '#43a047', '&:hover': { backgroundColor: '#388e3c' } }}
-                  onClick={() => navigate(`/seats/${transport}?serviceDetailId=${service.id}`)}  // Pass the correct serviceDetailId here
+                  onClick={() => navigate(`/seats/${transport}?adminConfigId=${service.id}`)}  // Pass the correct serviceDetailId here
                 >
                   Book Now
                 </Button>

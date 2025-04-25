@@ -1,23 +1,21 @@
 package com.app.reservationbooking.service;
 
 import com.app.reservationbooking.customexception.ResourceNotFoundException;
-import com.app.reservationbooking.dto.ServiceDetailsDTO;
-import com.app.reservationbooking.entities.ServiceDetails;
+import com.app.reservationbooking.dto.SubServiceDetailsDTO;
 
-import java.time.LocalDate;
 import java.util.List;
 
 /**
  * Service interface for managing service details operations.
  */
-public interface ServiceDetailsService {
+public interface SubServiceDetailsService {
 
     /**
      * Retrieves a list of all service details.
      *
      * @return a list of ServiceDetailsDTO objects
      */
-    List<ServiceDetailsDTO> getAllDetails();
+    List<SubServiceDetailsDTO> getAllDetails();
 
     /**
      * Retrieves a service detail by its ID.
@@ -26,7 +24,7 @@ public interface ServiceDetailsService {
      * @return the corresponding ServiceDetailsDTO
      * @throws ResourceNotFoundException if the detail with the given ID is not found
      */
-    ServiceDetailsDTO getDetailsById(Long detailId) throws ResourceNotFoundException;
+    SubServiceDetailsDTO getDetailsById(Long detailId) throws ResourceNotFoundException;
 
     /**
      * Creates a new service detail record.
@@ -34,7 +32,7 @@ public interface ServiceDetailsService {
      * @param detailsDTO the DTO containing the new service detail data
      * @return the saved ServiceDetailsDTO
      */
-    ServiceDetailsDTO createDetails(ServiceDetailsDTO detailsDTO);
+    SubServiceDetailsDTO createDetails(SubServiceDetailsDTO detailsDTO);
 
     /**
      * Updates an existing service detail by ID.
@@ -44,7 +42,7 @@ public interface ServiceDetailsService {
      * @return the updated ServiceDetailsDTO
      * @throws ResourceNotFoundException if the detail with the given ID is not found
      */
-    ServiceDetailsDTO updateDetails(Long detailId, ServiceDetailsDTO detailsDTO) throws ResourceNotFoundException;
+    SubServiceDetailsDTO updateDetails(Long detailId, SubServiceDetailsDTO detailsDTO) throws ResourceNotFoundException;
 
     /**
      * Deletes a service detail by its ID.

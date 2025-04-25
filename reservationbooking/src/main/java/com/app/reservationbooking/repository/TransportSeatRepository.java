@@ -8,7 +8,6 @@ import java.util.List;
 
 @Repository
 public interface TransportSeatRepository extends JpaRepository<Seat, Long> {
-
-    // Custom query to find seats by ServiceDetails (detailId)
-    List<Seat> findByServiceDetailsDetailId(Long detailId);
+    // You can add custom queries here if needed
+    List<Seat> findByAdminConfigId(Long adminConfigId);
 }

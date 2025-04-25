@@ -22,6 +22,9 @@ public class AdminConfiguration {
     @Column(name = "admin_config_id")
     private long adminConfigId;
 
+    @Column(name = "detail_id", nullable = false)
+    private Long detailId;
+
     @Column(name = "module_code", nullable = false)
     private String moduleCode;                    // Bus, Train, Flights, Movies, Events
 

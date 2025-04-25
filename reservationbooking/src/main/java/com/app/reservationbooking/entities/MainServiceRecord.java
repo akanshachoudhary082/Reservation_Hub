@@ -1,10 +1,8 @@
 package com.app.reservationbooking.entities;
 
 import java.util.List;
-import com.app.reservationbooking.enums.ServiceType;
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.app.reservationbooking.enums.MainServiceType;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import lombok.*;
@@ -18,7 +16,7 @@ import lombok.*;
 @Builder
 @ToString
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property="serviceRecordId")
-public class ServiceRecord extends BaseEntity {
+public class MainServiceRecord extends BaseEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO, generator = "services_seq")
@@ -28,11 +26,11 @@ public class ServiceRecord extends BaseEntity {
 
 	@Enumerated(EnumType.STRING)
 	@Column(name = "service_type", nullable = false)
-	private ServiceType serviceType;
+	private MainServiceType serviceType;
 
 	@OneToMany(mappedBy = "services", cascade = CascadeType.ALL,orphanRemoval=true)
 	//		@JsonManagedReference
-	private List<ServiceDetails> details;
+	private List<SubServiceDetails> details;
 
 
 }

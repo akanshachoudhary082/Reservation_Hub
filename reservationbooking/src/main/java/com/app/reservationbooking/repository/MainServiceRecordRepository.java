@@ -1,8 +1,8 @@
 package com.app.reservationbooking.repository;
 
-import com.app.reservationbooking.entities.ServiceDetails;
-import com.app.reservationbooking.entities.ServiceRecord;
-import com.app.reservationbooking.enums.ServiceType;
+import com.app.reservationbooking.entities.SubServiceDetails;
+import com.app.reservationbooking.entities.MainServiceRecord;
+import com.app.reservationbooking.enums.MainServiceType;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import java.util.Optional;
@@ -11,7 +11,7 @@ import java.util.Optional;
  * Repository interface for accessing ServiceRecord data from the database.
  */
 @Repository
-public interface ServiceRecordRepository extends JpaRepository<ServiceRecord, Long> {
+public interface MainServiceRecordRepository extends JpaRepository<MainServiceRecord, Long> {
 
     /**
      * Finds a ServiceRecord by its service type and associated ServiceDetails ID.
@@ -21,5 +21,5 @@ public interface ServiceRecordRepository extends JpaRepository<ServiceRecord, Lo
      * @return An Optional containing the matching ServiceRecord, or empty if none found.
      */
 
-    Optional<ServiceRecord> findByServiceTypeAndDetails(ServiceType serviceType, ServiceDetails details);
+    Optional<MainServiceRecord> findByServiceTypeAndDetails(MainServiceType serviceType, SubServiceDetails details);
 }
