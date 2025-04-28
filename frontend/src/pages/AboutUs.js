@@ -13,15 +13,39 @@ const AboutUs = () => {
   return (
     <Container className="about-us-container">
       
-      <Typography variant="h4" className="about-us-title">
+      {/* <Typography variant="h4" className="about-us-title">
         About Us
-      </Typography>
+      </Typography> */}
+      <Typography 
+    variant="h4" 
+    className="about-us-title"
+    sx={{ 
+      textAlign: 'center', 
+      marginBottom: '2rem', 
+      fontWeight: 'bold', 
+      fontFamily: "Bebas Neue", 
+      color: 'white', 
+      fontSize:'3rem',
+    }}
+  >
+    About Us
+  </Typography>
 
      
-      <Typography variant="body1" paragraph className="about-us-description">
-        We are a passionate team committed to providing the best services in transport, events, movies, and much more.
-      </Typography>
-
+  <Typography 
+    variant="body1" 
+    paragraph 
+    className="about-us-description"
+    sx={{ 
+      textAlign: 'center', 
+      marginBottom: '3rem', 
+      fontSize: '1.1rem', 
+      fontFamily: "'Nunito', sans-serif", 
+      color: 'white' 
+    }}
+  >
+    We are a passionate team committed to providing the best services in transport, events, movies, and much more.
+  </Typography>
      
       <Grid container spacing={3}>
         <Grid item xs={12} sm={6} md={4}>

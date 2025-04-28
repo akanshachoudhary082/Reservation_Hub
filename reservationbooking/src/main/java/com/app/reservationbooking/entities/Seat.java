@@ -27,7 +27,7 @@ public class Seat extends BaseEntity {
 	private Long detailId;
 
 	@Column(name = "seat_number")
-	private Long seatNumber;
+	private String seatNumber;
 
 	@Enumerated(EnumType.STRING)
 	@Column(name = "seat_type", nullable = false)
@@ -40,6 +40,9 @@ public class Seat extends BaseEntity {
 	@Enumerated(EnumType.STRING)
 	@Column(name = "status", nullable = false)
 	private SeatStatus status;
+
+	@Column(name = "seat_price")
+	private Double seatPrice;
 
 	@OneToMany(mappedBy = "seat", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<Booking> bookings;

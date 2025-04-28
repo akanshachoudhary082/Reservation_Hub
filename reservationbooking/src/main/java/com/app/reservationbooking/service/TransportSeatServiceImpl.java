@@ -510,7 +510,7 @@ public class TransportSeatServiceImpl implements TransportSeatService {
         Seat existingSeat = transportSeatRepository.findById(seatId)
                 .orElseThrow(() -> new ResourceNotFoundException("Seat not found with ID: " + seatId));
 
-        existingSeat.setSeatNumber(dto.getSeatNumber());
+        existingSeat.setSeatNumber(String.valueOf(dto.getSeatNumber()));
         existingSeat.setSeatType(dto.getSeatType());
         existingSeat.setClassType(dto.getClassType());
         existingSeat.setStatus(dto.getStatus());

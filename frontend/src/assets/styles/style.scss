@@ -1,24 +1,29 @@
-body {
-    margin: 0; /* Remove default margin */
-    padding: 0; /* Remove default padding */
-    background-image: url('../images/purple_background_image.png');
-    background-size:cover;
-    background-repeat: no-repeat;
-    width: 100%; /* Ensure full width */
-    height: 100%; /* Ensure full height */
-    overflow-x: hidden; /* Prevent horizontal scrolling */
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    color: #050505;
-  }
-  
 
-.header__footer__background {
-    background-color: #050505 !important;
-    background: #050505 !important;
-    color: #cac9c9 !important;
-    padding: 20px 0;
-    margin-top: auto;
+/* Apply background only on Home and Transport pages */
+.background-home-transport {
+  background-image: url('../images/Transport.jpeg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
 }
 
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  color: #050505;
+  //background-color: hsl(180, 8%, 7%);
+ 
+}
 
+/* Style for header/footer */
+.header__footer__background {
+  background-color: #050505 !important;
+  background: #050505 !important;
+  color: #cac9c9 !important;
+  padding: 20px 0;
+  margin-top: auto;
+}

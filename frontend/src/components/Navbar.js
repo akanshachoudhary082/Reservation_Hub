@@ -145,7 +145,6 @@ const Navbar = () => {
                 <Menu anchorEl={profileMenuAnchorEl} open={Boolean(profileMenuAnchorEl)} onClose={handleProfileMenuClose}>
                     <MenuItem component={Link} to="/account" onClick={handleProfileMenuClose}>My Account</MenuItem>
                     <MenuItem component={Link} to="/login" onClick={handleProfileMenuClose}>Login</MenuItem>
-                    <MenuItem component={Link} to="/signin" onClick={handleProfileMenuClose}>SignIn</MenuItem>
                     <MenuItem component={Link} to="/register" onClick={handleProfileMenuClose}>Register</MenuItem>
                     <MenuItem onClick={handleLogout}>Logout</MenuItem> {/* Handle Logout */}
                 </Menu>

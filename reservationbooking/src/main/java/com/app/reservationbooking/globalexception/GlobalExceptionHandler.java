@@ -1,6 +1,8 @@
 package com.app.reservationbooking.globalexception;
 
+import com.app.reservationbooking.customexception.EmailServiceException;
 import com.app.reservationbooking.customexception.ResourceNotFoundException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -11,6 +13,7 @@ import org.springframework.web.context.request.WebRequest;
 /**
  * Global exception handler to catch and handle exceptions across the entire application.
  */
+@Slf4j
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
@@ -30,6 +33,13 @@ public class GlobalExceptionHandler {
                 ex.getMessage());
 
         return new ResponseEntity<>(errorMessage, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(EmailServiceException.class)
+    public ResponseEntity<String> handleEmailServiceException(EmailServiceException e) {
+        log.error("Email service failed: {}", e.getMessage(), e);
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .body("There was an issue with sending the email. Please try again later.");
     }
 
     /**

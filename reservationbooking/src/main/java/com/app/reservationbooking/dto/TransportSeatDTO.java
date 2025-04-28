@@ -13,12 +13,14 @@ public class TransportSeatDTO {
 
     private Long detailId;
 
-    private Long seatNumber;
+    private String seatNumber;
 
     private SeatType seatType;
 
     private ClassType classType;
 
     private SeatStatus status;
+
+    private Double seatPrice;
 
 }

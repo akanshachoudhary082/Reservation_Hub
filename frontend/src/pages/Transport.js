@@ -8,6 +8,8 @@ import { useNavigate } from 'react-router-dom';
 import busImage from '../assets/images/bus-image.jpg';
 import trainImage from '../assets/images/train-image.jpg';
 import flightImage from '../assets/images/flight-image.png';
+import '../assets/styles/transport.scss'; // <--- import CSS file
+
 
 const Transport = () => {
   const dispatch = useDispatch();
@@ -18,13 +20,13 @@ const Transport = () => {
     const fetchServiceDetails = async () => {
       dispatch(setLoading());
 
-      const token = Cookies.get('jwtToken'); 
+      const token = Cookies.get('jwtToken');
       console.log('Using token:', token);
 
       try {
         const response = await axios.get('https://localhost:8443/details', {
           headers: {
-            Authorization: `Bearer ${token}`, 
+            Authorization: `Bearer ${token}`,
           },
         });
         dispatch(setServiceDetails(response.data));
@@ -54,59 +56,71 @@ const Transport = () => {
 
   const getImageForServiceType = (type) => {
     switch (type) {
-      case 'BUS': return busImage;
-      case 'TRAIN': return trainImage;
-      case 'FLIGHT': return flightImage;
-      default: return busImage;
+      case 'BUS': 
+        return { 
+          src: busImage, 
+          width: '100%', 
+          height: '60%' 
+        };
+      case 'TRAIN': 
+        return { 
+          src: trainImage, 
+          width: '85%', 
+          height: '75%',
+          Margin: '12px' 
+        };
+      case 'FLIGHT': 
+        return { 
+          src: flightImage, 
+          width: '100%', 
+          height: '50%' 
+        };
+      default: 
+        return { 
+          src: busImage, 
+          width: '100%', 
+          height: '60%' 
+        };
     }
   };
 
   return (
-    <Box sx={{ padding: 3, backgroundColor: '#f0f0f0', minHeight: '100vh' }}>
-      <Typography
-        variant="h4"
-        sx={{
-          textAlign: 'center',
-          marginBottom: '30px',
-          fontSize: { xs: '1.5rem', sm: '2rem' },
-          fontFamily: 'Bebas Neue',
-          fontWeight: 800,
-          color: '#333',
-        }}
-      >
+    <Box className="transport-container">
+      <Typography variant="h4" className="transport-heading" sx={{ fontFamily: 'Bebas Neue', fontSize: '3rem', fontWeight: 800, textAlign: 'center', color: 'black', marginBottom: '30px' }}>
         BOOK YOUR TICKETS NOW!
       </Typography>
 
-      <Grid container spacing={2} justifyContent="center">
+      <Grid container spacing={3} className="transport-grid">
         {uniqueServices.length > 0 ? (
-          uniqueServices.map((service) => (
-            <Grid item xs={12} sm={4} md={3} key={service.detailType}>
-              <Card>
-                <CardMedia
-                  component="img"
-                  image={getImageForServiceType(service.detailType)}
-                  alt={service.detailType}
-                  sx={{
-                    objectFit: 'cover',
-                    width: '100%',
-                    height: { xs: '150px', sm: '200px' },
-                  }}
-                />
-                <CardContent>
-                  <Typography variant="h6" sx={{ fontSize: { xs: '1rem', sm: '1.25rem' } }}>
-                    {service.detailType}
-                  </Typography>
-                  <Button
-                    variant="contained"
-                    sx={{ marginTop: '10px' }}
-                    onClick={() => navigate(`/details/${service.detailType}`)}
-                  >
-                    Book Now
-                  </Button>
-                </CardContent>
-              </Card>
-            </Grid>
-          ))
+          uniqueServices.map((service) => {
+            const { src, width, height } = getImageForServiceType(service.detailType);
+
+            return (
+              <Grid item xs={12} sm={6} md={4} key={service.detailType}>
+                <Card className="transport-card">
+                  <CardMedia
+                    component="img"
+                    image={src}
+                    alt={service.detailType}
+                    style={{ width: width, height: height }} // Apply width and height dynamically
+                    className="transport-image"
+                  />
+                  <CardContent className="transport-content">
+                    <Typography className="transport-title" variant="h6">
+                      {service.detailType}
+                    </Typography>
+                    <Button
+                      variant="contained"
+                      className="transport-button"
+                      onClick={() => navigate(`/details/${service.detailType}`)}
+                    >
+                      Book Now
+                    </Button>
+                  </CardContent>
+                </Card>
+              </Grid>
+            );
+          })
         ) : (
           <Typography>No transport services available</Typography>
         )}
@@ -116,3 +130,4 @@ const Transport = () => {
 };
 
 export default Transport;
+

@@ -195,24 +195,26 @@ public class TransportSeatConverterUtils {
     public static TransportSeatDTO convertToDTO(Seat seat) {
         return TransportSeatDTO.builder()
                 .seatId(seat.getSeatId())  // This remains the same
-                .seatNumber(seat.getSeatNumber())
+                .seatNumber(seat.getSeatNumber())  // Directly return as String
                 .seatType(seat.getSeatType())
                 .classType(seat.getClassType())
                 .status(seat.getStatus())
-                .detailId(seat.getDetailId())  // Ensure that detailId is included here
+                .detailId(seat.getDetailId())
+                .seatPrice(seat.getSeatPrice())// Ensure that detailId is included here
                 .build();
     }
-
 
     // Convert TransportSeatDTO to Seat entity using builder
     public static Seat convertToEntity(TransportSeatDTO dto) {
         return Seat.builder()
                 .detailId(dto.getDetailId())  // No change here; it's correctly setting the detailId
-                .seatNumber(dto.getSeatNumber())
+                .seatNumber(dto.getSeatNumber())  // Directly set as String
                 .seatType(dto.getSeatType())
                 .classType(dto.getClassType())
                 .status(dto.getStatus())
+                .seatPrice(dto.getSeatPrice())
                 .build();
     }
-}
 
+}
+//

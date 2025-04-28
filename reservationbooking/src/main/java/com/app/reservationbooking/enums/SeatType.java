@@ -12,6 +12,10 @@ public enum SeatType {
 	LOWER_BERTH,
 
 	SLEEPER,
+
+	UPPER,
+
+	LOWER,
 	
 	FRONT,
 	

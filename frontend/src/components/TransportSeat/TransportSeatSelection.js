@@ -2,7 +2,11 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 import Cookies from 'js-cookie';
-import { setTransportSeats, setLoading, setTransportSeatsError } from '../../redux/actions/transportSeatActions';
+import {
+  setTransportSeats,
+  setLoading,
+  setTransportSeatsError
+} from '../../redux/actions/transportSeatActions';
 
 import BusSeatSelection from './BusSeatSelection';
 import TrainSeatSelection from './TrainSeatSelection';
@@ -14,13 +18,11 @@ const TransportSeatSelection = ({ transport, detailId }) => {
 
   useEffect(() => {
     if (!detailId) {
-      console.log("missing.....")
-      dispatch(setTransportSeatsError('Service detail ID is missing.............................'));
+      dispatch(setTransportSeatsError('Service detail ID is missing.'));
       return;
     }
 
     const fetchSeats = async () => {
-      
       dispatch(setLoading(true));
       try {
         const response = await axios.get(`/seats/service/${detailId}`);
@@ -28,7 +30,6 @@ const TransportSeatSelection = ({ transport, detailId }) => {
 
         Cookies.set('selectedTransport', transport, { secure: true, sameSite: 'Strict' });
         Cookies.set('selectedSeats', JSON.stringify(response.data), { secure: true, sameSite: 'Strict' });
-
       } catch (err) {
         dispatch(setTransportSeatsError('Failed to load seats.'));
       } finally {
@@ -39,10 +40,14 @@ const TransportSeatSelection = ({ transport, detailId }) => {
     fetchSeats();
   }, [detailId, dispatch, transport]);
 
+  debugger
+  const upperDeck = seats.filter(seat => seat.seatType?.trim().toUpperCase() === 'UPPER');
+  const lowerDeck = seats.filter(seat => seat.seatType?.trim().toUpperCase() === 'LOWER');
+
   const renderSeatComponent = () => {
     switch ((transport || '').toUpperCase()) {
       case 'BUS':
-        return <BusSeatSelection seats={seats} />;
+        return <BusSeatSelection upperDeck={upperDeck} lowerDeck={lowerDeck} />;
       case 'TRAIN':
         return <TrainSeatSelection seats={seats} />;
       case 'FLIGHT':
@@ -57,7 +62,7 @@ const TransportSeatSelection = ({ transport, detailId }) => {
 
   return (
     <div>
-      <h2>Select Your Seat</h2>
+      
       {renderSeatComponent()}
     </div>
   );

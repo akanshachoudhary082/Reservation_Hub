@@ -44,6 +44,7 @@ public class SecurityConfig {
                                 .requestMatchers(HttpMethod.POST, "/services/create-service", "/details/create-details").hasAuthority("ADMIN")  // Only Admin can create
                                 .requestMatchers(HttpMethod.PUT, "/services/**", "/details/**").hasAuthority("ADMIN")  // Only Admin can update
                                 .requestMatchers(HttpMethod.DELETE, "/services/**", "/details/**").hasAuthority("ADMIN")  // Only Admin can delete
+                        .requestMatchers("/contact").permitAll()
                         .anyRequest().authenticated()
                 )
 

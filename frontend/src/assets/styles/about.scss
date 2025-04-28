@@ -1,77 +1,92 @@
 /* Container Styles */
 .about-us-container {
-    padding: 2rem;
-  }
-  
-  .about-us-title {
-    text-align: center;
-    margin-bottom: 2rem;
-    color: #3f51b5; /* Customize the color */
-    font-size: 2rem;
-  }
-  
-  .about-us-description {
-    text-align: center;
-    color: #fcfcfc;
-    margin-bottom: 3rem;
-    font-size: 1.2rem;
-  }
-  
-  /* Card Styles */
-  .card-paper {
-    padding: 2rem;
-    text-align: center;
-    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-    transition: transform 0.3s ease-in-out;
-    background-color: #fff;
-  }
-  
-  .card-paper:hover {
-    transform: scale(1.05);
-  }
-  
-  .card-title {
-    font-weight: bold;
-    margin-top: 1.5rem;
-    
-  }
-  
-  .card-description {
-    margin-top: 1rem;
-    font-size: 1rem;
-    
-  }
-  
-  /* Avatar image styling */
-  .MuiAvatar-root {
-    width: 100px;
-    height: 100px;
-    margin-bottom: 1rem;
-    object-fit: cover;
-    border-radius: 50%;
-  }
-  
-  /* Button Styles */
-  .contact-button-container {
-    text-align: center;
-    margin-top: 3rem;
-    margin-top: 2rem;
-    color: #fff;
-  }
-  
-  .contact-button {
-    width: 100%;
-    max-width: 220px;
-    margin: 0 auto;
+  padding: 2rem;
+}
+
+.about-us-title {
+  text-align: center;
+  margin-bottom: 2rem;
+  color: #eeecec; /* Customize the color */
+  font-size: 2rem;
+  margin-bottom: 10rem;
+}
+
+.about-us-description {
+  text-align: center;
+  color: #fcfcfc;
+  margin-top: 30px;
+  font-size: 1.2rem;
+}
+
+/* Card Styles */
+.card-paper {
+  margin-top: 50px;
+  padding: 2.5rem;
+  text-align: center;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Lighter initial shadow */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* On hover, make shadow deeper and scale */
+.card-paper:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2); /* Larger and deeper shadow on hover */
+}
+
+/* Card Title */
+.card-title {
+  font-weight: bold;
+  margin-top: 1.5rem;
+}
+
+/* Card Description */
+.card-description {
+  margin-top: 1rem;
+  font-size: 1rem;
+}
+
+/* Avatar image styling */
+.MuiAvatar-root {
+  width: 100px;
+  height: 100px;
+  margin-bottom: 1rem;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+/* Button Styles */
+.contact-button-container {
+  text-align: center;
+  margin-top: 3rem;
+  color: #fff;
+}
+
+.contact-button {
+  width: 100%;
+  max-width: 220px;
+  margin: 0 auto;
+  padding: 1rem;
+  font-size: 1rem;
+  background-color: #007bff; /* Button color */
+  border: none;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+}
+
+.contact-button:hover {
+  background-color: #0056b3; /* Darker button color on hover */
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .about-us-container {
     padding: 1rem;
-    font-size: 1rem;
   }
-  
-  /* Responsive Styles */
-  @media (max-width: 768px) {
-    .about-us-container {
-      padding: 1rem;
-    }
+
+  /* Adjust card padding on smaller screens */
+  .card-paper {
+    padding: 1.5rem;
   }
-  
+}

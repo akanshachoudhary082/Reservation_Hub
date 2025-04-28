@@ -20,7 +20,7 @@ public class AdminConfiguration {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "admin_config_seq")
     @SequenceGenerator(name = "admin_config_seq", sequenceName = "admin_id_seq", allocationSize = 1)
     @Column(name = "admin_config_id")
-    private long adminConfigId;
+    private Long adminConfigId;
 
     @Column(name = "detail_id", nullable = false)
     private Long detailId;
@@ -47,7 +47,7 @@ public class AdminConfiguration {
     // For Events: Event details
 
     @Column(name = "price_of_ticket", nullable = false)
-    private double priceOfTicket;
+    private Double priceOfTicket;
 
     @Column(name = "available_on", nullable = false)
     private LocalDate availableOn;
