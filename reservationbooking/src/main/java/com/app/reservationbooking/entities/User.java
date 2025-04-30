@@ -3,6 +3,7 @@ package com.app.reservationbooking.entities;
 import java.util.List;
 
 import com.app.reservationbooking.enums.Role;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -48,9 +49,11 @@ public class User extends BaseEntity {
 //	private List<Seat> seats;
 
 	@OneToMany(mappedBy = "user")
+	@JsonIgnore
 	private List<Booking> bookings;
 
 	@OneToMany(mappedBy = "user")
+	@JsonIgnore
 	private List<Payment> payments;
 
 //	@OneToMany(mappedBy = "user")

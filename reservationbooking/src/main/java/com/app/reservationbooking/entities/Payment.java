@@ -48,6 +48,7 @@ public class Payment {
 	@Column(name = "transaction_id", unique = true, nullable = false)
 	private String transactionId;
 
+
 	@Column(name = "payment_date", nullable = false)
 	private LocalDateTime paymentDate;
 

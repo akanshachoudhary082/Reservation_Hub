@@ -26,18 +26,17 @@ const Login = () => {
         Login
       </Typography>
 
-      <MobileNumberForm />  {/* Login form component for mobile number */}
+      <MobileNumberForm />  
       <Divider sx={{ my: 4 }}>OR</Divider>
-      <EmailPasswordForm />  {/* Login form component for email/password */}
-
-      {/* Sign Up Link */}
+      <EmailPasswordForm />  
+      
       <Box sx={{ textAlign: 'center', marginTop: 2 }}>
         <Typography variant="body2">
           Don't have an account? 
           <Link 
             component="button" 
             sx={{ cursor: 'pointer', color: 'primary.main' }}
-            onClick={handleSignUpRedirect}  // Handle the redirection
+            onClick={handleSignUpRedirect}  
           >
             Sign Up
           </Link>

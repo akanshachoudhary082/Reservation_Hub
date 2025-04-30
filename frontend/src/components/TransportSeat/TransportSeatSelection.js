@@ -40,7 +40,7 @@ const TransportSeatSelection = ({ transport, detailId }) => {
     fetchSeats();
   }, [detailId, dispatch, transport]);
 
-  debugger
+  
   const upperDeck = seats.filter(seat => seat.seatType?.trim().toUpperCase() === 'UPPER');
   const lowerDeck = seats.filter(seat => seat.seatType?.trim().toUpperCase() === 'LOWER');
 

@@ -25,6 +25,16 @@ public class Booking extends BaseEntity {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
+    @Column(name = "passenger_name", nullable = false)
+    private String passengerName;
+
+
+    @Column(name = "mobile_number", unique = true, nullable = false)
+    private String mobileNumber;
+
+    @Column(name = "email", unique = true, nullable = false)
+    private String userEmail;
+
     @ManyToOne
     @JoinColumn(name = "seat_id", nullable = false)
     private Seat seat;
@@ -36,25 +46,13 @@ public class Booking extends BaseEntity {
     @Column(name = "booking_date", nullable = false)
     private LocalDateTime bookingDate;
 
-    @Column(name = "start_point", nullable = false)
-    private LocalDateTime startPoint;               // Starting Time (For Movies, Events, Transport) OR Departure City (For Transport, For Movies - null)
 
-    @Column(name = "end_point",nullable = false)
-    private LocalDateTime endPoint;
-
-    @Column(name = "description", nullable = false)
-    private String description;
-
-//    @Column(name = "time_slot", nullable = false)
-//    private String timeSlot;
-
-//    @ManyToOne
-//    @JoinColumn(name = "detail_id", nullable = false)
-//    private ServiceDetails details;
     @Column(name = "detail_id", nullable = false)
     private Long detailId;
 
     @OneToOne
-    @JoinColumn(name = "payment_id", nullable = false)
+    @JoinColumn(name = "payment_id", nullable = true)
     private Payment payment;
+
+
 }

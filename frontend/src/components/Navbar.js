@@ -29,6 +29,7 @@ const Navbar = () => {
             });
     
             Cookies.remove('jwtToken'); 
+            Cookies.remove('userRole');
             handleProfileMenuClose();
             navigate('/login');
         } catch (error) {

@@ -39,18 +39,16 @@ public class SecurityConfig {
                 .exceptionHandling(ex -> ex.authenticationEntryPoint(authEntry))
                 .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
-                                .requestMatchers("/users/signup", "/users/signin", "/users/logout","/swagger-ui/**", "/v3/api-docs/**", "/swagger-ui.html").permitAll()  // Allow these endpoints without authentication
-                          .requestMatchers(HttpMethod.GET, "/services", "/details").hasAnyAuthority("CUSTOMER", "ADMIN")  // Customer and Admin can view
-                                .requestMatchers(HttpMethod.POST, "/services/create-service", "/details/create-details").hasAuthority("ADMIN")  // Only Admin can create
-                                .requestMatchers(HttpMethod.PUT, "/services/**", "/details/**").hasAuthority("ADMIN")  // Only Admin can update
-                                .requestMatchers(HttpMethod.DELETE, "/services/**", "/details/**").hasAuthority("ADMIN")  // Only Admin can delete
-                        .requestMatchers("/contact").permitAll()
+                                .requestMatchers("/users/signup", "/users/signin", "/users/logout").permitAll()
+                          .requestMatchers(HttpMethod.GET, "/services", "/details").hasAnyAuthority("CUSTOMER", "ADMIN")
+                                .requestMatchers(HttpMethod.POST, "/services/create-service", "/details/create-details").hasAuthority("ADMIN")
+                                .requestMatchers(HttpMethod.PUT, "/services/**", "/details/**").hasAuthority("ADMIN")
+                                .requestMatchers(HttpMethod.DELETE, "/services/**", "/details/**").hasAuthority("ADMIN")
                         .anyRequest().authenticated()
                 )
 
                 .requiresChannel(channel -> channel
-                        .anyRequest().requiresSecure())  // Enforce HTTPS for all requests
-
+                        .anyRequest().requiresSecure())
 
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();

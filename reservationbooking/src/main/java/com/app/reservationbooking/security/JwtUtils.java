@@ -34,22 +34,21 @@ public class JwtUtils {
 
     private Key key;
 
+
     @PostConstruct
     public void init() {
         key = Keys.hmacShaKeyFor(jwtSecret.getBytes());
     }
 
-    // will be invoked by Authentication controller) , upon successful
-    // authentication
     public String generateJwtToken(Authentication authentication) {
         log.info("generate jwt token " + authentication);
         CustomUserDetails userPrincipal = (CustomUserDetails) authentication.getPrincipal();
-//JWT : userName,issued at ,exp date,digital signature(does not typically contain password , can contain authorities
-        return Jwts.builder() // JWTs : a Factory class , used to create JWT tokens
-                .setSubject((userPrincipal.getUsername())) // setting subject part of the token(typically user
-                // name/email)
-                .setIssuedAt(new Date())// Sets the JWT Claims iat (issued at) value of current date
-                .setExpiration(new Date((new Date()).getTime() + jwtExpirationMs))// Sets the JWT Claims exp
+
+        return Jwts.builder()
+                .setSubject((userPrincipal.getUsername()))
+
+                .setIssuedAt(new Date())
+                .setExpiration(new Date((new Date()).getTime() + jwtExpirationMs))
 
                 .claim("authorities", getAuthoritiesInString(userPrincipal.getAuthorities()))
 
@@ -59,6 +58,8 @@ public class JwtUtils {
 
                 .compact();
     }
+
+
 
 
     public String getUserNameFromJwtToken(Claims claims) {

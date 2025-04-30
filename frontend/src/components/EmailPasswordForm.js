@@ -3,6 +3,7 @@ import axios from 'axios';
 import Cookies from 'js-cookie'; 
 import { TextField, Button, Typography, Snackbar, Alert } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import { jwtDecode } from 'jwt-decode';  
 
 const EmailPasswordForm = () => {
   const [email, setEmail] = useState('');
@@ -19,7 +20,6 @@ const EmailPasswordForm = () => {
     const trimmedEmail = email.trim();
     const trimmedPassword = password.trim();
 
-    
     const payload = {
       email: trimmedEmail,
       password: trimmedPassword,
@@ -36,21 +36,29 @@ const EmailPasswordForm = () => {
         }
       )
       .then(async(response) => {
-        //debugger
         setErrorMessage('');
         setSuccessMessageOpen(true);
 
-        
         const token = await response.data.jwt;
 
-        console.log('token---',token,response);
-        
-        if (token) {
-          await Cookies.set('jwtToken', token,{ expires: 1 }); 
+        //console.log('token---', token, response);
 
+        if (token) {
+          
+          await Cookies.set('jwtToken', token, { expires: 1 });
+
+          
+          const decoded = jwtDecode(token);  
+          const userRole = decoded?.authorities?.[0] || '';  
+          
+          console.log('Decoded role:', userRole);
+
+          
+          Cookies.set('userRole', userRole, { expires: 1 });
         }
-        if(response?.status == 200){
-          await navigate('/')
+
+        if (response?.status === 200) {
+          await navigate('/'); 
         }
 
       })

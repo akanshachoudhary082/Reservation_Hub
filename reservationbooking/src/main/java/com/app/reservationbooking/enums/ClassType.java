@@ -6,6 +6,16 @@ public enum ClassType {
 	BUSINESS,
 	
 	AC,
-	
-	NON_AC;
+
+	NON_AC,
+
+	FIRST_AC,
+
+	SECOND_AC,
+
+	THIRD_AC,
+
+	SLEEPER,
+
+	GENERAL
 }
