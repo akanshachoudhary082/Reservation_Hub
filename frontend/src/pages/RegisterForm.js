@@ -9,7 +9,7 @@ import {
   IconButton,
 } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 import { USER_REGISTER_REQUEST, USER_REGISTER_SUCCESS, USER_REGISTER_FAIL } from '../redux/actions/userActionTypes';
 import countryPhoneCodes from '../assets/countryPhoneCodes.json';
@@ -261,6 +261,15 @@ const RegisterForm = () => {
           </Button>
 
           {error && <Typography color="error">{error}</Typography>}
+
+          {/* Add the link to the login page here */}
+          <Typography variant="body2" align="center" sx={{ marginTop: 2 }}>
+            Already have an account?{' '}
+            <Link to="/login" style={{ textDecoration: 'none', color: '#1976d2' }}>
+              Login
+            </Link>
+          </Typography>
+
         </Box>
       </div>
     </div>

@@ -1,5 +1,6 @@
 package com.app.reservationbooking.entities;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import com.app.reservationbooking.enums.ClassType;
 import com.app.reservationbooking.enums.SeatStatus;
@@ -52,4 +53,18 @@ public class Seat extends BaseEntity {
 //	@JoinColumn(name = "detail_id", nullable = false)
 //	private ServiceDetails serviceDetails;
 
+	@Column(name = "city")
+	private String city;
+
+	@Column(name = "show_name")
+	private String showName;
+
+	@Column(name = "theater_name")
+	private String theaterName;
+
+	@Column(name = "show_date_time", columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
+	private LocalDateTime showDateTime;
+
+	//@Column(name = "price_of_ticket", nullable = false)
+	//private double priceOfTicket;
 }

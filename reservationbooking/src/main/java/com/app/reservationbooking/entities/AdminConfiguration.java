@@ -52,5 +52,4 @@ public class AdminConfiguration {
     @Column(name = "available_on")
     private LocalDate availableOn;
 
-
 }

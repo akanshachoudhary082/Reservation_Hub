@@ -11,6 +11,9 @@ import transportSeatReducer from './reducers/transportSeatReducer';
 import transportBookingReducer from './reducers/transportBookingReducer';
 import transportPaymentReducer from './reducers/transportPaymentReducer';
 import eventReducer from './reducers/eventReducer';
+import movieShowtimesReducer from './reducers/movieShowtimeReducer';
+import movieSeatSelectionReducer from './reducers/movieSeatSelectionReducer';
+import eventSeatSelectionReducer from './reducers/eventSeatSelectionReducer';
 
 const rootReducer = combineReducers({
     navbar: navbarReducer, 
@@ -25,6 +28,9 @@ const rootReducer = combineReducers({
     transportPayment: transportPaymentReducer,
     user: userReducer, // handles registration and profile update
     events: eventReducer,
+    movieShowtimes: movieShowtimesReducer,
+    movieSeatSelection: movieSeatSelectionReducer,
+    eventSeatSelection: eventSeatSelectionReducer
 });
 
 const store = createStore(

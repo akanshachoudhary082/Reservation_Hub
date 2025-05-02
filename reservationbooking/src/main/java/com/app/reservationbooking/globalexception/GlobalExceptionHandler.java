@@ -2,6 +2,8 @@ package com.app.reservationbooking.globalexception;
 
 import com.app.reservationbooking.customexception.EmailServiceException;
 import com.app.reservationbooking.customexception.ResourceNotFoundException;
+import com.app.reservationbooking.customexception.MovieNotFoundException;
+import com.app.reservationbooking.customexception.MovieSeatsNotAvailableException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,6 +29,42 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(ResourceNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public ResponseEntity<String> handleResourceNotFoundException(ResourceNotFoundException ex, WebRequest request) {
+        String errorMessage = String.format("Error in %s at %s: %s",
+                ex.getStackTrace()[0].getClassName(),
+                ex.getStackTrace()[0].getMethodName(),
+                ex.getMessage());
+
+        return new ResponseEntity<>(errorMessage, HttpStatus.NOT_FOUND);
+    }
+
+    /**
+     * Handles MovieNotFoundException and returns a 404 NOT FOUND status with a detailed error message.
+     *
+     * @param ex      the thrown MovieNotFoundException
+     * @param request the current web request
+     * @return ResponseEntity with error message and HTTP 404 status
+     */
+    @ExceptionHandler(MovieNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ResponseEntity<String> handleMovieNotFoundException(MovieNotFoundException ex, WebRequest request) {
+        String errorMessage = String.format("Error in %s at %s: %s",
+                ex.getStackTrace()[0].getClassName(),
+                ex.getStackTrace()[0].getMethodName(),
+                ex.getMessage());
+
+        return new ResponseEntity<>(errorMessage, HttpStatus.NOT_FOUND);
+    }
+
+    /**
+     * Handles SeatNotAvailableException and returns a 404 NOT FOUND status with a detailed error message.
+     *
+     * @param ex      the thrown SeatNotAvailableException
+     * @param request the current web request
+     * @return ResponseEntity with error message and HTTP 404 status
+     */
+    @ExceptionHandler(MovieSeatsNotAvailableException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ResponseEntity<String> handleSeatNotAvailableException(MovieSeatsNotAvailableException ex, WebRequest request) {
         String errorMessage = String.format("Error in %s at %s: %s",
                 ex.getStackTrace()[0].getClassName(),
                 ex.getStackTrace()[0].getMethodName(),

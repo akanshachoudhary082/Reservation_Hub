@@ -6,14 +6,16 @@ import Typography from '@mui/material/Typography';
 import CardActionArea from '@mui/material/CardActionArea';
 import { useNavigate } from 'react-router-dom'; 
 import imageMapping from '../services/imageMapping'; 
-import CalendarMonthOutlinedIcon from '@mui/icons-material/CalendarMonthOutlined'; // Import the calendar icon
+import CalendarMonthOutlinedIcon from '@mui/icons-material/CalendarMonthOutlined'; 
 import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
 
-const EventCard = ({ event }) => {
+const EventCard = ({ event, selectedCity }) => {
     const navigate = useNavigate();
 
     const handleCardClick = () => {     
-        navigate(`/events/${event.startPoint}`); 
+        const eventDate = event.startPoint;
+        //const formattedDate = eventDate.toISOString().slice(0, 19); // Format to 'yyyy-MM-ddTHH:mm:ss'
+        navigate(`/events/${encodeURIComponent(selectedCity)}/${encodeURIComponent(event.description)}/${encodeURIComponent(event.name)}/${eventDate}`);
     };
 
     const imagePath = imageMapping[event.description];
@@ -23,7 +25,7 @@ const EventCard = ({ event }) => {
             <CardActionArea>
                 <CardMedia
                     component="img"
-                    height="200" // Increased height for the image
+                    height="200"
                     image={imagePath}
                     alt={event.description}
                 />
@@ -36,7 +38,7 @@ const EventCard = ({ event }) => {
                         {event.name}                       
                     </Typography>
                     <Typography variant="body2" color="text.secondary" display="flex" alignItems="center">
-                        <CalendarMonthOutlinedIcon sx={{ marginRight: 1 }} /> {/* Calendar icon */}
+                        <CalendarMonthOutlinedIcon sx={{ marginRight: 1 }} />
                         {new Date(event.startPoint).toLocaleDateString('en-GB')} 
                     </Typography>
                 </CardContent>

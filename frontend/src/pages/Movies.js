@@ -5,6 +5,7 @@ import MovieCard from '../components/MovieCard';
 import '../assets/styles/Movies.scss';
 import axios from 'axios';
 import Grid from '@mui/material/Grid'; 
+import Cookies from 'js-cookie';
 
 const Movies = () => {
     const dispatch = useDispatch();
@@ -15,9 +16,16 @@ const Movies = () => {
 
     useEffect(() => {
         const fetchMoviesByCity = async (city) => {
+
+            const token = Cookies.get('jwtToken');
+
             dispatch(fetchMoviesRequest());
             try {
-                const response = await axios.get(`http://localhost:8080/movies/get-movies/${city}`);
+                const response = await axios.get(`https://localhost:8443/movies/get-movies/${city}`, {
+                    headers: {
+                      Authorization: `Bearer ${token}`,
+                    },
+                  });
                 console.log(response.data); 
                 dispatch(fetchMoviesSuccess(response.data)); 
             } catch (error) {
@@ -45,8 +53,8 @@ const Movies = () => {
             <Grid container spacing={2} justifyContent="center"> {/* Use Grid for layout */}
                 {movies.length > 0 ? (
                     movies.map((movie) => (
-                        <Grid item xs={12} sm={6} md={4} key={movie.startPoint}> {/* Responsive grid item */}
-                            <MovieCard movie={movie} /> 
+                        <Grid item xs={12} sm={6} md={4} key={movie.description}> {/* Responsive grid item */}
+                            <MovieCard movie={movie} city={selectedCity} /> 
                         </Grid>
                     ))
                 ) : (

@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import busImage from '../assets/images/bus-image.jpg';
 import trainImage from '../assets/images/train-image.jpg';
 import flightImage from '../assets/images/flight-image.png';
-import '../assets/styles/transport.scss'; // <--- import CSS file
+import '../assets/styles/transport.scss'; 
 
 
 const Transport = () => {

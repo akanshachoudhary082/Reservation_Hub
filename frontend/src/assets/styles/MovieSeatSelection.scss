@@ -1,0 +1,59 @@
+.movie-seat-selection {
+    background-color: #000000; // Dark background for the selection screen
+    padding: 20px;
+    min-height: 100vh;
+
+    h3, h4 {
+        color: white;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .seat-grid {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        //max-width: 400px;
+
+        .seat {
+            flex: 0 0 50px; /* Fixed width for each seat */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 5px; /* Margin for space between seats */
+        }
+    }
+
+    .loading, .error {
+        color: white;
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    h6{
+        color: white;
+    }
+
+    .screen-image {
+        display: block; // Ensures the image is treated as a block element
+        margin: 20px auto; // Centers the image horizontally with margin on top and bottom
+        margin-top: 70px;
+        max-width: 100%; // Ensures the image does not exceed the width of its container
+        height: auto; // Maintains the aspect ratio of the image
+        
+    }
+
+    .ticket-info {
+        margin-bottom: 10px;
+        font-weight: bold;
+        color: white;
+    }
+
+    .button-container {
+        display: flex;
+        justify-content: center; /* Center horizontally */
+        margin-top: 20px; /* Add some space above the button */
+    }
+
+}

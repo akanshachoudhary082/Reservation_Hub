@@ -1,0 +1,33 @@
+.movie-seat {
+    width: 50px; /* Fixed width for square shape */
+    height: 50px; /* Fixed height for square shape */
+    margin: 5px; /* Margin for space between seats (5px on each side) */
+    border-radius: 4px;
+    transition: background-color 0.3s, transform 0.2s;
+
+    &.selected {
+        background-color: #036e23; // Primary color for selected seat
+        color: white;
+        transform: scale(1.05);
+    }
+
+    &.available {
+        background-color: #f0f0f0; // Light gray for available seat
+        color: rgb(7, 168, 55);
+
+        &:hover {
+            background-color: #036e23; // Darker gray on hover
+            color: #f0f0f0;
+        }
+    }
+
+    &.booked {
+        background-color: #555353; // Red for booked seat
+        color: white;
+        cursor: not-allowed;
+
+        &:hover {
+            background-color: #ff3d00; // Darker red on hover
+        }
+    }
+}

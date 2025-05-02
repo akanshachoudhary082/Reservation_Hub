@@ -5,6 +5,7 @@ import EventCard from '../components/EventCard';
 import '../assets/styles/Events.scss';
 import axios from 'axios';
 import Grid from '@mui/material/Grid'; 
+import Cookies from 'js-cookie';
 
 const Events = () => {
     const dispatch = useDispatch();
@@ -15,9 +16,14 @@ const Events = () => {
 
     useEffect(() => {
         const fetchEventsByCity = async (city) => {
+            const token = Cookies.get('jwtToken');
             dispatch(fetchEventsRequest());
             try {
-                const response = await axios.get(`http://localhost:8080/events/get-events/${city}`);
+                const response = await axios.get(`https://localhost:8443/events/get-events/${city}`, {
+                    headers: {
+                      Authorization: `Bearer ${token}`,
+                    },
+                  });
                 console.log(response.data); 
                 dispatch(fetchEventsSuccess(response.data)); 
             } catch (error) {
@@ -46,7 +52,7 @@ const Events = () => {
                 {events.length > 0 ? (
                     events.map((event) => (
                         <Grid item xs={12} sm={6} md={4} key={event.startPoint}> {/* Responsive grid item */}
-                            <EventCard event={event} /> 
+                            <EventCard event={event} selectedCity={selectedCity} /> 
                         </Grid>
                     ))
                 ) : (

@@ -3,9 +3,15 @@ package com.app.reservationbooking.enums;
 public enum SeatType {
 	WINDOW,
 
-    LUXURY,
+   LUXURY,
 
 	SEMI_SLEEPER,
+
+	UPPER_BERTH,
+
+	LOWER_BERTH,
+
+	SLEEPER,
 
 	UPPER,
 
@@ -17,9 +23,9 @@ public enum SeatType {
 	
 	BALCONY,
 	
-	VIP,
-
-	AISLE
+	VIP, 
 	
+	GENERAL,
 
+	CLASSIC;
 }
