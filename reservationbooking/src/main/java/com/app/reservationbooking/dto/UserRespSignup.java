@@ -54,6 +54,9 @@ public class UserRespSignup extends BaseEntity {
         this.role = role;
     }
 
+    public UserRespSignup(Object o, String userIdMismatch, String s) {
+    }
+
 
     public void setPassword(String password) {
         this.password = password != null ? password.trim() : null;

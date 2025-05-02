@@ -99,7 +99,7 @@ const ContactUs = () => {
   };
   
   return (
-    <Paper elevation={4} sx={{ padding: 4, maxWidth: 600, margin: 'auto', mt: 4 }}>
+    <Paper elevation={4} sx={{ padding: 4, maxWidth: 1004, margin: 'auto', marginBottom:'40px',mt: 4 }}>
       <Typography variant="h5" gutterBottom>
         How can we help you?
       </Typography>

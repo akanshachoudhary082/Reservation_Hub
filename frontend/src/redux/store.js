@@ -8,6 +8,8 @@ import transportServiceDetailsReducer from './reducers/transportServiceDetailsRe
 import userReducer from './reducers/userReducer';
 import contactReducer from './reducers/contactReducer';
 import transportSeatReducer from './reducers/transportSeatReducer';
+import transportBookingReducer from './reducers/transportBookingReducer';
+import transportPaymentReducer from './reducers/transportPaymentReducer';
 import eventReducer from './reducers/eventReducer';
 
 const rootReducer = combineReducers({
@@ -19,6 +21,8 @@ const rootReducer = combineReducers({
     movies: moviesReducer,
     contact: contactReducer,
     transportSeats: transportSeatReducer,
+    transportBooking: transportBookingReducer,
+    transportPayment: transportPaymentReducer,
     user: userReducer, // handles registration and profile update
     events: eventReducer,
 });

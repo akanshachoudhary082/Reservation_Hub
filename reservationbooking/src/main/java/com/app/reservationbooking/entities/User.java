@@ -13,7 +13,7 @@ import lombok.*;
 @AllArgsConstructor
 @Getter
 @Setter
-@ToString
+@ToString(exclude = {"bookings", "payments"}) // avoid stack overflow
 @Builder
 public class User extends BaseEntity {
 

@@ -3,9 +3,20 @@ package com.app.reservationbooking.utility;
 import com.app.reservationbooking.dto.TransportPaymentDTO;
 import com.app.reservationbooking.entities.Payment;
 
+/**
+ * Utility class that provides methods for converting between TransportPaymentDTO and Payment entity.
+ * These methods ensure proper transformation between DTOs used for API communication and entities used in the database.
+ */
+
 public class TransportPaymentConverterUtils {
 
     // Convert DTO to Entity
+    /**
+     * Converts a TransportPaymentDTO to a Payment entity.
+     *
+     * @param dto the TransportPaymentDTO to convert
+     * @return the Payment entity representing the DTO
+     */
     public static Payment convertToEntity(TransportPaymentDTO dto) {
         Payment payment = new Payment();
 
@@ -13,12 +24,16 @@ public class TransportPaymentConverterUtils {
         payment.setAmount(dto.getAmount());
         payment.setPaymentMethod(dto.getPaymentMethod());
         payment.setPaymentStatus(dto.getPaymentStatus());
-
-        // Note: We won't set 'user' and 'service' here as they are fetched separately in the service layer
         return payment;
     }
 
     // Convert Entity to DTO
+    /**
+     * Converts a Payment entity to a TransportPaymentDTO.
+     *
+     * @param payment the Payment entity to convert
+     * @return the TransportPaymentDTO representing the Payment entity
+     */
     public static TransportPaymentDTO convertToDTO(Payment payment) {
         TransportPaymentDTO dto = new TransportPaymentDTO();
 

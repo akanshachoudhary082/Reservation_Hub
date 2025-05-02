@@ -69,7 +69,7 @@ const MyAccount = () => {
     try {
       dispatch({ type: USER_PROFILE_UPDATE_REQUEST });
 
-      const response = await axios.put(`http://localhost:8080/users/${userInfo.id}`, formData);
+      const response = await axios.put(`https://localhost:8443/users/${userInfo.id}`, formData);
 
       dispatch({
         type: USER_PROFILE_UPDATE_SUCCESS,
@@ -85,7 +85,7 @@ const MyAccount = () => {
 
   return (
     <Paper className="my-account-container" elevation={4}>
-      <Typography variant="h5" className="my-account-title" gutterBottom>
+      <Typography variant="h5" className="my-account-title" width={1000} gutterBottom>
         My Account
       </Typography>
 
@@ -176,3 +176,5 @@ const MyAccount = () => {
 };
 
 export default MyAccount;
+
+

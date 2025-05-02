@@ -23,4 +23,6 @@ public class TransportSeatDTO {
 
     private Double seatPrice;
 
+    private String passengerName;
+
 }

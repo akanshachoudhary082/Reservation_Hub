@@ -74,13 +74,26 @@ public class SubServiceDetailsController {
     private SubServiceDetailsService detailsService;
 
     // Get all details
+    /**
+     * Retrieves all sub-service details.
+     * Accessible by users with 'CUSTOMER' or 'ADMIN' authority.
+     *
+     * @return list of all SubServiceDetailsDTOs
+     */
     @GetMapping
     @PreAuthorize("hasAuthority('CUSTOMER') or hasAuthority('ADMIN')")  // Customer and Admin can view details
     public List<SubServiceDetailsDTO> getAllDetails() {
         return detailsService.getAllDetails();
     }
 
-    // Get details by ID
+    /**
+     * Retrieves a specific sub-service detail by its ID.
+     * Accessible by users with 'CUSTOMER' or 'ADMIN' authority.
+     *
+     * @param id the ID of the sub-service detail
+     * @return the corresponding SubServiceDetailsDTO wrapped in a ResponseEntity
+     * @throws ResourceNotFoundException if no record is found with the given ID
+     */
     @GetMapping("/{id}")
     @PreAuthorize("hasAuthority('CUSTOMER') or hasAuthority('ADMIN')")  // Customer and Admin can view details by ID
     public ResponseEntity<SubServiceDetailsDTO> getDetailsById(@PathVariable Long id) throws ResourceNotFoundException {
@@ -88,7 +101,13 @@ public class SubServiceDetailsController {
         return ResponseEntity.ok(detailsDTO);
     }
 
-    // Create new details
+    /**
+     * Creates a new sub-service detail.
+     * Accessible only by users with 'ADMIN' authority.
+     *
+     * @param detailsDTO the sub-service detail to be created
+     * @return the created SubServiceDetailsDTO wrapped in a ResponseEntity with status 201 (Created)
+     */
     @PostMapping("/create-details")
     @PreAuthorize("hasAuthority('ADMIN')")  // Only Admin can create service details
     public ResponseEntity<SubServiceDetailsDTO> createDetails(@RequestBody SubServiceDetailsDTO detailsDTO) {
@@ -96,7 +115,15 @@ public class SubServiceDetailsController {
         return ResponseEntity.status(HttpStatus.CREATED).body(createdDetails);
     }
 
-    // Update details by ID
+    /**
+     * Updates an existing sub-service detail by ID.
+     * Accessible only by users with 'ADMIN' authority.
+     *
+     * @param id the ID of the detail to update
+     * @param detailsDTO the updated sub-service detail data
+     * @return the updated SubServiceDetailsDTO wrapped in a ResponseEntity
+     * @throws ResourceNotFoundException if no record is found with the given ID
+     */
     @PutMapping("/{id}")
     @PreAuthorize("hasAuthority('ADMIN')")  // Only Admin can update service details
     public ResponseEntity<SubServiceDetailsDTO> updateDetails(@PathVariable Long id, @RequestBody SubServiceDetailsDTO detailsDTO) throws ResourceNotFoundException {
@@ -104,7 +131,14 @@ public class SubServiceDetailsController {
         return ResponseEntity.ok(updatedDetails);
     }
 
-    // Delete details by ID
+    /**
+     * Deletes a sub-service detail by ID.
+     * Accessible only by users with 'ADMIN' authority.
+     *
+     * @param id the ID of the detail to delete
+     * @return a ResponseEntity with status 204 (No Content) if deletion is successful
+     * @throws ResourceNotFoundException if no record is found with the given ID
+     */
     @DeleteMapping("/{id}")
     @PreAuthorize("hasAuthority('ADMIN')")  // Only Admin can delete service details
     public ResponseEntity<Void> deleteDetails(@PathVariable Long id) throws ResourceNotFoundException {

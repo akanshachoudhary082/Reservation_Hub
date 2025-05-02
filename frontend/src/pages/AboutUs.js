@@ -25,7 +25,7 @@ const AboutUs = () => {
       fontWeight: 'bold', 
       fontFamily: "Bebas Neue", 
       color: 'white', 
-      fontSize:'3rem',
+      fontSize:'4rem',
     }}
   >
     About Us
@@ -84,7 +84,7 @@ const AboutUs = () => {
 
       
       <Box className="contact-button-container">
-        <Typography variant="h6" gutterBottom>
+        <Typography variant="h6"  color='white' gutterBottom>
           Get in touch with us to know more about our services!
         </Typography>
 

@@ -5,6 +5,7 @@ import java.util.UUID;
 
 import com.app.reservationbooking.enums.PaymentMethod;
 import com.app.reservationbooking.enums.PaymentStatus;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -27,12 +28,14 @@ public class Payment {
 	@JoinColumn(name = "service_id", nullable = false)
 	private MainServiceRecord services;
 
+
 	@ManyToOne
 	@JoinColumn(name = "user_id", nullable = false)
 	private User user;
 
 	@OneToOne(mappedBy = "payment", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private Booking reservation;
+	@JsonBackReference
+	private Booking booking;
 
 	@Column(name = "amount", nullable = false)
 	private Double amount;

@@ -49,7 +49,7 @@ public class AdminConfiguration {
     @Column(name = "price_of_ticket", nullable = false)
     private Double priceOfTicket;
 
-    @Column(name = "available_on", nullable = false)
+    @Column(name = "available_on")
     private LocalDate availableOn;
 
 

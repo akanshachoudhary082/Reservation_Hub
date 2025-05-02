@@ -2,6 +2,8 @@ package com.app.reservationbooking.entities;
 
 import java.time.LocalDateTime;
 import com.app.reservationbooking.enums.BookingStatus;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -29,11 +31,14 @@ public class Booking extends BaseEntity {
     private String passengerName;
 
 
-    @Column(name = "mobile_number", unique = true, nullable = false)
+    @Column(name = "mobile_number", nullable = false)
     private String mobileNumber;
 
-    @Column(name = "email", unique = true, nullable = false)
+    @Column(name = "email",  nullable = false)
     private String userEmail;
+
+    @Column(name = "state", nullable = false)
+    private String stateResidency;
 
     @ManyToOne
     @JoinColumn(name = "seat_id", nullable = false)
@@ -42,7 +47,8 @@ public class Booking extends BaseEntity {
     @Enumerated(EnumType.STRING)
     @Column(name = "status", nullable = false)
     private BookingStatus status;
-    
+
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     @Column(name = "booking_date", nullable = false)
     private LocalDateTime bookingDate;
 
@@ -52,6 +58,7 @@ public class Booking extends BaseEntity {
 
     @OneToOne
     @JoinColumn(name = "payment_id", nullable = true)
+    @JsonManagedReference
     private Payment payment;
 
 

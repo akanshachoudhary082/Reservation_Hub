@@ -17,7 +17,7 @@ public class TransportSearchConverterUtils {
 
     public static TransportSearchDTO convertToDTO(AdminConfiguration config, String sourceCity, String destinationCity) {
         TransportSearchDTO dto = TransportSearchDTO.builder()
-                .id(config.getAdminConfigId())  // This is your `detailId`
+                .id(config.getAdminConfigId())
                 .moduleCode(config.getModuleCode())
                 .moduleCategory(config.getModuleCategory())
                 .name(config.getName())
@@ -26,7 +26,7 @@ public class TransportSearchConverterUtils {
                 .description(config.getDescription())
                 .price(config.getPriceOfTicket())
                 .availableOn(config.getAvailableOn())
-                .detailId(config.getDetailId())  // Ensure this is set!
+                .detailId(config.getDetailId())
                 .build();
 
         // Set source and destination cities
@@ -59,7 +59,7 @@ public class TransportSearchConverterUtils {
      */
     public static AdminConfiguration convertToEntity(TransportSearchDTO dto) {
         AdminConfiguration entity = new AdminConfiguration();
-        entity.setAdminConfigId(dto.getId()); // Assuming your ID is in the DTO and can be set directly
+        entity.setAdminConfigId(dto.getId());
         entity.setModuleCode(dto.getModuleCode());
         entity.setModuleCategory(dto.getModuleCategory());
         entity.setName(dto.getName());
@@ -69,10 +69,10 @@ public class TransportSearchConverterUtils {
         entity.setPriceOfTicket(dto.getPrice());
         entity.setAvailableOn(dto.getAvailableOn());
 
-        // Set source and destination if they exist in DTO
+
         if (dto.getSourceCity() != null && dto.getDestinationCity() != null) {
             String routeDescription = "Route: " + dto.getSourceCity() + " to " + dto.getDestinationCity();
-            entity.setDescription(routeDescription);  // Assuming you want to format description this way
+            entity.setDescription(routeDescription);
         }
 
         return entity;

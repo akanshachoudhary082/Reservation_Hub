@@ -14,12 +14,15 @@ const Login = () => {
   return (
     <Box
       sx={{
-        maxWidth: 500,
+        width: '200%',
+        maxWidth: 1000, // Ensures it doesn’t grow too wide on large screens
         margin: '0 auto',
         padding: 4,
         boxShadow: 3,
         borderRadius: 2,
         backgroundColor: '#f9f9f9',
+        marginBottom: '40px',
+        marginTop:'40px',
       }}
     >
       <Typography variant="h4" align="center" gutterBottom>

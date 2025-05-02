@@ -189,26 +189,49 @@ package com.app.reservationbooking.utility;
 import com.app.reservationbooking.dto.TransportSeatDTO;
 import com.app.reservationbooking.entities.Seat;
 
+/**
+ * Utility class for converting between Seat entities and TransportSeatDTOs.
+ * Provides methods to transform data between the entity layer (used for database operations)
+ * and the DTO layer (used for API communication).
+ */
+
 public class TransportSeatConverterUtils {
 
+    /**
+     * Converts a Seat entity to a TransportSeatDTO.
+     * This method uses the builder pattern to construct the TransportSeatDTO from the Seat entity.
+     *
+     * @param seat the Seat entity to convert
+     * @return the TransportSeatDTO representing the Seat entity
+     */
+
+
     // Convert Seat entity to TransportSeatDTO using builder
+
     public static TransportSeatDTO convertToDTO(Seat seat) {
+
         return TransportSeatDTO.builder()
-                .seatId(seat.getSeatId())  // This remains the same
-                .seatNumber(seat.getSeatNumber())  // Directly return as String
+                .seatId(seat.getSeatId())
+                .seatNumber(seat.getSeatNumber())
                 .seatType(seat.getSeatType())
                 .classType(seat.getClassType())
                 .status(seat.getStatus())
                 .detailId(seat.getDetailId())
-                .seatPrice(seat.getSeatPrice())// Ensure that detailId is included here
+                .seatPrice(seat.getSeatPrice())
                 .build();
     }
 
     // Convert TransportSeatDTO to Seat entity using builder
+    /**
+     * Converts a TransportSeatDTO to a Seat entity.
+     * This method uses the builder pattern to construct the Seat entity from the TransportSeatDTO.
+     *
+     * @return the Seat entity representing the TransportSeatDTO
+     */
     public static Seat convertToEntity(TransportSeatDTO dto) {
         return Seat.builder()
-                .detailId(dto.getDetailId())  // No change here; it's correctly setting the detailId
-                .seatNumber(dto.getSeatNumber())  // Directly set as String
+                .detailId(dto.getDetailId())
+                .seatNumber(dto.getSeatNumber())
                 .seatType(dto.getSeatType())
                 .classType(dto.getClassType())
                 .status(dto.getStatus())

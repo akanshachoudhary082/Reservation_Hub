@@ -6,6 +6,7 @@ import com.app.reservationbooking.entities.User;
 import com.app.reservationbooking.enums.BookingStatus;
 import lombok.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @Setter
@@ -17,7 +18,10 @@ public class TransportBookingDTO {
 
     private Long bookingId;
 
-    private User user;
+    //private User user;
+
+    private Long userId;
+
 
     private String passengerName;
 
@@ -25,11 +29,15 @@ public class TransportBookingDTO {
 
     private String userEmail;
 
-    private Seat seat;
+   // private Seat seat;
+   private List<TransportSeatDTO> seats;
+
 
     private BookingStatus status;
 
     private LocalDateTime bookingDate;
+
+    private String stateResidency;
 
     private Long detailId;
 

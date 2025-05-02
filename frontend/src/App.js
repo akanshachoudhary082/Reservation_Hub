@@ -8,6 +8,8 @@ import AboutUs from './pages/AboutUs';
 import Transport from './pages/Transport';  
 import TransportServiceDetails from './pages/TransportServiceDetails';
 import TransportSeatSelectionPage from './pages/TransportSeatSelectionPage';
+import TransportBookingPage from './pages/TransportBookingPage';
+import TransportPaymentPage from './pages/TransportPaymentPage';
 import ContactUs from './pages/ContactUs'; 
 import '../src/assets/styles/style.scss';
 import MobileNumberForm from '../src/components/MobileNumberForm';
@@ -51,6 +53,8 @@ const App = () => {
             <Route path="/transport" element={<Transport />} />
             <Route path="/details/:transport" element={<TransportServiceDetails />} />
             <Route path="/seats/:transport" element={<TransportSeatSelectionPage />} />
+            <Route path="/transport-booking" element={<TransportBookingPage />} />
+            <Route path="/transport-payment" element={<TransportPaymentPage />} />
             <Route path="/movies" element={<CitySelectionPopUp />} /> {/* City selection for movies */}
             <Route path="/movies/:city" element={<Movies />} /> {/* Movies page with city */}
             <Route path="/events" element={<CitySelectionPopUp />} />

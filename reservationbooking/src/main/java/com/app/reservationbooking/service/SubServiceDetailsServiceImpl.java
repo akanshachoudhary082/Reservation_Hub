@@ -69,6 +69,7 @@ public class SubServiceDetailsServiceImpl implements SubServiceDetailsService {
      * @throws ResourceNotFoundException if the associated ServiceRecord is not found.
      */
     @Override
+    @Transactional
     public SubServiceDetailsDTO createDetails(SubServiceDetailsDTO detailsDTO) {
         if (detailsDTO.getServiceId() == null) {
             log.error("serviceId cannot be null");
@@ -101,6 +102,7 @@ public class SubServiceDetailsServiceImpl implements SubServiceDetailsService {
      * @throws ResourceNotFoundException if the service detail is not found.
      */
     @Override
+    @Transactional
     public SubServiceDetailsDTO updateDetails(Long detailId, SubServiceDetailsDTO detailsDTO) throws ResourceNotFoundException {
         log.info("Updating service detail with ID: {}", detailId);
 
@@ -128,6 +130,7 @@ public class SubServiceDetailsServiceImpl implements SubServiceDetailsService {
      * @throws ResourceNotFoundException if the service detail is not found.
      */
     @Override
+    @Transactional
     public void deleteDetails(Long detailId) throws ResourceNotFoundException {
         log.info("Deleting service detail with ID: {}", detailId);
 

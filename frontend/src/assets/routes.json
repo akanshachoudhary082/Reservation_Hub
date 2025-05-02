@@ -1,0 +1,20 @@
+{
+    "bus_routes": [
+      "Bhopal", "Jabalpur", "Nagpur", "Raipur", "Bilaspur", "Surat", "Delhi", "Raipur", "Bilaspur", "Nagpur", 
+      "Jabalpur", "Surat", "Delhi", "Mysuru", "Bengaluru", "Hyderabad", "Nagpur", "Bilaspur", "Raipur", "Delhi", 
+      "Surat", "Vadodara", "Ahmedabad", "Kota", "Jaipur", "Agra"
+    ],
+    "train_routes": [
+      "Bhopal", "Itarsi", "Nagpur", "Raipur", "Bilaspur", "Surat", "Delhi", "Bilaspur", "Raigarh", "Nagpur", 
+      "Jabalpur", "Bhopal", "Surat", "Delhi", "Bengaluru", "Tumkur", "Hyderabad", "Nagpur", "Raipur", "Bilaspur", 
+      "Delhi", "Ahmedabad", "Anand", "Vadodara", "Surat", "Nagpur", "Raipur", "Delhi", "Kota", "Jaipur", "Ajmer", 
+      "Surat", "Vadodara", "Nagpur", "Delhi"
+    ],
+    "flight_routes": [
+      "Bhopal", "Indore", "Nagpur", "Raipur", "Surat", "Vadodara", "Delhi", "Raipur", "Nagpur", "Jabalpur", "Bhopal", 
+      "Surat", "Vadodara", "Delhi", "Bengaluru", "Hyderabad", "Nagpur", "Raipur", "Bilaspur", "Surat", "Delhi", 
+      "Ahmedabad", "Surat", "Vadodara", "Jaipur", "Kota", "Agra", "Delhi", "Delhi", "Jaipur", "Kota", "Ahmedabad", 
+      "Surat", "Vadodara", "Mumbai"
+    ]
+  }
+  

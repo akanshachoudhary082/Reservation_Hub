@@ -24,7 +24,7 @@ const Transport = () => {
       console.log('Using token:', token);
 
       try {
-        const response = await axios.get('https://localhost:8443/details', {
+        const response = await axios.get('/details', {
           headers: {
             Authorization: `Bearer ${token}`,
           },
